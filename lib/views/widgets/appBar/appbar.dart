@@ -43,7 +43,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
                             decoration: InputDecoration(
                               hintText: 'Cari E-learning atau PODTRET',
                               border: InputBorder.none,
-                              contentPadding:  EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                              contentPadding:  EdgeInsets.symmetric(horizontal: 12, vertical: 15),
                               prefixIcon: Icon(Icons.search), // Search icon inside the search bar
                             ),
                           ),
