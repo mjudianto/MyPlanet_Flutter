@@ -6,8 +6,6 @@ class PodtretController {
   static Future<Podtret> fetchNewPodtrets() async {
     try {
       Podtret userCourses = Podtret();
-
-      print('test');
       
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       userCourses = await PodtretsProvider.getActivePodtrets(userToken ?? "");
