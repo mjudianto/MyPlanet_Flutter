@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:myplanet/controllers/users/user_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/users/user_model.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/login_appbar.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';  
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                               GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
 
                               // ignore: use_build_context_synchronously
-                              context.go('/home');
+                              Get.to(RouteName.dashboardPage);
                             
                             } catch (e) {
                               // Handle exceptions that might occur during the authentication process
