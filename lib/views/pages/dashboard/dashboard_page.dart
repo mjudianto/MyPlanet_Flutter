@@ -12,7 +12,9 @@ import 'package:myplanet/views/pages/profile/profile_page.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+  DashboardPage({super.key});
+  final _buildBody = <Widget>[HomePage(), const ElearningPage(), const PodtretPage(), const CommunityPage(), const ProfilePage()];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +23,7 @@ class DashboardPage extends StatelessWidget {
       init: DashboardController(),
       builder: (controller) {
         return Scaffold(
-          body: SafeArea(
-            child: Center(
-              child: IndexedStack(
-                index: controller.tabIndex,
-                children: [
-                  HomePage(),
-                  const ElearningPage(),
-                  const PodtretPage(),
-                  const CommunityPage(),
-                  const ProfilePage(),
-                ],
-              ),
-            )
-          ),
+          body: _buildBody[controller.tabIndex],
           bottomNavigationBar: BottomNavigationBar(
             onTap: controller.changeTabIndex,
             currentIndex: controller.tabIndex,
@@ -75,8 +64,6 @@ class DashboardPage extends StatelessWidget {
     return BottomNavigationBarItem(
       icon: Center(
         child: ZoomTapAnimation(
-          onTap: () {
-          },
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -92,8 +79,6 @@ class DashboardPage extends StatelessWidget {
       ),
       activeIcon: Center(
         child: ZoomTapAnimation(
-          onTap: () {
-          },
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

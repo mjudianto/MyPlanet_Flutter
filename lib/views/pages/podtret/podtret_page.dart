@@ -17,8 +17,7 @@ class _PodtretPageState extends State<PodtretPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return const Scaffold(
         // appBar: const PageAppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -37,7 +36,6 @@ class _PodtretPageState extends State<PodtretPage> {
           ),
         ),
         
-      ),
     );
   }
 }

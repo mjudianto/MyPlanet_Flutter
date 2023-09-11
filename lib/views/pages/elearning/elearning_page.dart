@@ -23,8 +23,7 @@ class _ElearningPageState extends State<ElearningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         // appBar: const PageAppBar(),
         body: SingleChildScrollView(
           child: Column(
@@ -119,7 +118,6 @@ class _ElearningPageState extends State<ElearningPage> {
           ),
         ),
         
-      ),
     );
   }
 }
