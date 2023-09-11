@@ -25,7 +25,7 @@ class _PodtretPageState extends State<PodtretPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min, 
             children: [
-              PageAppBar(),
+              PageAppBar(type: 'search',),
 
               SizedBox(
                 height: 200,

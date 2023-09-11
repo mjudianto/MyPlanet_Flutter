@@ -26,7 +26,7 @@ class _CommunityPageState extends State<CommunityPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min, 
             children: [
-              PageAppBar(),
+              PageAppBar(type: 'logo',),
 
               SizedBox(
                 height: 200,

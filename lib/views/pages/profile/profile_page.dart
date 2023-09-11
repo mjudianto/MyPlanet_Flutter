@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min, 
             children: [
-              PageAppBar(),
+              PageAppBar(type: 'text',),
 
               SizedBox(
                 height: 200,

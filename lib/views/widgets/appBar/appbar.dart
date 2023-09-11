@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 
-class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const PageAppBar({Key? key}) : super(key: key);
+class PageAppBar extends StatelessWidget implements PreferredSizeWidget {  
+  const PageAppBar({Key? key, required this.type, this.title}) : super(key: key);
+
+  final String type;
+  final String? title;
+
 
   @override
-  Size get preferredSize => const Size.fromHeight(100); // Adjust the height as needed
+  Size get preferredSize => const Size.fromHeight(105); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
@@ -23,37 +27,13 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: SizedBox(
           height: preferredSize.height, // Set the height of the SizedBox to the preferredSize height
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 12), // Add some spacing to the left
-                    Expanded(
-                      child: Container(
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: const Center(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Cari E-learning atau PODTRET',
-                              border: InputBorder.none,
-                              contentPadding:  EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-                              prefixIcon: Icon(Icons.search), // Search icon inside the search bar
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16), // Add some spacing to the right
-                  ],
-                ),
-              ),
+              type == 'search' 
+              ? const SearchBar() 
+              : Title(title: title ?? "",),
             ],
           ),
         ),
@@ -61,6 +41,55 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
+      ),
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  final String title;
+
+  const Title({
+    super.key,
+    required this.title
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+        title,
+        style: TextStyle(
+          color: whiteColor,
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          fontWeight: bold
+        ),
+      );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 45,
+      width: 330,
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: const Center(
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: 'Cari E-learning atau PODTRET',
+            border: InputBorder.none,
+            prefixIcon: Icon(Icons.search), // Search icon inside the search bar
+          ),
+        ),
       ),
     );
   }

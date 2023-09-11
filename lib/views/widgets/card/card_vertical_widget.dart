@@ -25,7 +25,7 @@ class CardVerticalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 185,
+      width: 165,
       child: GestureDetector(
         onTap: () => targetLocation != null ? context.go(targetLocation.toString()) : null,
         child: Card(
@@ -47,8 +47,8 @@ class CardVerticalWidget extends StatelessWidget {
                       child: FadeInImage(
                         placeholder: const AssetImage('assets/loading.jpeg'), // Replace with your placeholder image asset
                         image: NetworkImage("https://myplanet.enseval.com/${thumbnail ?? ""}"),
-                        width: 157,
-                        height: 135,
+                        width: 140,
+                        height: 120,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -56,17 +56,17 @@ class CardVerticalWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        width: 132,
+                        width: 135,
                         child: Text(
                           title ?? "",
                           style: TextStyle(
-                            fontSize: 15,
+                            fontSize: 12,
                             color: blackColor,
                             fontWeight: semiBold,
                             fontFamily: 'Poppins', // Set the font family to Poppins
@@ -80,68 +80,76 @@ class CardVerticalWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        subTitle ?? "",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: secondaryColor,
-                          fontWeight: medium,
-                          fontFamily: 'Poppins', // Set the font family to Poppins
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: SizedBox(
+                    width: 135,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          subTitle ?? "",
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: secondaryColor,
+                            fontWeight: medium,
+                            fontFamily: 'Poppins', // Set the font family to Poppins
+                          ),
                         ),
-                      ),
-                      Visibility(visible: rating == null ? false : true , child: const Icon(Icons.star, color: Color(0xffFFCE31), size: 16,)),
-                      Text(
-                        rating.toString() == 'null' ? "" : rating.toString(),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: secondaryColor,
-                          fontWeight: medium,
-                          fontFamily: 'Poppins', // Set the font family to Poppins
+                        Visibility(visible: rating == null ? false : true , child: const Icon(Icons.star, color: Color(0xffFFCE31), size: 12,)),
+                        Text(
+                          rating.toString() == 'null' ? "" : rating.toString(),
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: secondaryColor,
+                            fontWeight: medium,
+                            fontFamily: 'Poppins', // Set the font family to Poppins
+                          ),
                         ),
-                      ),
-                      Text(
-                        ratingCount.toString() == 'null' ? "" : ' (${ratingCount.toString()})',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: secondaryColor,
-                          fontWeight: medium,
-                          fontFamily: 'Poppins', // Set the font family to Poppins
+                        Text(
+                          ratingCount.toString() == 'null' ? "" : ' (${ratingCount.toString()})',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: secondaryColor,
+                            fontWeight: medium,
+                            fontFamily: 'Poppins', // Set the font family to Poppins
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 4),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.draw_outlined,
-                        size: 15,
-                      ),
-                      SizedBox(
-                        width: 100,
-                        child: Text(
-                          subTitle2 ?? "Learning & People Development",
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: blackColor,
-                            fontWeight: medium,
-                            fontFamily: 'Poppins', // Set the font family to Poppins
-                          ),
-                          overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
-                          maxLines: 1, // Limit the text to a single line
+                  padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: SizedBox(
+                    width: 135,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/icons/course_createdBy_icon.png',
+                          color: blackColor,
+                          height: 10,
                         ),
-                      )
-                    ],
+                        const Text(' '),
+                        SizedBox(
+                          width: 117,
+                          child: Text(
+                            subTitle2 ?? "Learning & People Development",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: blackColor,
+                              fontWeight: medium,
+                              fontFamily: 'Poppins', // Set the font family to Poppins
+                            ),
+                            overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                            maxLines: 1, // Limit the text to a single line
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

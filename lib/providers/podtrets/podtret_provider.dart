@@ -1,12 +1,16 @@
 import 'package:http/http.dart' as http;
 import '../../models/podtrets/podtret_model.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 
 class PodtretsProvider {
-  static const String baseUrl = "https://myplanet.enseval.com:3000"; // Replace with your API base URL
-
-  static Future<Podtret> getActivePodtrets() async {
+  static Future<Podtret> getActivePodtrets(String userToken) async {
     try {
-      final response = await http.get(Uri.parse('$baseUrl/podtrets/getActivePodtrets'));
+      final response = await http.get(
+        Uri.parse('${GlobalVariable.apiUrl}/podtrets/getActivePodtrets'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        }
+      );
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return podtretFromJson(jsonResponse);

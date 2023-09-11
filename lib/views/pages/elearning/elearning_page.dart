@@ -31,7 +31,7 @@ class _ElearningPageState extends State<ElearningPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min, 
             children: [
-              const PageAppBar(),
+              const PageAppBar(type: 'search',),
     
               FutureBuilder(
                 future: _userCoursesFuture,
@@ -46,12 +46,12 @@ class _ElearningPageState extends State<ElearningPage> {
                   } else if (snapshot.hasError) {
                     return
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.65,
                       width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: Text(
-                          'Error: Data Load Failed',
-                          textAlign: TextAlign.center,
+                      child: Center(
+                        child: Image.asset(
+                          'assets/error planet.png', // Replace this with the path to your logo image
+                          height: 600, // Set the height of the logo image
                         ),
                       ),
                     );
@@ -72,10 +72,10 @@ class _ElearningPageState extends State<ElearningPage> {
                               final course2 = (index * 2 + 1 < elearningCourses.data!.length) ? elearningCourses.data![index * 2 + 1] : null;
                     
                               return SizedBox(
-                                height: 240,
+                                height: 220,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
                                   children: [
                                     Expanded(
                                       child: CardVerticalWidget(
@@ -85,6 +85,7 @@ class _ElearningPageState extends State<ElearningPage> {
                                         subTitle2: course1.createdBy,
                                         rating: course1.averageRating,
                                         ratingCount: course1.responseCount,
+                                        targetLocation: '/elearning/course/${course1.elearningCourseId}',
                                       ),
                                     ),
                                     if (course2 != null)
@@ -98,6 +99,7 @@ class _ElearningPageState extends State<ElearningPage> {
                                           subTitle2: course2.createdBy,
                                           rating: course2.averageRating,
                                           ratingCount: course2.responseCount,
+                                          targetLocation: '/elearning/course/${course2.elearningCourseId}',
                                         ),
                                       ),
                                   ],

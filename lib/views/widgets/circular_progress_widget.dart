@@ -15,7 +15,7 @@ class CircularPercentageIndicator extends StatelessWidget {
         child: Text(
           '${percentage.toStringAsFixed(0)}%',
           style: TextStyle(
-            fontSize: 14,
+            fontSize: 10,
             fontWeight: bold,
           ),
         ),

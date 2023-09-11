@@ -5,7 +5,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(180); // Adjust the height as needed
+  Size get preferredSize => const Size.fromHeight(155); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                   children: [
                     Image.asset(
                       'assets/logo.png', // Replace this with the path to your logo image
-                      width: 155, // Set the width of the logo image
-                      height: 45, // Set the height of the logo image
+                      width: 141, // Set the width of the logo image
+                      height: 32, // Set the height of the logo image
                     ),
                     const Spacer(), // Add a spacer to push the widgets to the edges
                     IconButton(
@@ -52,13 +52,14 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 35.0),
+                padding: const EdgeInsets.only(top: 17.0),
                 child: Row(
                   children: [
                     const SizedBox(width: 12), // Add some spacing to the left
                     Expanded(
                       child: Container(
-                        height: 48,
+                        width: 350,
+                        height: 45,
                         decoration: BoxDecoration(
                           color: whiteColor,
                           borderRadius: BorderRadius.circular(25),
@@ -68,8 +69,12 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                             decoration: InputDecoration(
                               hintText: 'Cari E-learning atau PODTRET',
                               border: InputBorder.none,
-                              contentPadding:  EdgeInsets.symmetric(horizontal: 12, vertical: 15),
-                              prefixIcon: Icon(Icons.search), // Search icon inside the search bar
+                              prefixIcon: Icon(Icons.search, size: 20,), // Search icon inside the search bar
+                              hintStyle: TextStyle(
+                                color: secondaryColor,
+                                fontSize: 14,
+                                fontFamily: 'Poppins'
+                              ),
                             ),
                           ),
                         ),

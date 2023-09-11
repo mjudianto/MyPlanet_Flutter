@@ -50,8 +50,8 @@ class CardHorizontalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? 380,
-      height: height ?? 140,
+      width: width ?? 335,
+      height: height ?? 115,
       child: GestureDetector(
         onTap: () => targetLocation != null ? context.go(targetLocation.toString()) : null,
         child: Card(
@@ -60,7 +60,7 @@ class CardHorizontalWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(25.0),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.only(left: 10.0),
             child: Row(
               children: [
                 Column(
@@ -74,8 +74,8 @@ class CardHorizontalWidget extends StatelessWidget {
                           FadeInImage(
                             placeholder: const AssetImage('assets/loading.jpeg'), // Replace with your placeholder image asset
                             image: NetworkImage("https://myplanet.enseval.com/${thumbnail ?? ""}"),
-                            width: thumbnailWidht ?? 115,
-                            height: thumbnailHeight ?? 100,
+                            width: thumbnailWidht ?? 100,
+                            height: thumbnailHeight ?? 85,
                             fit: BoxFit.cover,
                           ),
                         ],
@@ -101,7 +101,7 @@ class CardHorizontalWidget extends StatelessWidget {
                             child: Text(
                               category ?? "",
                               style: TextStyle(
-                                fontSize: 10,
+                                fontSize: 8,
                                 color: whiteColor,
                                 fontWeight: bold,
                                 fontFamily: 'Poppins', // Set the font family to Poppins
@@ -116,11 +116,11 @@ class CardHorizontalWidget extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: titleWidth ?? 140,
+                            width: titleWidth ?? 130,
                             child: Text(
                             title ?? "",
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: blackColor,
                                 fontWeight: semiBold,
                                 fontFamily: 'Poppins', // Set the font family to Poppins
@@ -135,11 +135,11 @@ class CardHorizontalWidget extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: subTitleWidth ?? 140,
+                            width: subTitleWidth ?? 130,
                             child: Text(
                               subTitle ?? "Learning & People Development",
                               style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 10,
                                 color: secondaryColor,
                                 fontWeight: semiBold,
                                 fontFamily: 'Poppins', // Set the font family to Poppins
@@ -157,18 +157,18 @@ class CardHorizontalWidget extends StatelessWidget {
                 Visibility(
                   visible: percentage == null ? false : true,
                   child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: Center(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 60,
+                            height: 60,
                             child: CircularPercentageIndicator(percentage: percentage ?? 0),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),
