@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                               GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
 
                               // ignore: use_build_context_synchronously
-                              Get.toNamed(RouteName.dashboardPage);
+                              Get.offNamed(RouteName.dashboardPage);
                             
                             } catch (e) {
                               // Handle exceptions that might occur during the authentication process
