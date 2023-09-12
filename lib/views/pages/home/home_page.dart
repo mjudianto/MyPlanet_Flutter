@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myplanet/controllers/elearnings/elearning_course_controller.dart';
-import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
-import 'package:myplanet/helpers/global_variable.dart';
-import 'package:myplanet/models/elearnings/elearning_course_model.dart';
-import 'package:myplanet/models/podtrets/podtret_model.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/routes/route_name.dart';
+import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
+import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/homepage_appbar_widget.dart';
 import 'package:myplanet/views/widgets/card/card_horizontal_widget.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
@@ -11,9 +10,8 @@ import 'package:myplanet/theme.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
-  final Future<ElearningCourse> _userCoursesFuture = ElearningCourseController.fetchUserCourses();
-  final Future<Podtret> _newPodtrets = PodtretController.fetchNewPodtrets();
-  final Future<bool> _checkInternetConnection = GlobalVariable.checkInternetConnection();
+
+  final HomePageController homePageController = Get.find();
 
   HomePage({super.key});
 
@@ -21,7 +19,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: _checkInternetConnection,
+        future: homePageController.checkInternetConnection,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SizedBox(
@@ -74,7 +72,7 @@ class HomePage extends StatelessWidget {
                 const HomePageAppBar(),
                 const SectionTitle(title: 'New Course'),
                 FutureBuilder(
-                  future: _userCoursesFuture,
+                  future: homePageController.userCoursesFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Display a loading indicator while waiting for the future to complete
@@ -128,8 +126,12 @@ class HomePage extends StatelessWidget {
                                 subTitle2: course.createdBy,
                                 rating: course.averageRating,
                                 ratingCount: course.responseCount,
-                                targetLocation:
-                                    '/elearning/course/${course.elearningCourseId}',
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
+
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                },
                               );
                             },
                           ),
@@ -143,7 +145,7 @@ class HomePage extends StatelessWidget {
                 ),
                 const SectionTitle(title: 'Continue Learning'),
                 FutureBuilder(
-                  future: _userCoursesFuture,
+                  future: homePageController.userCoursesFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Display a loading indicator while waiting for the future to complete
@@ -200,8 +202,12 @@ class HomePage extends StatelessWidget {
                                 title: course.judul,
                                 percentage:
                                     double.parse(course.percentage.toString()),
-                                targetLocation:
-                                    '/elearning/course/${course.elearningCourseId}',
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
+                                  
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                }
                               );
                             },
                           ),
@@ -215,7 +221,7 @@ class HomePage extends StatelessWidget {
                 ),
                 const SectionTitle(title: 'New Podtret'),
                 FutureBuilder(
-                  future: _newPodtrets,
+                  future: homePageController.newPodtrets,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Display a loading indicator while waiting for the future to complete

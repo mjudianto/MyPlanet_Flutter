@@ -25,6 +25,29 @@ class UserRecordProvider {
     }
   }
 
+  static setUserTestRecord(String userToken, String elearningTestId, String score) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${GlobalVariable.apiUrl}/userRecords/setUserTestRecord'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        },
+        body: {
+          'elearningTestId' : elearningTestId,
+          'score' : score
+        },
+      );
+      if (response.statusCode == 200) {
+        var jsonResponse = response.body;
+        return jsonResponse;
+      } else {
+        throw Exception('${response.statusCode} Failed to fetch data from API');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
   static sendUserPostTestAccessRequest(String userToken, String elearningTestId, String message) async {
     try {
       final response = await http.post(

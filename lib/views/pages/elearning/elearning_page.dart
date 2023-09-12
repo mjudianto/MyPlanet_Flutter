@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myplanet/controllers/elearnings/elearning_course_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
+import 'package:myplanet/routes/route_name.dart';
+import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
 
@@ -84,7 +87,12 @@ class _ElearningPageState extends State<ElearningPage> {
                                         subTitle2: course1.createdBy,
                                         rating: course1.averageRating,
                                         ratingCount: course1.responseCount,
-                                        targetLocation: '/elearning/course/${course1.elearningCourseId}',
+                                        onTap: () {
+                                          ElearningCoursePageController elearningCoursePageController = Get.find();
+                                          elearningCoursePageController.setElearningCourseId(course1.elearningCourseId.toString());
+  
+                                          Get.toNamed(RouteName.elearningCoursePage);
+                                        },
                                       ),
                                     ),
                                     if (course2 != null)
@@ -98,7 +106,12 @@ class _ElearningPageState extends State<ElearningPage> {
                                           subTitle2: course2.createdBy,
                                           rating: course2.averageRating,
                                           ratingCount: course2.responseCount,
-                                          targetLocation: '/elearning/course/${course2.elearningCourseId}',
+                                          onTap: () {
+                                            ElearningCoursePageController elearningCoursePageController = Get.find();
+                                            elearningCoursePageController.setElearningCourseId(course2.elearningCourseId.toString());
+    
+                                            Get.toNamed(RouteName.elearningCoursePage);
+                                          },
                                         ),
                                       ),
                                   ],

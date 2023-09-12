@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myplanet/controllers/users/user_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/users/user_model.dart';
@@ -104,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             // Fetch the user token when the button is pressed
                             try {
+                              print('before');
                               User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text);
 
                               await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
@@ -112,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
 
                               // ignore: use_build_context_synchronously
                               Get.offNamed(RouteName.dashboardPage);
-                            
+
+                              print('after');
+
                             } catch (e) {
                               // Handle exceptions that might occur during the authentication process
                               // print('Error during authentication: $e');

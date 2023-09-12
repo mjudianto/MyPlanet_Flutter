@@ -1,20 +1,20 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:myplanet/controllers/elearnings/elearning_course_controller.dart';
+import 'package:get/get.dart';
 import 'package:myplanet/controllers/elearnings/user_record_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/elearnings/elearning_course_detail_model.dart';
 import 'package:myplanet/models/elearnings/elearning_module_model.dart';
 import 'package:myplanet/models/elearnings/userRecords/user_post_test_access_request_model.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
+import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_controller.dart';
+import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class ElearningCoursePage extends StatefulWidget {
-  const ElearningCoursePage({super.key, required this.elearningCourseId});
-
-  final String elearningCourseId;
+  const ElearningCoursePage({super.key});
 
   @override
   State<ElearningCoursePage> createState() => _ElearningCoursePageState();
@@ -32,6 +32,8 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
   String currentLessonId = '';
   bool lessonRecorded = false;
   Future<UserPostTestAccessRequest>? _userPostTestAccessRequestFuture;
+
+  ElearningCoursePageController elearningCoursePageController = Get.find();
 
   void updateVideoPlayer(String newVideoUrl, String elearningLessonId) {
     setState(() {
@@ -67,15 +69,14 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
 
   void disposeVideo() {
     _videoPlayerController.dispose();
-    super.dispose();
   }
 
   @override
   void initState() {
     super.initState();
 
-    _singleCourseFuture = ElearningCourseController.fetchSingleCourseDetail(widget.elearningCourseId);
-    _courseModulesFuture = ElearningCourseController.fetchCourseModules(widget.elearningCourseId);
+    _singleCourseFuture = elearningCoursePageController.fetchSingleCourseDetail();
+    _courseModulesFuture = elearningCoursePageController.fetchCourseModules();
 
     _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(lessonVideoUrl))
       ..initialize().then((value) => setState(() {}));
@@ -89,8 +90,8 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
       for (var module in modules.data!) {
         moduleExpansionStates[module.elearningModuleId.toString()] = false;
 
-        final moduleLessonsFuture = ElearningCourseController.fetchModuleLessons(module.elearningModuleId.toString());
-        final moduleTestsFuture = ElearningCourseController.fetchModuleTests(module.elearningModuleId.toString());
+        final moduleLessonsFuture = elearningCoursePageController.fetchModuleLessons(module.elearningModuleId.toString());
+        final moduleTestsFuture = elearningCoursePageController.fetchModuleTests(module.elearningModuleId.toString());
 
         moduleDataFutures[module.elearningModuleId.toString()] = Future.wait([moduleLessonsFuture, moduleTestsFuture]);
       }
@@ -99,6 +100,7 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       home: Scaffold(
         body: Column(
@@ -138,7 +140,7 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                           onPressed: () {
                             GlobalVariable.currentUrl = '/elearning';
                             disposeVideo();
-                            GoRouter.of(context).pop();
+                            Get.back();
                           }
                         )
                       ),
@@ -583,7 +585,7 @@ class StartPostTestConfirmationModal extends StatefulWidget {
 class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmationModal> {
   @override
   Widget build(BuildContext context) {
-    bool maxtAttemptReached = widget.lesson.maxAttempt != null && widget.lesson.maxAttempt <= widget.lesson.attempt;
+    RxBool maxtAttemptReached = (widget.lesson.maxAttempt != null && widget.lesson.maxAttempt <= widget.lesson.attempt).obs;
     TextEditingController textAlasanController = TextEditingController();
 
     return FutureBuilder(
@@ -603,9 +605,10 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
         } else {
           final userPostTestAccessRequest = snapshot.data;
 
-          final bool requestSent = userPostTestAccessRequest?.data != null && userPostTestAccessRequest!.data?.adminReply == 0;
-          bool underPunishment = false;
+          RxBool requestSent = (userPostTestAccessRequest?.data != null && userPostTestAccessRequest!.data?.adminReply == 0).obs;
+          RxBool underPunishment = false.obs;
           int secondsDifference = 0;
+
           if (userPostTestAccessRequest?.data?.punishment != null && !(DateTime.now().isAfter(DateTime.parse(userPostTestAccessRequest?.data?.punishment)))) {
             DateTime endTime = DateTime.parse(userPostTestAccessRequest!.data?.punishment); // Start time
             DateTime currentDateTime = DateTime.now();
@@ -615,11 +618,11 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
 
             // Calculate the time difference in seconds
             secondsDifference = timeDifference.inSeconds;
-            underPunishment = true;
+            underPunishment.value = true;
           }
           
           return Container(
-            height: maxtAttemptReached ? (requestSent ? 300 : 468) : 388,
+            height: maxtAttemptReached.value ? (requestSent.value ? 300 : 468) : 388,
             padding: const EdgeInsets.all(16),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -666,220 +669,237 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 5),
-                      Text(
-                        maxtAttemptReached
-                        ? ( requestSent
-                          ? 'anda sudah mengirim request. mohon menunggu balasan dari admin'
-                          : 'Post Test anda sudah melebihi batas maksimal percobaan. Mohon untuk mengisi form alasan di bawah ini guna memohon akses Post Test terbaru.'
-                        )
-                        : ( underPunishment
-                          ? 'Anda sedang dalam masa pembelajaran. Silahkan menunggu beberapa saat untuk memulai test kembali.'
-                          : 'Silahkan mengerjakan quiz dengan tenang tanpa gangguan'
-                        ),
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: blackColor,
-                          fontWeight: regular,
-                          fontFamily: 'Poppins'
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
+                      Obx(() {
+                        return Text(
+                          maxtAttemptReached.value
+                          ? ( requestSent.value
+                            ? 'anda sudah mengirim request. mohon menunggu balasan dari admin'
+                            : 'Post Test anda sudah melebihi batas maksimal percobaan. Mohon untuk mengisi form alasan di bawah ini guna memohon akses Post Test terbaru.'
+                          )
+                          : ( underPunishment.value
+                            ? 'Anda sedang dalam masa pembelajaran. Silahkan menunggu beberapa saat untuk memulai test kembali.'
+                            : 'Silahkan mengerjakan quiz dengan tenang tanpa gangguan'
+                          ),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: blackColor,
+                            fontWeight: regular,
+                            fontFamily: 'Poppins'
+                          ),
+                          textAlign: TextAlign.center,
+                        );
+                      }),
                       const SizedBox(height: 30),
-                      Visibility(
-                        visible: !maxtAttemptReached && !underPunishment,
-                        child: Container(
-                          height: 75,
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          decoration: BoxDecoration(
-                            color: primaryColor,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Passing Score',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
-                                      color: whiteColor,
-                                      fontWeight: medium
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  Text(
-                                    widget.lesson.passingScore.toString(),
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16,
-                                      color: whiteColor,
-                                      fontWeight: bold
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                                child: Container(
-                                  color: whiteColor, // Set the color of the separator
-                                  width: 2,       // Set the thickness of the separator
-                                  height: 50,          // Set the width of the separator
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Time',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12,
-                                      color: whiteColor,
-                                      fontWeight: medium
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5,),
-                                  Text(
-                                    '${(widget.lesson.timeLimit~/60000).toString()} Minutes',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16,
-                                      color: whiteColor,
-                                      fontWeight: bold
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ]
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: maxtAttemptReached && !requestSent && !underPunishment,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Alasan',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 14,
-                                fontWeight: medium
-                              ),
+                      Obx(() 
+                        => Visibility(
+                          visible: !maxtAttemptReached.value && !underPunishment.value,
+                          child: Container(
+                            height: 75,
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            decoration: BoxDecoration(
+                              color: primaryColor,
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            TextField(
-                              controller: textAlasanController,
-                              maxLines: 4,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none, // Remove the underline
-                                filled: true, // Fill the container with the background color
-                                fillColor: pastelSecondaryColor, // Set your background color here
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: underPunishment,
-                        child: Column (
-                          children: [
-                            Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text('Akses akan terbuka pada : '),
-                                Countdown(
-                                  seconds: secondsDifference,
-                                  build: (BuildContext context, double time) {
-                                    // Convert time from seconds to a Duration object
-                                    Duration duration = Duration(seconds: time.toInt());
-    
-                                    // Extract hours, minutes, and seconds components from the Duration
-                                    int hours = duration.inHours;
-                                    int minutes = duration.inMinutes.remainder(60);
-                                    int seconds = duration.inSeconds.remainder(60);
-    
-                                    // Format the components as HH:MM:SS
-                                    String formattedTime = '${hours}h ${minutes.toString().padLeft(2, '0')}m ${seconds.toString().padLeft(2, '0')}s';
-    
-                                    return Text(
-                                      formattedTime,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Passing Score',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
-                                        fontSize: 14,
-                                        fontWeight: semiBold
+                                        fontSize: 12,
+                                        color: whiteColor,
+                                        fontWeight: medium
                                       ),
-                                    );
-                                  },
-                                  interval: const Duration(milliseconds: 1000),
-                                  onFinished: () async {
-                                    setState(() {});
-                                  },
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Text(
+                                      widget.lesson.passingScore.toString(),
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 16,
+                                        color: whiteColor,
+                                        fontWeight: bold
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                                  child: Container(
+                                    color: whiteColor, // Set the color of the separator
+                                    width: 2,       // Set the thickness of the separator
+                                    height: 50,          // Set the width of the separator
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Time',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 12,
+                                        color: whiteColor,
+                                        fontWeight: medium
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5,),
+                                    Text(
+                                      '${(widget.lesson.timeLimit~/60000).toString()} Minutes',
+                                      style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 16,
+                                        color: whiteColor,
+                                        fontWeight: bold
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ]
                             ),
-                            const SizedBox(height: 20,),
-                            Container(
-                              padding: const EdgeInsets.only(left: 20),
-                              alignment: Alignment.centerLeft,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                        )
+                      ),
+                      
+
+                      Obx(() 
+                        => Visibility(
+                          visible: maxtAttemptReached.value && !requestSent.value && !underPunishment.value,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Alasan',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 14,
+                                  fontWeight: medium
+                                ),
+                              ),
+                              TextField(
+                                controller: textAlasanController,
+                                maxLines: 4,
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none, // Remove the underline
+                                  filled: true, // Fill the container with the background color
+                                  fillColor: pastelSecondaryColor, // Set your background color here
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      ),
+                      
+                      Obx(() => 
+                        Visibility(
+                          visible: underPunishment.value,
+                          child: Column (
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text('Catatan :'),
-                                  const SizedBox(height: 10,),
-                                  Text(
-                                    userPostTestAccessRequest?.data != null && userPostTestAccessRequest?.data?.adminReplyMessage != null ? userPostTestAccessRequest?.data!.adminReplyMessage : "tidak ada catatan"
+                                  const Text('Akses akan terbuka pada : '),
+                                  Countdown(
+                                    seconds: secondsDifference,
+                                    build: (BuildContext context, double time) {
+                                      // Convert time from seconds to a Duration object
+                                      Duration duration = Duration(seconds: time.toInt());
+      
+                                      // Extract hours, minutes, and seconds components from the Duration
+                                      int hours = duration.inHours;
+                                      int minutes = duration.inMinutes.remainder(60);
+                                      int seconds = duration.inSeconds.remainder(60);
+      
+                                      // Format the components as HH:MM:SS
+                                      String formattedTime = '${hours}h ${minutes.toString().padLeft(2, '0')}m ${seconds.toString().padLeft(2, '0')}s';
+      
+                                      return Text(
+                                        formattedTime,
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          fontSize: 14,
+                                          fontWeight: semiBold
+                                        ),
+                                      );
+                                    },
+                                    interval: const Duration(milliseconds: 1000),
+                                    onFinished: () async {
+                                      underPunishment.value = false;
+                                      underPunishment.refresh();
+                                    },
                                   ),
                                 ],
                               ),
-                            ),
-                            
-                          ],
-                        )
-                      ),
-                      const SizedBox(height: 30,),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        height: 55,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (maxtAttemptReached && !requestSent && !underPunishment) {
-                              try {
-                                await UserRecordController.sendUserPostTestAccessRequest(widget.lesson.elearningTestId.toString(), textAlasanController.text);
-                                setState(() {
-                                  widget.future = UserRecordController.checkExistingUserPostTestAccessRequest(widget.lesson.elearningTestId.toString());
-                                });
-                              } catch (err) {
-                                // print(err);
-                              }
-                            } else if (maxtAttemptReached || underPunishment) {
-                              Navigator.of(context).pop();
-                            }
-                            else {
-                              context.push('/elearning/test/${widget.lesson.elearningTestId}');
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: maxtAttemptReached && !requestSent && !underPunishment ? primaryColor : (maxtAttemptReached ? secondaryColor : (underPunishment ? secondaryColor : primaryColor)),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                            child: Text(
-                              maxtAttemptReached && !requestSent && !underPunishment ? 'Send Request' : (maxtAttemptReached ? 'back' : (underPunishment ? 'back' : 'start')),
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: 'Poppins',
-                                fontWeight: semiBold
-                              ),  
-                            ),
-                          ),
+                              const SizedBox(height: 20,),
+                              Container(
+                                padding: const EdgeInsets.only(left: 20),
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text('Catatan :'),
+                                    const SizedBox(height: 10,),
+                                    Text(
+                                      userPostTestAccessRequest?.data != null && userPostTestAccessRequest?.data?.adminReplyMessage != null ? userPostTestAccessRequest?.data!.adminReplyMessage : "tidak ada catatan"
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              
+                            ],
+                          )
                         ),
+                      ),
+                      
+                      const SizedBox(height: 30,),
+
+                      Obx(() => 
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: 55,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (maxtAttemptReached.value && !requestSent.value && !underPunishment.value) {
+                                try {
+                                  await UserRecordController.sendUserPostTestAccessRequest(widget.lesson.elearningTestId.toString(), textAlasanController.text);
+                                  requestSent.value = true;
+                                } catch (err) {
+                                  // print(err);
+                                }
+                              } else if (maxtAttemptReached.value || underPunishment.value) {
+                                Get.back();
+                              }
+                              else {
+                                ElearningTestPageController elearningTestPageController = Get.find();
+                                elearningTestPageController.setElearningTestId(widget.lesson.elearningTestId);
+
+                                Get.toNamed(RouteName.elearningTestPage);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: maxtAttemptReached.value && !requestSent.value && !underPunishment.value ? primaryColor : (maxtAttemptReached.value ? secondaryColor : (underPunishment.value ? secondaryColor : primaryColor)),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              child: Text(
+                                maxtAttemptReached.value && !requestSent.value && !underPunishment.value ? 'Send Request' : (maxtAttemptReached.value ? 'back' : (underPunishment.value ? 'back' : 'start')),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: semiBold
+                                ),  
+                              ),
+                            ),
+                          ),
+                        )
                       ),
                     ],
                   ),

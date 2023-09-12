@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/circular_progress_widget.dart';
 
@@ -24,7 +23,7 @@ class CardHorizontalWidget extends StatelessWidget {
     this.subTitleWidth,
     this.subTitleHeight,
 
-    this.targetLocation,
+    this.onTap,
   });
 
   final String? thumbnail;
@@ -45,7 +44,7 @@ class CardHorizontalWidget extends StatelessWidget {
   final double? subTitleWidth;
   final double? subTitleHeight;
 
-  final String? targetLocation;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,7 @@ class CardHorizontalWidget extends StatelessWidget {
       width: width ?? 335,
       height: height ?? 115,
       child: GestureDetector(
-        onTap: () => targetLocation != null ? context.go(targetLocation.toString()) : null,
+        onTap: onTap,
         child: Card(
           elevation: 3,
           shape: RoundedRectangleBorder(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:myplanet/theme.dart';
 
 class CardVerticalWidget extends StatelessWidget {
@@ -11,7 +10,7 @@ class CardVerticalWidget extends StatelessWidget {
     this.subTitle2,
     this.rating,
     this.ratingCount,
-    this.targetLocation,
+    this.onTap,
   });
 
   final String? thumbnail;
@@ -20,14 +19,14 @@ class CardVerticalWidget extends StatelessWidget {
   final String? subTitle2;
   final double? rating;
   final int? ratingCount;
-  final String? targetLocation;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 165,
       child: GestureDetector(
-        onTap: () => targetLocation != null ? context.go(targetLocation.toString()) : null,
+        onTap: onTap,
         child: Card(
           elevation: 4,
           shape: RoundedRectangleBorder(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:myplanet/controllers/elearnings/elearning_course_controller.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 class ElearningTestPage extends StatefulWidget {
-  const ElearningTestPage({super.key, required this.elearningTestId});
-
-  final String elearningTestId;
+  const ElearningTestPage({super.key});
 
   @override
   State<ElearningTestPage> createState() => _ElearningTestPageState();
@@ -23,6 +23,8 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
   List<List<String>?> generatedChoices = [];
   int correctAnswer = 0;
 
+  ElearningTestPageController elearningTestPageController = Get.find();
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +33,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
 
   Future<void> _fetchTest() async {
     try {
-      final test = await ElearningCourseController.fetchSingleTestDetail(widget.elearningTestId);
+      final test = await elearningTestPageController.fetchSingleTestDetail();
       setState(() {
         _testData = test.data;
         _testData!.shuffle();
@@ -282,14 +284,21 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                               });
                             } else {
                               correctAnswer = 0;
+
+                              if (answers.length < currentQuestion+1) {
+                                answers.add('blank');
+                              }
+                              
                               for (int i = 0; i < answers.length; i++) {
                                 if (answers[i] == _testData![i].answer) {
                                   correctAnswer++;
                                 }
                               }
 
-                              // print(_testData![0].questionNumber == 0 ? (correctAnswer / _testData!.length)*100 : (correctAnswer / _testData![0].questionNumber)*100);
-                              // print(widget.elearningTestId);
+                              String score = (correctAnswer/_testData!.length*100).toStringAsFixed(0);
+
+                              // elearningTestPageController.submitTestRecord(score);
+                              Get.offAllNamed(RouteName.elearningFeedbackPage);
                             }
                             
                           },

@@ -21,6 +21,7 @@ class UserProvider {
       }
 
     } catch (e) {
+      print(e);
       throw Exception('Error: $e');
     }
   }
