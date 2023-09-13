@@ -475,7 +475,7 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                                                                         const SizedBox(width: 8,),
                                                                         TestDetail(
                                                                         icon: 'assets/icons/test_status.png',
-                                                                        text:  !isLesson ? ((lesson.score ?? 0) > lesson.passingScore ? "Lulus" : "Gagal") : "",
+                                                                        text:  !isLesson ? (lesson.attempt == null ? '-' : ((lesson.score ?? 0) > lesson.passingScore ? "Lulus" : "Gagal")) : "",
                                                                         ),
                                                                       ],
                                                                     ),

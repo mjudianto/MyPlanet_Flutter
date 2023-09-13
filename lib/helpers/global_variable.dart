@@ -1,6 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';  
+import 'package:http/http.dart' as http;
 
 class GlobalVariable {
 
@@ -27,7 +28,12 @@ class GlobalVariable {
 
   static Future<bool> checkInternetConnection() async {
     bool result = await InternetConnectionChecker().hasConnection;
-    if(result == true) {  
+    
+    final response = await http.get(
+      Uri.parse('${GlobalVariable.apiUrl}/testConnection')
+    );
+
+    if(result == true && response.statusCode == 200) {  
       return true;
     } else {
       return false;

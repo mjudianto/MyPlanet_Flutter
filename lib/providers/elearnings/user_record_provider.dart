@@ -90,6 +90,25 @@ class UserRecordProvider {
     }
   }
 
+  static Future<UserPostTestAccessRequest> checkExistingUserFeedback(String userToken, String elearningTestId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('${GlobalVariable.apiUrl}/userRecords/checkExistingUserPostTestAccessRequest/$elearningTestId'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        },
+      );
+      if (response.statusCode == 200) {
+        var jsonResponse = response.body;
+        return userPostTestAccessRequestFromJson(jsonResponse);
+      } else {
+        throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
 }
 
 

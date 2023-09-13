@@ -32,12 +32,20 @@ class HomePage extends StatelessWidget {
           }
           if (snapshot.hasError) {
             return SizedBox(
-              height: 100,
               width: MediaQuery.of(context).size.width,
-              child: const Center(
-                child: Text(
-                  'Error: Checking Connection',
-                  textAlign: TextAlign.center,
+              child: Center(
+                child: Column(
+                  children: [
+                    const HomePageAppBar(),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                    Image.asset(
+                      'assets/error planet.png', // Replace this with the path to your logo image
+                      width: 400, // Set the height of the logo image
+                    ),
+                    // Text(connected.toString()),
+                  ],
                 ),
               ),
             );

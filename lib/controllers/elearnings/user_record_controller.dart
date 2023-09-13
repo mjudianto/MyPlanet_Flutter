@@ -38,4 +38,17 @@ class UserRecordController {
     }
   }
 
+  static Future<UserPostTestAccessRequest> checkExistingUserFeedback(String elearningTestId) async {
+    UserPostTestAccessRequest userPostTestAccessRequest = UserPostTestAccessRequest();
+
+    try {
+      String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
+      userPostTestAccessRequest = await UserRecordProvider.checkExistingUserFeedback(userToken ?? "", elearningTestId);
+
+      return userPostTestAccessRequest;
+    } on Exception {
+      return UserPostTestAccessRequest();
+    }
+  }
+
 }
