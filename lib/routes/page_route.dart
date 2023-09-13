@@ -10,9 +10,14 @@ import 'package:myplanet/views/pages/home/home_page.dart';
 import 'package:myplanet/views/pages/login_page.dart';
 import 'package:myplanet/views/pages/podtret/podtret_page.dart';
 import 'package:myplanet/views/pages/profile/profile_page.dart';
+import 'package:myplanet/views/pages/splash_screen.dart';
 
 class AppPage {
   static final pages = [
+    GetPage(
+      name: RouteName.splashScreen,
+      page: () => const SplashPage(),
+    ),
     GetPage(
       name: RouteName.loginPage,
       page: () => const LoginPage(),
@@ -26,8 +31,7 @@ class AppPage {
       page: () => HomePage(),
     ),
 
-
-    // elearning 
+    // elearning
     GetPage(
       name: RouteName.elearningPage,
       page: () => const ElearningPage(),
@@ -44,7 +48,6 @@ class AppPage {
       name: RouteName.elearningFeedbackPage,
       page: () => ElearningFeedbackPage(),
     ),
-
 
     GetPage(
       name: RouteName.podtretPage,

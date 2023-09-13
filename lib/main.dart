@@ -6,10 +6,10 @@ import 'package:myplanet/routes/page_route.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final isUserLoggedIn = await GlobalVariable.userAuth(); 
+  final isUserLoggedIn = await GlobalVariable.userAuth();
   final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
   HomeBinding().dependencies();
-  
+
   runApp(MyPlanet(initialLocation: initialLocation));
 }
 
@@ -26,4 +26,3 @@ class MyPlanet extends StatelessWidget {
     );
   }
 }
-

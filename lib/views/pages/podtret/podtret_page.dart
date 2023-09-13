@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myplanet/views/widgets/appBar/appbar.dart';
+import 'package:myplanet/views/widgets/appBar/appbar_podtret.dart';
 
 class PodtretPage extends StatefulWidget {
   const PodtretPage({super.key});
@@ -9,7 +9,6 @@ class PodtretPage extends StatefulWidget {
 }
 
 class _PodtretPageState extends State<PodtretPage> {
-
   @override
   void initState() {
     super.initState();
@@ -18,24 +17,19 @@ class _PodtretPageState extends State<PodtretPage> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        // appBar: const PageAppBar(),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min, 
-            children: [
-              PageAppBar(type: 'search',),
-
-              SizedBox(
-                height: 200,
-                child: Center(
-                  child: Text('Podtret Page')
-                )
-              ),
-            ],
-          ),
+      // appBar: const PageAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AppBarPodtret(
+              type: 'search',
+            ),
+            SizedBox(height: 200, child: Center(child: Text('Podtret Page'))),
+          ],
         ),
-        
+      ),
     );
   }
 }

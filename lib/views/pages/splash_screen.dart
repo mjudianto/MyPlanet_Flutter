@@ -1,33 +1,38 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart'; // Import the router library
+import 'package:myplanet/theme.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    super.initState();
+    // TODO: implement initState
+    Timer(
+      Duration(seconds: 3),
+      () => Navigator.pushNamed(context, '/home'),
+    );
 
-    // Simulate some async initialization (like fetching data or checking auth)
-    Future.delayed(const Duration(seconds: 2), () {
-      // After a delay, navigate to the main screen
-      context.go('/home');
-    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      backgroundColor: backgroundColor2,
       body: Center(
-        child: Text(
-          'Splash Screen',
-          style: TextStyle(fontSize: 24),
+        child: Container(
+          width: 246,
+          height: 90,
+          decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage('assets/splash.png'))),
         ),
       ),
     );
