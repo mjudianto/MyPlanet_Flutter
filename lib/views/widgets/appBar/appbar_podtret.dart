@@ -94,19 +94,20 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
               width:
                   10), // Menambahkan ruang di antara logo dan kotak pencarian
           Expanded(
             child: Container(
+              height: 40,
               decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(25),
               ),
-              child: Center(
+              child: const Center(
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: 'Cari E-learning atau PODTRET',
+                    hintText: 'Cari PODTRET',
                     border: InputBorder.none,
                     prefixIcon: Icon(Icons
                         .search), // Ikon pencarian di dalam kotak pencarian
