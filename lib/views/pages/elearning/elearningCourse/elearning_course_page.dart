@@ -103,433 +103,452 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
 
     return MaterialApp(
       home: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(
-              height: 350,
-              width: MediaQuery.of(context).size.width,
-              child: Stack(
-                children: [
-                  // Video player widget
-                  Positioned.fill(
-                    child: _videoPlayerController.value.isInitialized
-                    ? CustomVideoPlayer(
-                      customVideoPlayerController: _customVideoPlayerController,
-                    )
-                    : Container(
-                      decoration: const BoxDecoration(
-                        color: blackColor
-                      ),
-                    )
-                  ),
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.07,
-                    left: 20,
-                    child: Container(
-                      height: 35,
-                      width: 35,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: Center(
-                        child: IconButton(
-                          iconSize: 16,
-                          color: blackColor,
-                          icon: const Icon(Icons.arrow_back_ios_new),
-                          onPressed: () {
-                            GlobalVariable.currentUrl = '/elearning';
-                            disposeVideo();
-                            Get.back();
-                          }
-                        )
+        body: Container(
+          decoration: const BoxDecoration(
+            color: backgroundColor
+          ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 350,
+                width: MediaQuery.of(context).size.width,
+                child: Stack(
+                  children: [
+                    // Video player widget
+                    Positioned.fill(
+                      child: _videoPlayerController.value.isInitialized
+                      ? CustomVideoPlayer(
+                        customVideoPlayerController: _customVideoPlayerController,
+                      )
+                      : Container(
+                        decoration: const BoxDecoration(
+                          color: blackColor
+                        ),
+                      )
+                    ),
+                    Positioned(
+                      top: MediaQuery.of(context).size.height * 0.07,
+                      left: 20,
+                      child: Container(
+                        height: 35,
+                        width: 35,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            iconSize: 16,
+                            color: blackColor,
+                            icon: const Icon(Icons.arrow_back_ios_new),
+                            onPressed: () {
+                              GlobalVariable.currentUrl = '/elearning';
+                              disposeVideo();
+
+                              Get.offAllNamed(RouteName.dashboardPage);
+                            }
+                          )
+                        ),
                       ),
                     ),
-                  ),
-                  Visibility(
-                    visible: videoInitialized ? (_videoPlayerController.value.isInitialized ? false : true) : false,
-                    child: const Center(child: CircularProgressIndicator()),
-                  ),
-                ],
+                    Visibility(
+                      visible: videoInitialized ? (_videoPlayerController.value.isInitialized ? false : true) : false,
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                  ],
+                ),
               ),
-            ),
-              
-            FutureBuilder(
-              future: _singleCourseFuture,
-              builder: (context, snapshot) { 
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Display a loading indicator while waiting for the future to complete
-                  return 
-                  SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  // Handle any errors that occurred during the Future execution
-                  return
-                  SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        'Error: Error: Data Load Failed',
-                        textAlign: TextAlign.center,
+                
+              FutureBuilder(
+                future: _singleCourseFuture,
+                builder: (context, snapshot) { 
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Display a loading indicator while waiting for the future to complete
+                    return 
+                    SizedBox(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: CircularProgressIndicator(),
                       ),
-                    ),
-                  );
-                } else {
-                  // If the Future completed successfully, display the data
-                  if (snapshot.data != null) {
-                    var course = snapshot.data;
-
+                    );
+                  } else if (snapshot.hasError) {
+                    // Handle any errors that occurred during the Future execution
                     return
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: Text(
-                            course!.data![0].judul.toString(),
-                            style: TextStyle(
-                              color: blackColor,
-                              fontSize: 20,
-                              fontWeight: bold,
+                    SizedBox(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Center(
+                        child: Text(
+                          'Error: Error: Data Load Failed',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  } else {
+                    // If the Future completed successfully, display the data
+                    if (snapshot.data != null) {
+                      var course = snapshot.data;
+        
+                      return
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 20),
+                            child: Text(
+                              course!.data![0].judul.toString(),
+                              style: TextStyle(
+                                color: blackColor,
+                                fontSize: 20,
+                                fontWeight: bold,
+                              ),
                             ),
                           ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Visibility(visible: course.data?[0].averageRating.toString() == null ? false : true , child: const Icon(Icons.star, color: Color(0xffFFCE31), size: 16,)),
-                              Text(
-                                course.data?[0].averageRating.toString() == 'null' ? "" : course.data![0].averageRating.toString(),
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: blackColor,
-                                  fontWeight: medium,
-                                  fontFamily: 'Poppins', // Set the font family to Poppins
+        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Visibility(visible: course.data?[0].averageRating.toString() == null ? false : true , child: const Icon(Icons.star, color: Color(0xffFFCE31), size: 16,)),
+                                Text(
+                                  course.data?[0].averageRating.toString() == 'null' ? "" : course.data![0].averageRating.toString(),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: blackColor,
+                                    fontWeight: medium,
+                                    fontFamily: 'Poppins', // Set the font family to Poppins
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                course.data![0].responseCount.toString() == 'null' ? "" : ' (${course.data![0].responseCount.toString()}) • ',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: blackColor,
-                                  fontWeight: medium,
-                                  fontFamily: 'Poppins', // Set the font family to Poppins
+                                Text(
+                                  course.data![0].responseCount.toString() == 'null' ? "" : ' (${course.data![0].responseCount.toString()}) • ',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: blackColor,
+                                    fontWeight: medium,
+                                    fontFamily: 'Poppins', // Set the font family to Poppins
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '${course.data![0].totalLessonsAndTests.toString()} lessons',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: blackColor,
-                                  fontWeight: medium,
-                                  fontFamily: 'Poppins', // Set the font family to Poppins
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0, top: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/course_createdBy_icon.png',
-                                color: blackColor,
-                                height: 13,
-                              ),
-                              const Text(' '),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                child: Text(
-                                  course.data![0].createdBy ?? "Learning & People Development",
+                                Text(
+                                  '${course.data![0].totalLessonsAndTests.toString()} lessons',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: blackColor,
                                     fontWeight: medium,
                                     fontFamily: 'Poppins', // Set the font family to Poppins
                                   ),
-                                  overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
-                                  maxLines: 1, // Limit the text to a single line
                                 ),
-                              )
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-
-                      ],
-                    );
-                  } else {
-                    // Handle the case when there is no data
-                    return const Text('No data available.');
+        
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20.0, top: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/course_createdBy_icon.png',
+                                  color: blackColor,
+                                  height: 13,
+                                ),
+                                const Text(' '),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.8,
+                                  child: Text(
+                                    course.data![0].createdBy ?? "Learning & People Development",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: blackColor,
+                                      fontWeight: medium,
+                                      fontFamily: 'Poppins', // Set the font family to Poppins
+                                    ),
+                                    overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                                    maxLines: 1, // Limit the text to a single line
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+        
+                        ],
+                      );
+                    } else {
+                      // Handle the case when there is no data
+                      return const Text('No data available.');
+                    }
                   }
                 }
-              }
-            ),
+              ),
+        
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20.0),
+                  child: FutureBuilder<ElearningModule>(
+                    future: _courseModulesFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (!snapshot.hasData || snapshot.data == null) {
+                        return const Text('No modules available.');
+                      } else {
+                        final modules = snapshot.data!.data;
+                        if(true){
+                          return SingleChildScrollView(
+                            child: Column(children: modules!.map((module) {
+                              final moduleDataFuture = moduleDataFutures[module.elearningModuleId.toString()];
+                              bool lastModule = false;
 
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20.0),
-                child: FutureBuilder<ElearningModule>(
-                  future: _courseModulesFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else if (!snapshot.hasData || snapshot.data == null) {
-                      return const Text('No modules available.');
-                    } else {
-                      final modules = snapshot.data!.data;
-                      return ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: modules?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          final module = modules![index];
-                          final moduleDataFuture = moduleDataFutures[module.elearningModuleId.toString()];
-                            
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: index != modules.length - 1 ? 12 : 30), // Adjust the vertical padding as needed
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                borderRadius: BorderRadius.circular(15),
-                                border: Border.all(color: blackColor),
-                              ),
-                              child: Column(
-                                children: [
-                                  ExpansionTile(
-                                    title: Text(
-                                      module.judul!,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: blackColor,
-                                        fontWeight: semiBold,
-                                        fontFamily: 'Poppins',
-                                      ),
-                                    ),
-                                    trailing: Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey.shade300,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Icon(
-                                        moduleExpansionStates[module.elearningModuleId.toString()] ?? false
-                                        ? Icons.keyboard_arrow_up
-                                        : Icons.keyboard_arrow_down,
-                                        size: 24,
-                                        color: blackColor,
-                                      ),
-                                    ),
-                                    onExpansionChanged: (expanded) {
-                                      setState(() {
-                                        moduleExpansionStates[module.elearningModuleId.toString()] = expanded;
-                                      });
-                                    },
+                              if(modules.last.elearningModuleId == module.elearningModuleId) {
+                                lastModule = true;
+                              }
+
+                              return Padding(
+                                padding: EdgeInsets.only(bottom: lastModule ? 32 : 16),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color: blackColor,
+                                      width: 0.2
+                                    )
+                                  ),
+                                  child: Column(
                                     children: [
-                                      FutureBuilder(
-                                        future: moduleDataFuture,
-                                        builder: (context, snapshot) {
-                                          if (snapshot.connectionState == ConnectionState.waiting) {
-                                            return const SizedBox(
-                                              height: 200,
-                                              child: Center(child: CircularProgressIndicator())
-                                            );
-                                          } else if (snapshot.hasError) {
-                                            return Text('Error: ${snapshot.error}');
-                                          } else if (!snapshot.hasData || snapshot.data == null) {
-                                            return const Text('No lesson available.');
-                                          } else {
-                                            final List<dynamic> results = snapshot.data as List<dynamic>;
-                                            final lessons = results[0].data;
-                                            final tests = results[1].data;
-                                            final lessonsLength = lessons!.length + (tests == null ? 0 : tests.length);
-
-                                            final double sizeBoxLength = lessonsLength * 50 > 200 ? 200 : 50.0 * lessonsLength + (tests == null ? 25 : 50);
-
-                                            return SizedBox(
-                                              height: sizeBoxLength,
-                                              child: ListView.builder(
-                                                padding: EdgeInsets.zero,
-                                                itemCount: lessonsLength,
-                                                itemBuilder: (context, index) {
-                                                  final lesson = index < lessons.length ? lessons[index] : tests[index-lessons.length];
-                                                  final bool isLesson = index < lessons.length;
-
-                                                  return GestureDetector(
-                                                    onTap: isLesson ? () {
-                                                      updateVideoPlayer('https://myplanet.enseval.com/${lesson.konten}', lesson.elearningLessonId.toString());
-                                                    } 
-                                                    : (){
-                                                      showModalBottomSheet(
-                                                        context: context,
-                                                        builder: (BuildContext context) {
-                                                          _userPostTestAccessRequestFuture = UserRecordController.checkExistingUserPostTestAccessRequest(lesson.elearningTestId.toString());
-                                                          return StartPostTestConfirmationModal(
-                                                            lesson: lesson,
-                                                            future: _userPostTestAccessRequestFuture,
-                                                          ); // Use the widget you created
+                                      ExpansionTile(
+                                        initiallyExpanded: true,
+                                        title: Text(
+                                          module.judul!,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: blackColor,
+                                            fontWeight: semiBold,
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        ),
+                                        trailing: Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey.shade300,
+                                            borderRadius: BorderRadius.circular(15),
+                                          ),
+                                          child: Icon(
+                                            moduleExpansionStates[module.elearningModuleId.toString()] ?? false
+                                            ? Icons.keyboard_arrow_up
+                                            : Icons.keyboard_arrow_down,
+                                            size: 24,
+                                            color: blackColor,
+                                          ),
+                                        ),
+                                        onExpansionChanged: (expanded) {
+                                          setState(() {
+                                            moduleExpansionStates[module.elearningModuleId.toString()] = expanded;
+                                          });
+                                        },
+                                        children: [
+                                          FutureBuilder(
+                                            future: moduleDataFuture,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                                return const SizedBox(
+                                                  height: 200,
+                                                  child: Center(child: CircularProgressIndicator())
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                return Text('Error: ${snapshot.error}');
+                                              } else if (!snapshot.hasData || snapshot.data == null) {
+                                                return const Text('No lesson available.');
+                                              } else {
+                                                final List<dynamic> results = snapshot.data as List<dynamic>;
+                                                final lessons = results[0].data;
+                                                final tests = results[1].data;
+                                                final lessonsLength = lessons!.length + (tests == null ? 0 : tests.length);
+                                
+                                                // final double sizeBoxLength = 50.0 * lessonsLength + (tests == null ? 25 : 50);
+                                
+                                                return Container(
+                                                  constraints: const BoxConstraints(maxHeight: double.infinity),
+                                                  child: ListView.builder(
+                                                    shrinkWrap: true,
+                                                    physics: const NeverScrollableScrollPhysics(),
+                                                    padding: EdgeInsets.zero,
+                                                    itemCount: lessonsLength,
+                                                    itemBuilder: (context, index) {
+                                                      final lesson = index < lessons.length ? lessons[index] : tests[index-lessons.length];
+                                                      final bool isLesson = index < lessons.length;
+                                                                                            
+                                                      return GestureDetector(
+                                                        onTap: isLesson ? () {
+                                                          updateVideoPlayer('https://myplanet.enseval.com/${lesson.konten}', lesson.elearningLessonId.toString());
+                                                        } 
+                                                        : (){
+                                                          showModalBottomSheet(
+                                                            context: context,
+                                                            builder: (BuildContext context) {
+                                                              _userPostTestAccessRequestFuture = UserRecordController.checkExistingUserPostTestAccessRequest(lesson.elearningTestId.toString());
+                                                              return StartPostTestConfirmationModal(
+                                                                lesson: lesson,
+                                                                future: _userPostTestAccessRequestFuture,
+                                                              ); // Use the widget you created
+                                                            },
+                                                          );
                                                         },
-                                                      );
-                                                    },
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(left: 15.0, right: 15, bottom: index == lessonsLength - 1 ? 15 : 3, top: isLesson ? 0 : 5),
-                                                      child: Row(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                                        children: [
-                                                          Column(
-                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                            children: [
-                                                              ClipRRect(
-                                                                borderRadius: BorderRadius.circular(15.0),
-                                                                child: Stack(
-                                                                  children: [
-                                                                    Image.asset(
-                                                                      isLesson ? 'assets/lesson_placeholder.png' : 'assets/test_placeholder.png', // Replace this with the path to your logo image
-                                                                      width: 75, // Set the width of the logo image
-                                                                      height: isLesson ? 50 : 65, // Set the height of the logo image
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                                                                  
-                                                          Padding(
-                                                            padding: const EdgeInsets.only(left: 10.0),
-                                                            child: Column(
+                                                        child: Padding(
+                                                          padding: EdgeInsets.symmetric(vertical: isLesson ? 2.5 : 7),
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                                                            child: Row(
                                                               mainAxisAlignment: MainAxisAlignment.center,
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              crossAxisAlignment: CrossAxisAlignment.center,
                                                               children: [
-                                                                Row(
+                                                                Column(
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                                   children: [
-                                                                    SizedBox(
-                                                                      width: 180,
-                                                                      child: Text(
-                                                                      lesson.judul ?? "",
-                                                                      style: TextStyle(
-                                                                          fontSize: 12,
-                                                                          color: blackColor,
-                                                                          fontWeight: semiBold,
-                                                                          fontFamily: 'Poppins', // Set the font family to Poppins
-                                                                        ),
-                                                                        overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
-                                                                        maxLines: 1, // Limit the text to a single line
+                                                                    ClipRRect(
+                                                                      borderRadius: BorderRadius.circular(15.0),
+                                                                      child: Stack(
+                                                                        children: [
+                                                                          Image.asset(
+                                                                            isLesson ? 'assets/lesson_placeholder.png' : 'assets/test_placeholder.png', // Replace this with the path to your logo image
+                                                                            width: 75, // Set the width of the logo image
+                                                                            height: isLesson ? 50 : 65, // Set the height of the logo image
+                                                                          ),
+                                                                        ],
                                                                       ),
                                                                     ),
                                                                   ],
                                                                 ),
-                                                                SizedBox(height: isLesson ? 5 : 2),
-                                                                Row(
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 180,
-                                                                      child: Text(
-                                                                        GlobalVariable.userData['user']['empnik'],
-                                                                        style: TextStyle(
-                                                                          fontSize: 12,
-                                                                          color: secondaryColor,
-                                                                          fontWeight: medium,
-                                                                          fontFamily: 'Poppins', // Set the font family to Poppins
-                                                                        ),
-                                                                        overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
-                                                                        maxLines: 1, // Limit the text to a single line
+                                                                                                        
+                                                                Padding(
+                                                                  padding: const EdgeInsets.only(left: 10.0),
+                                                                  child: Column(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            width: 180,
+                                                                            child: Text(
+                                                                            lesson.judul ?? "",
+                                                                            style: TextStyle(
+                                                                                fontSize: 12,
+                                                                                color: blackColor,
+                                                                                fontWeight: semiBold,
+                                                                                fontFamily: 'Poppins', // Set the font family to Poppins
+                                                                              ),
+                                                                              overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                                                                              maxLines: 1, // Limit the text to a single line
+                                                                            ),
+                                                                          ),
+                                                                        ],
                                                                       ),
-                                                                    )
-                                                                  ],
+                                                                      SizedBox(height: isLesson ? 5 : 2),
+                                                                      Row(
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            width: 180,
+                                                                            child: Text(
+                                                                              GlobalVariable.userData['user']['empnik'],
+                                                                              style: TextStyle(
+                                                                                fontSize: 12,
+                                                                                color: secondaryColor,
+                                                                                fontWeight: medium,
+                                                                                fontFamily: 'Poppins', // Set the font family to Poppins
+                                                                              ),
+                                                                              overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                                                                              maxLines: 1, // Limit the text to a single line
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Visibility(
+                                                                        visible: !isLesson,
+                                                                        child: const SizedBox(height: 3)
+                                                                      ),
+                                                                      Visibility(
+                                                                        visible: !isLesson,
+                                                                        child: SizedBox(
+                                                                          width: 180,
+                                                                          child: Row(
+                                                                            children: [
+                                                                              TestDetail(
+                                                                                icon: 'assets/icons/test_passed.png',
+                                                                                text: !isLesson ? (lesson.score == null ? '0' : lesson.score.toString()) : "",
+                                                                              ),
+                                                                              const SizedBox(width: 8,),
+                                                                              TestDetail(
+                                                                              icon: 'assets/icons/test_attempt.png',
+                                                                              text:  !isLesson ? (lesson.attempt == null ? '0' : lesson.attempt.toString()) : "",
+                                                                              ),
+                                                                              const SizedBox(width: 8,),
+                                                                              TestDetail(
+                                                                              icon: 'assets/icons/test_status.png',
+                                                                              text:  !isLesson ? (lesson.attempt == null ? '-' : ((lesson.score ?? 0) > lesson.passingScore ? "Lulus" : "Gagal")) : "",
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                                Visibility(
-                                                                  visible: !isLesson,
-                                                                  child: const SizedBox(height: 3)
-                                                                ),
-                                                                Visibility(
-                                                                  visible: !isLesson,
-                                                                  child: SizedBox(
-                                                                    width: 180,
-                                                                    child: Row(
+                                                                  
+                                                                const Expanded(
+                                                                  child: Center(
+                                                                    child: Column(
+                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                      crossAxisAlignment: CrossAxisAlignment.center,
                                                                       children: [
-                                                                        TestDetail(
-                                                                          icon: 'assets/icons/test_passed.png',
-                                                                          text: !isLesson ? (lesson.score == null ? '0' : lesson.score.toString()) : "",
-                                                                        ),
-                                                                        const SizedBox(width: 8,),
-                                                                        TestDetail(
-                                                                        icon: 'assets/icons/test_attempt.png',
-                                                                        text:  !isLesson ? (lesson.attempt == null ? '0' : lesson.attempt.toString()) : "",
-                                                                        ),
-                                                                        const SizedBox(width: 8,),
-                                                                        TestDetail(
-                                                                        icon: 'assets/icons/test_status.png',
-                                                                        text:  !isLesson ? (lesson.attempt == null ? '-' : ((lesson.score ?? 0) > lesson.passingScore ? "Lulus" : "Gagal")) : "",
-                                                                        ),
+                                                                        SizedBox(
+                                                                          width: 60,
+                                                                          height: 60,
+                                                                          child: Icon(
+                                                                            Icons.play_circle_fill_rounded,
+                                                                            size: 24,
+                                                                            color: primaryColor,
+                                                                          )
+                                                                        )
                                                                       ],
                                                                     ),
-                                                                  )
-                                                                )
+                                                                  ),
+                                                                ),
                                                               ],
                                                             ),
                                                           ),
-                                                            
-                                                          const Expanded(
-                                                            child: Center(
-                                                              child: Column(
-                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                                children: [
-                                                                  SizedBox(
-                                                                    width: 60,
-                                                                    height: 60,
-                                                                    child: Icon(
-                                                                      Icons.play_circle_fill_rounded,
-                                                                      size: 24,
-                                                                      color: primaryColor,
-                                                                    )
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                                
-                                            );
-                                          }
-                                        }
+                                                        ),
+                                                      );
+                                                    },
+                                                  ),
+                                                    
+                                                );
+                                              }
+                                            }
+                                          ),
+                                
+                                        ],
                                       ),
-
                                     ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            }).toList()),
                           );
-                        },
-                      );
-                    }
-                  },
+                        }
+                      }
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -789,6 +808,12 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
                                   filled: true, // Fill the container with the background color
                                   fillColor: pastelSecondaryColor, // Set your background color here
                                 ),
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12,
+                                  color: blackColor,
+                                  fontWeight: medium
+                                ),
                               )
                             ],
                           ),
@@ -877,6 +902,8 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
                               else {
                                 ElearningTestPageController elearningTestPageController = Get.find();
                                 elearningTestPageController.setElearningTestId(widget.lesson.elearningTestId);
+
+                                elearningTestPageController.passingScore = widget.lesson.passingScore;
 
                                 Get.toNamed(RouteName.elearningTestPage);
                               }

@@ -4,7 +4,7 @@ import 'package:myplanet/models/elearnings/elearning_course_detail_model.dart';
 import 'package:myplanet/models/elearnings/elearning_lesson_model.dart';
 import 'package:myplanet/models/elearnings/elearning_module_model.dart';
 import 'package:myplanet/models/elearnings/userRecords/user_test_record_model.dart';
-import 'package:myplanet/providers/elearnings/elearning_course_provider.dart';
+import 'package:myplanet/providers/elearnings/elearning_provider.dart';
 
 class ElearningCoursePageController extends GetxController {
   String elearningCourseId = '';
@@ -16,7 +16,7 @@ class ElearningCoursePageController extends GetxController {
       ElearningCourseDetail courseDetail = ElearningCourseDetail();
       
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
-      courseDetail = await ElearningCourseProvider.getSingleCourseDetail(userToken ?? "", elearningCourseId);
+      courseDetail = await ElearningProvider.getSingleCourseDetail(userToken ?? "", elearningCourseId);
       return courseDetail;
     } on Exception catch(e) {
       throw Exception('error: $e');
@@ -28,7 +28,7 @@ class ElearningCoursePageController extends GetxController {
       ElearningModule modules = ElearningModule();
       
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
-      modules = await ElearningCourseProvider.getCourseModules(userToken ?? "", elearningCourseId);
+      modules = await ElearningProvider.getCourseModules(userToken ?? "", elearningCourseId);
       return modules;
     } on Exception catch(e) {
       throw Exception('error: $e');
@@ -40,7 +40,7 @@ class ElearningCoursePageController extends GetxController {
       ElearningLesson lessons = ElearningLesson();
       
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
-      lessons = await ElearningCourseProvider.getModuleLessons(userToken ?? "", elearningModuleId);
+      lessons = await ElearningProvider.getModuleLessons(userToken ?? "", elearningModuleId);
       return lessons;
     } on Exception catch(e) {
       throw Exception('error: $e');
@@ -52,7 +52,7 @@ class ElearningCoursePageController extends GetxController {
       UserTestRecord tests = UserTestRecord();
       
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
-      tests = await ElearningCourseProvider.getModuleTests(userToken ?? "", elearningModuleId);
+      tests = await ElearningProvider.getModuleTests(userToken ?? "", elearningModuleId);
       return tests;
     } on Exception {
       return UserTestRecord();
