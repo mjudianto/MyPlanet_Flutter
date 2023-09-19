@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myplanet/controllers/elearnings/elearning_course_controller.dart';
+import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
@@ -21,7 +21,7 @@ class _ElearningPageState extends State<ElearningPage> {
   void initState() {
     super.initState();
 
-    _userCoursesFuture = ElearningCourseController.fetchUserCourses();
+    _userCoursesFuture = ElearningController.fetchUserCourses();
   }
 
   @override

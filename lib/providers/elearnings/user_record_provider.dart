@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:http/http.dart' as http;
 import 'package:myplanet/models/elearnings/userRecords/user_post_test_access_request_model.dart';
@@ -90,21 +92,45 @@ class UserRecordProvider {
     }
   }
 
-  static Future<UserPostTestAccessRequest> checkExistingUserFeedback(String userToken, String elearningTestId) async {
+  static checkExistingUserFeedback(String userToken, String elearningTestId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/userRecords/checkExistingUserPostTestAccessRequest/$elearningTestId'),
+        Uri.parse('${GlobalVariable.apiUrl}/userRecords/checkExistingUserFeedback/$elearningTestId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         },
       );
       if (response.statusCode == 200) {
-        var jsonResponse = response.body;
-        return userPostTestAccessRequestFromJson(jsonResponse);
+        return true;
       } else {
-        throw Exception('Failed to fetch data from API');
+        return false;
+        // throw Exception('Failed to fetch data from API');
       }
     } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  static sendUserFeedback(String userToken, String elearningTestId, List<Map> feedbacks) async {
+    try {
+      String jsonFeedback = json.encode(feedbacks);
+      final response = await http.post(
+        Uri.parse('${GlobalVariable.apiUrl}/userRecords/userFeedback/$elearningTestId'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        },
+        body: {
+          'feedbacks': jsonFeedback
+        }
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+      } else {
+        print(response.body);
+        // throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      print(e);
       throw Exception('Error: $e');
     }
   }

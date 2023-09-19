@@ -5,13 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:myplanet/models/elearnings/elearning_lesson_model.dart';
 import 'package:myplanet/models/elearnings/elearning_module_model.dart';
 import 'package:myplanet/models/elearnings/elearning_test_model.dart';
+import 'package:myplanet/models/elearnings/feedback_question_model.dart';
 import 'package:myplanet/models/elearnings/userRecords/user_test_record_model.dart';
 
-class ElearningCourseProvider {
+class ElearningProvider {
   static Future<ElearningCourse> getUserCourses(String userToken) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getUserCourses'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getUserCourses'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -30,7 +31,7 @@ class ElearningCourseProvider {
   static Future<ElearningCourseDetail> getSingleCourseDetail(String userToken ,String elearningCourseId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getSingleCourseDetail/$elearningCourseId'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getSingleCourseDetail/$elearningCourseId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -49,7 +50,7 @@ class ElearningCourseProvider {
   static Future<ElearningModule> getCourseModules(String userToken ,String elearningCourseId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getCourseModules/$elearningCourseId'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getCourseModules/$elearningCourseId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -68,7 +69,7 @@ class ElearningCourseProvider {
   static Future<ElearningLesson> getModuleLessons(String userToken ,String elearningModuleId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getModuleLessons/$elearningModuleId'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleLessons/$elearningModuleId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -87,7 +88,7 @@ class ElearningCourseProvider {
   static Future<UserTestRecord> getModuleTests(String userToken ,String elearningModuleId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getModuleTests/$elearningModuleId'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleTests/$elearningModuleId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -106,7 +107,7 @@ class ElearningCourseProvider {
   static Future<ElearningTest> getTestDetail(String userToken, String elearningTestId) async {
     try {
       final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearningCourses/getTestDetail/$elearningTestId'),
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/getTestDetail/$elearningTestId'),
         headers: {
           'Authorization' : 'bearer $userToken',
         }
@@ -114,6 +115,25 @@ class ElearningCourseProvider {
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningTestFromJson(jsonResponse);
+      } else {
+        throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  static Future<FeedbackQuestion> getFeedbackQuestions(String userToken) async {
+    try {
+      final response = await http.get(
+        Uri.parse('${GlobalVariable.apiUrl}/elearning/feedbackQuestions'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        }
+      );
+      if (response.statusCode == 200) {
+        var jsonResponse = response.body;
+        return feedbackQuestionFromJson(jsonResponse);
       } else {
         throw Exception('Failed to fetch data from API');
       }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_controller.dart';
+import 'package:myplanet/views/pages/elearning/elearninTest/feedback/elearning_feedback_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
@@ -34,6 +35,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
   Future<void> _fetchTest() async {
     try {
       final test = await elearningTestPageController.fetchSingleTestDetail();
+
       setState(() {
         _testData = test.data;
         _testData!.shuffle();
@@ -267,7 +269,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                         width: 170,
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: (){ 
+                          onPressed: () async { 
                             if (_testData![0].questionNumber == 0 ? currentQuestion+1 != _testData!.length : currentQuestion+1 != _testData![0].questionNumber) {
                               setState(() {
                                 if (answers.length < currentQuestion+1) {
@@ -297,8 +299,16 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
 
                               String score = (correctAnswer/_testData!.length*100).toStringAsFixed(0);
 
+                              ElearningFeedbackPageController elearningFeedbackPageController = Get.find();
+                              
+                              await elearningFeedbackPageController.checkExistingUserFeedback(elearningTestPageController.elearningTestId);
+
+                              elearningTestPageController.score = int.parse(score);
+                              elearningTestPageController.status = int.parse(score) >= elearningTestPageController.passingScore ? 'Lulus' : 'Gagal';
+
                               // elearningTestPageController.submitTestRecord(score);
-                              Get.offAllNamed(RouteName.elearningFeedbackPage);
+
+                              Get.offNamed(RouteName.elearningFeedbackPage);
                             }
                             
                           },

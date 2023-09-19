@@ -12,6 +12,7 @@ const backgroundColor = Color(0xffF6F6F9);
 const backgroundColor2 = Color(0xff1d1d1d);
 const pastelSecondaryColor = Color(0xffE2E3E5);
 const dangerColor = Color(0xffDC3545);
+const successColor = Color(0xff008A27);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryColor,
