@@ -24,7 +24,7 @@ class _ImageSliderWithIndicatorState extends State<ImageSliderWithIndicator> {
           carouselController: _controller,
           options: CarouselOptions(
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
+            autoPlayInterval: const Duration(seconds: 10),
             autoPlayAnimationDuration: Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             aspectRatio: 2.0,
