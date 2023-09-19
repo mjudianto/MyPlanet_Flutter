@@ -11,6 +11,8 @@ abstract class RouteName {
   static const elearningFeedbackPage = '/elearning/course/feedback';
 
   static const podtretPage = '/podtret';
+  // static const recomendationPodtret = '/podtret/recomendation_podtret';
+
   static const communityPage = '/community';
   static const profilePage = '/profile';
 }

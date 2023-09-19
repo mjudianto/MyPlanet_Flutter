@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/podtret/video_play_podtret.dart';
 
 class CardRecomendation extends StatelessWidget {
   const CardRecomendation({super.key});
@@ -9,7 +10,13 @@ class CardRecomendation extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('klik');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                VideoPlayPodtret(), // Ganti dengan nama yang sesuai
+          ),
+        );
       },
       child: SizedBox(
         width: 283,

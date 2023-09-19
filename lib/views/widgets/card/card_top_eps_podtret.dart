@@ -10,7 +10,10 @@ class CardTopEps extends StatelessWidget {
       onTap: () {},
       child: Container(
           width: 300,
-          margin: const EdgeInsets.only(right: 38),
+          margin: const EdgeInsets.only(
+            right: 38,
+            bottom: 8,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),

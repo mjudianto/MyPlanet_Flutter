@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
+import 'package:myplanet/views/pages/podtret/recomendation_podtret.dart';
+import 'package:myplanet/views/pages/podtret/top_eps_podtret.dart';
 import 'package:myplanet/views/widgets/appBar/appbar_podtret.dart';
 import 'package:myplanet/views/widgets/card/card_recomendation_podtret.dart';
 import 'package:myplanet/views/widgets/card/card_new_eps_podtret.dart';
@@ -47,10 +50,21 @@ class _PodtretPageState extends State<PodtretPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SvgPicture.asset(
-              'assets/icons/arrow_right.svg',
-              width: 14,
-              height: 14,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        RecomendationPodtret(), // Ganti dengan nama yang sesuai
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/icons/arrow_right.svg',
+                width: 14,
+                height: 14,
+              ),
             ),
           ],
         ),
@@ -96,10 +110,21 @@ class _PodtretPageState extends State<PodtretPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SvgPicture.asset(
-              'assets/icons/arrow_right.svg',
-              width: 14,
-              height: 14,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const NewEpsPodtret(), // Ganti dengan nama yang sesuai
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/icons/arrow_right.svg',
+                width: 14,
+                height: 14,
+              ),
             ),
           ],
         ),
@@ -145,10 +170,21 @@ class _PodtretPageState extends State<PodtretPage> {
                 fontWeight: semiBold,
               ),
             ),
-            SvgPicture.asset(
-              'assets/icons/arrow_right.svg',
-              width: 14,
-              height: 14,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        TopEpsPodtret(), // Ganti dengan nama yang sesuai
+                  ),
+                );
+              },
+              child: SvgPicture.asset(
+                'assets/icons/arrow_right.svg',
+                width: 14,
+                height: 14,
+              ),
             ),
           ],
         ),
@@ -169,9 +205,6 @@ class _PodtretPageState extends State<PodtretPage> {
                     CardTopEps(),
                     CardTopEps(),
                   ],
-                ),
-                SizedBox(
-                  height: 8,
                 ),
                 Row(
                   children: [
@@ -223,7 +256,34 @@ class _PodtretPageState extends State<PodtretPage> {
                 ],
               ),
             ),
-            const Center(child: Text('Santai Content')),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 16,
+                  ),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                  CardTopEps(),
+                ],
+              ),
+            ),
             const Center(child: Text('Seram Content')),
             const Center(child: Text('Politik Content')),
             const Center(child: Text('Olahraga Content')),
