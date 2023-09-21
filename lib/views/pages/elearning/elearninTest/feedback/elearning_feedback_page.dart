@@ -12,7 +12,8 @@ import 'package:myplanet/views/widgets/appBar/appbar.dart';
 class ElearningFeedbackPage extends StatelessWidget {
   ElearningFeedbackPage({super.key});
 
-  final ElearningFeedbackPageController elearningFeedbackPageController = Get.find();
+  final ElearningFeedbackPageController elearningFeedbackPageController =
+      Get.find();
   final ElearningTestPageController elearningTestPageController = Get.find();
   final TextEditingController feedbackTextController = TextEditingController();
 
@@ -55,79 +56,96 @@ class ElearningFeedbackPage extends StatelessWidget {
                   height: 40,
                 ),
                 FutureBuilder(
-                  future: elearningFeedbackPageController.fetchFeedbackQuestion(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.5,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      return
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.65,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: Image.asset(
-                            'assets/error planet.png', // Replace this with the path to your logo image
-                            height: 600, // Set the height of the logo image
+                    future:
+                        elearningFeedbackPageController.fetchFeedbackQuestion(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
                           ),
-                        ),
-                      );
-                    } else {
-                      final feedbackQuestion = snapshot.data?.data;
-                      
-                      return SingleChildScrollView(
-                        child: Container(
-                          constraints: const BoxConstraints(maxHeight: double.infinity),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
-                            itemCount: feedbackQuestion?.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              if (feedbacks.length <= index) {
-                                feedbacks.add({'feedbackQuestionId' : (feedbackQuestion?[index].feedbackQuestionId).toString(), "feedback" : '0'});
-                              }
+                        );
+                      } else if (snapshot.hasError) {
+                        return SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: Image.asset(
+                              'assets/error planet.png', // Replace this with the path to your logo image
+                              height: 600, // Set the height of the logo image
+                            ),
+                          ),
+                        );
+                      } else {
+                        final feedbackQuestion = snapshot.data?.data;
 
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      feedbackQuestion![index].question.toString(),
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 12,
-                                        color: blackColor,
-                                        fontWeight: medium
+                        return SingleChildScrollView(
+                          child: Container(
+                            constraints: const BoxConstraints(
+                                maxHeight: double.infinity),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics:
+                                  const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
+                              itemCount: feedbackQuestion?.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                if (feedbacks.length <= index) {
+                                  feedbacks.add({
+                                    'feedbackQuestionId':
+                                        (feedbackQuestion?[index]
+                                                .feedbackQuestionId)
+                                            .toString(),
+                                    "feedback": '0'
+                                  });
+                                }
+
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        feedbackQuestion![index]
+                                            .question
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 12,
+                                            color: blackColor,
+                                            fontWeight: medium),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 8,),
-                                  FeedbackAnswer(feedbacks: feedbacks[index], questionType: feedbackQuestion[index].questionType!, controller: feedbackTextController),
-                                  const SizedBox(height: 16,)
-                                ],
-                              );
-                            },
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    FeedbackAnswer(
+                                        feedbacks: feedbacks[index],
+                                        questionType: feedbackQuestion[index]
+                                            .questionType!,
+                                        controller: feedbackTextController),
+                                    const SizedBox(
+                                      height: 16,
+                                    )
+                                  ],
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                    }
-                  }
-                ),
-
+                        );
+                      }
+                    }),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () async {
-                      feedbacks[4]['feedback'] = feedbackTextController.text.toString();
+                      feedbacks[4]['feedback'] =
+                          feedbackTextController.text.toString();
 
-                      elearningFeedbackPageController.sendUserFeedback(feedbacks);
+                      elearningFeedbackPageController
+                          .sendUserFeedback(feedbacks);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
@@ -136,14 +154,14 @@ class ElearningFeedbackPage extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       child: Text(
                         'submit',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: semiBold
-                        ),  
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: semiBold),
                       ),
                     ),
                   ),
@@ -168,9 +186,8 @@ class ElearningFeedbackPage extends StatelessWidget {
                     width: Get.width * 0.8,
                     height: Get.height * 0.5,
                     decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(30)
-                    ),
+                        color: whiteColor,
+                        borderRadius: BorderRadius.circular(30)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -179,15 +196,17 @@ class ElearningFeedbackPage extends StatelessWidget {
                             height: 24,
                           ),
                           DotLottieLoader.fromAsset(
-                          lulus ? "assets/icons/greenChecklist.lottie" : "assets/icons/redX.lottie",
-                          frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {  
+                              lulus
+                                  ? "assets/icons/greenChecklist.lottie"
+                                  : "assets/icons/redX.lottie",
+                              frameBuilder:
+                                  (BuildContext ctx, DotLottie? dotlottie) {
                             if (dotlottie != null) {
                               return Lottie.memory(
-                                dotlottie.animations.values.single,
-                                width: 120,
-                                height: 120,
-                                repeat: false
-                              );
+                                  dotlottie.animations.values.single,
+                                  width: 120,
+                                  height: 120,
+                                  repeat: false);
                             } else {
                               return Container();
                             }
@@ -195,33 +214,36 @@ class ElearningFeedbackPage extends StatelessWidget {
                           Text(
                             '${!lulus ? 'Failed' : 'Congrats'}!',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 24,
-                              fontWeight: bold,
-                              color: blackColor
-                            ),
+                                fontFamily: 'Poppins',
+                                fontSize: 24,
+                                fontWeight: bold,
+                                color: blackColor),
                           ),
-                          const SizedBox(height: 8,),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           Text(
                             '${!lulus ? 'Post test gagal, mohon coba lagi' : 'Post test completed successfully'}!',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 14,
-                              fontWeight: bold,
-                              color: blackColor
-                            ),
+                                fontFamily: 'Poppins',
+                                fontSize: 14,
+                                fontWeight: bold,
+                                color: blackColor),
                           ),
-                          const SizedBox(height: 16,),
+                          const SizedBox(
+                            height: 16,
+                          ),
                           Text(
                             'YOUR SCORE',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 12,
-                              fontWeight: medium,
-                              color: secondaryColor
-                            ),
+                                fontFamily: 'Poppins',
+                                fontSize: 12,
+                                fontWeight: medium,
+                                color: secondaryColor),
                           ),
-                          const SizedBox(height: 12,),
+                          const SizedBox(
+                            height: 12,
+                          ),
                           Text(
                             elearningTestPageController.score.toString(),
                             style: TextStyle(
@@ -231,47 +253,53 @@ class ElearningFeedbackPage extends StatelessWidget {
                               color: !lulus ? dangerColor : successColor,
                             ),
                           ),
-                          const SizedBox(height: 24,),
+                          const SizedBox(
+                            height: 24,
+                          ),
                           RichText(
                             text: TextSpan(
-                              text : lulus ? 'Terima Kasih telah menyelesaikan ' : 'Mohon maaf anda gagal dalam menyelesaikan ',
-                              style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 12,
-                                fontWeight: medium,
-                                color: blackColor,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: elearningTestPageController.elearningTest.data![0].judul,
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                    fontWeight: bold,
-                                    color: blackColor,
+                                text: lulus
+                                    ? 'Terima Kasih telah menyelesaikan '
+                                    : 'Mohon maaf anda gagal dalam menyelesaikan ',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 12,
+                                  fontWeight: medium,
+                                  color: blackColor,
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: elearningTestPageController
+                                        .elearningTest.data![0].judul,
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 12,
+                                      fontWeight: bold,
+                                      color: blackColor,
+                                    ),
                                   ),
-                                ),
-                                TextSpan(
-                                  text: lulus ? ' dengan baik.' : ', mohon coba lagi',
-                                  style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                    fontWeight: medium,
-                                    color: blackColor,
-                                  ), // Default style
-                                ),
-                              ]
-                            ),
+                                  TextSpan(
+                                    text: lulus
+                                        ? ' dengan baik.'
+                                        : ', mohon coba lagi',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize: 12,
+                                      fontWeight: medium,
+                                      color: blackColor,
+                                    ), // Default style
+                                  ),
+                                ]),
                             textAlign: TextAlign.center,
-                            
                           ),
                         ],
                       ),
                     ),
                   ),
                 ),
-                SizedBox(height: Get.height * 0.12,),
-                
+                SizedBox(
+                  height: Get.height * 0.12,
+                ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
                   height: 55,
@@ -287,14 +315,14 @@ class ElearningFeedbackPage extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
                       child: Text(
                         'Back',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Poppins',
-                          fontWeight: semiBold
-                        ),  
+                            fontSize: 16,
+                            fontFamily: 'Poppins',
+                            fontWeight: semiBold),
                       ),
                     ),
                   ),
@@ -339,14 +367,14 @@ class FeedbackAnswer extends StatelessWidget {
               ),
               half: Image.asset(
                 'assets/icons/star_colored.png',
-              ), 
+              ),
               empty: Image.asset(
                 'assets/icons/star.png',
               ),
             ),
             onRatingUpdate: (rating) {
               feedbacks['feedback'] = rating.toStringAsFixed(0);
-              // print(feedbacks); 
+              // print(feedbacks);
             },
             itemSize: 24,
           ),
@@ -365,11 +393,10 @@ class FeedbackAnswer extends StatelessWidget {
               fillColor: pastelSecondaryColor, // Set your background color here
             ),
             style: TextStyle(
-              fontFamily: 'Poppins',
-              fontSize: 12,
-              color: blackColor,
-              fontWeight: medium
-            ),
+                fontFamily: 'Poppins',
+                fontSize: 12,
+                color: blackColor,
+                fontWeight: medium),
           ),
         ),
       );

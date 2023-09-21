@@ -10,7 +10,6 @@ class CommunityPage extends StatefulWidget {
 }
 
 class _CommunityPageState extends State<CommunityPage> {
-
   @override
   void initState() {
     super.initState();
@@ -24,20 +23,16 @@ class _CommunityPageState extends State<CommunityPage> {
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min, 
+            mainAxisSize: MainAxisSize.min,
             children: [
-              PageAppBar(type: 'logo',),
-
-              SizedBox(
-                height: 200,
-                child: Center(
-                  child: Text('Community Page')
-                )
+              PageAppBar(
+                type: 'logo',
               ),
+              SizedBox(
+                  height: 200, child: Center(child: Text('Community Page'))),
             ],
           ),
         ),
-        
       ),
     );
   }
