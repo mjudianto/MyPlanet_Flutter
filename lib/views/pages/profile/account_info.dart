@@ -84,45 +84,106 @@ class _AccountInfoState extends State<AccountInfo> {
             left: defaultMargin, right: defaultMargin, top: defaultMargin),
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors
-                    .white, // Ganti dengan warna background yang diinginkan
-                borderRadius: BorderRadius.circular(20),
-              ),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print('meledak dUaaaAArrrRR!!!');
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/ic_user.svg',
-                              width: 24,
-                            ),
-                            const SizedBox(width: 14),
-                            Text(
-                              'Account Info',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
-                            ),
-                          ],
-                        ),
-                        const Icon(
-                          Icons.chevron_right,
-                          color: blackColor,
-                        ),
-                      ],
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_user.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nama',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
                     ),
-                  ),
-                ],
-              ),
+                    Text(
+                      'Nanda Raditya',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Divider(
+              height: 2,
+              color: blackColor,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_user.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nama',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
+                    ),
+                    Text(
+                      'Nanda Raditya',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Divider(
+              height: 2,
+              color: blackColor,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_user.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nama',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
+                    ),
+                    Text(
+                      'Nanda Raditya',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
             ),
           ],
         ),
