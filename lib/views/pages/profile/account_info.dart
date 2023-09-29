@@ -114,17 +114,20 @@ class _AccountInfoState extends State<AccountInfo> {
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 4,
             ),
             const Divider(
               height: 2,
               color: blackColor,
             ),
+            const SizedBox(
+              height: 8,
+            ),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/ic_user.svg',
+                  'assets/icons/ic_nik.svg',
                   width: 24,
                 ),
                 const SizedBox(width: 14),
@@ -132,12 +135,12 @@ class _AccountInfoState extends State<AccountInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nama',
+                      'NIK',
                       style: secondaryTextStyle.copyWith(
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'Nanda Raditya',
+                      '082124776437',
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -150,17 +153,20 @@ class _AccountInfoState extends State<AccountInfo> {
               ],
             ),
             const SizedBox(
-              height: 8,
+              height: 4,
             ),
             const Divider(
               height: 2,
               color: blackColor,
             ),
+            const SizedBox(
+              height: 8,
+            ),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(
-                  'assets/icons/ic_user.svg',
+                  'assets/icons/ic_telp.svg',
                   width: 24,
                 ),
                 const SizedBox(width: 14),
@@ -168,12 +174,129 @@ class _AccountInfoState extends State<AccountInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nama',
+                      'Phone',
                       style: secondaryTextStyle.copyWith(
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'Nanda Raditya',
+                      '082124776437',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const Divider(
+              height: 2,
+              color: blackColor,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_mail.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Mail',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
+                    ),
+                    Text(
+                      'nandaraditya80@gmail.com',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const Divider(
+              height: 2,
+              color: blackColor,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_organization.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Organization',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
+                    ),
+                    Text(
+                      'EPM - Training',
+                      style: blackTextStyle.copyWith(
+                          fontSize: 12, fontWeight: semiBold),
+                    ),
+                    const Divider(
+                      height: 2,
+                      color: blackColor,
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            const Divider(
+              height: 2,
+              color: blackColor,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/ic_company.svg',
+                  width: 24,
+                ),
+                const SizedBox(width: 14),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Company',
+                      style: secondaryTextStyle.copyWith(
+                          fontSize: 12, fontWeight: regular),
+                    ),
+                    Text(
+                      'EPM - Pusat',
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
