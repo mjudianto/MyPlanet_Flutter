@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
 
 class CardNewEps extends StatelessWidget {
   final dynamic item; 
@@ -15,7 +16,15 @@ class CardNewEps extends StatelessWidget {
     String publishDate = DateFormat('dd MMMM yyyy').format(dateTime);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                NewEpsPodtret(), // Ganti dengan nama yang sesuai
+          ),
+        );
+      },
       child: Container(
           width: 136,
           // height: 278,

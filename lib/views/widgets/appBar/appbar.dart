@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 
-class PageAppBar extends StatelessWidget implements PreferredSizeWidget {  
-  const PageAppBar({Key? key, required this.type, this.title}) : super(key: key);
+class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const PageAppBar({Key? key, required this.type, this.title})
+      : super(key: key);
 
   final String type;
   final String? title;
 
-
   @override
-  Size get preferredSize => const Size.fromHeight(105); // Adjust the height as needed
+  Size get preferredSize =>
+      const Size.fromHeight(105); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/appBarBackground.png'), // Replace this with the path to your background image
-          fit: BoxFit.cover, // Adjust the image fit to cover the entire container
+          image: AssetImage(
+              'assets/appBarBackground.png'), // Replace this with the path to your background image
+          fit: BoxFit
+              .cover, // Adjust the image fit to cover the entire container
         ),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(58), // Radius to make the corners round
@@ -25,19 +28,23 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         title: SizedBox(
-          height: preferredSize.height, // Set the height of the SizedBox to the preferredSize height
+          height: preferredSize
+              .height, // Set the height of the SizedBox to the preferredSize height
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              type == 'search' 
-              ? const SearchBar() 
-              : Title(title: title ?? "",),
+              type == 'search'
+                  ? const SearchBar()
+                  : Title(
+                      title: title ?? "",
+                    ),
             ],
           ),
         ),
-        toolbarHeight: preferredSize.height, // Set the toolbar height to the preferredSize height
+        toolbarHeight: preferredSize
+            .height, // Set the toolbar height to the preferredSize height
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -49,22 +56,18 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
 class Title extends StatelessWidget {
   final String title;
 
-  const Title({
-    super.key,
-    required this.title
-  });
+  const Title({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-        title,
-        style: TextStyle(
+      title,
+      style: TextStyle(
           color: whiteColor,
           fontFamily: 'Poppins',
           fontSize: 16,
-          fontWeight: bold
-        ),
-      );
+          fontWeight: bold),
+    );
   }
 }
 
