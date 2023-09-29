@@ -9,6 +9,7 @@ class GlobalVariable {
   static String apiUrl = 'https://myplanet.enseval.com:3000';
   static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   static Map<String, dynamic> userData = {};
+  static String myplanetUrl = 'https://myplanet.enseval.com';
 
 
   static Future<bool> userAuth() async {

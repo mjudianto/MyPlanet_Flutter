@@ -1,22 +1,26 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
-import 'package:myplanet/views/pages/podtret/video_play_podtret.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_page.dart';
 
 class CardRecomendation extends StatelessWidget {
-  const CardRecomendation({super.key});
+  final dynamic item;
+
+  const CardRecomendation({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
+    PodtretKontenController podtretKontenController = Get.find();
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                VideoPlayPodtret(), // Ganti dengan nama yang sesuai
-          ),
-        );
+        podtretKontenController.podtret = item;
+
+        Get.toNamed(RouteName.podtretContent);
       },
       child: SizedBox(
         width: 283,
@@ -35,8 +39,20 @@ class CardRecomendation extends StatelessWidget {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
                   ),
-                  child: Image.asset(
-                    'assets/podtret/thumbnail/eps74.png',
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => Image.asset(
+                      'assets/loading.jpeg', // Placeholder image
+                      width: 282,
+                      height: 157,
+                      fit: BoxFit.cover,
+                    ),
+                    errorWidget: (context, url, error) => Image.asset(
+                      'assets/podtret_placeholder.jpeg', // Default image for errors
+                      width: 282,
+                      height: 157,
+                      fit: BoxFit.cover,
+                    ),
+                    imageUrl: '${GlobalVariable.myplanetUrl}/${item.thumbnail}',
                     width: 282,
                     height: 157,
                     fit: BoxFit.cover,
@@ -86,7 +102,7 @@ class CardRecomendation extends StatelessWidget {
                                 height: 4,
                               ),
                               Text(
-                                'Eps 74 : Tips Biar Gaji Gak Boncos !!',
+                                item.judul,
                                 style: blackTextStyle.copyWith(
                                   fontSize: 18,
                                   fontWeight: semiBold,
@@ -99,7 +115,7 @@ class CardRecomendation extends StatelessWidget {
                                 height: 6,
                               ),
                               Text(
-                                'Kumis',
+                                item.nama,
                                 style: secondaryTextStyle.copyWith(
                                   fontSize: 10,
                                   fontWeight: regular,

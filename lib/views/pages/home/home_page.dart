@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SizedBox(
-              height: 100,
+              height: Get.height,
               width: MediaQuery.of(context).size.width,
               child: const Center(
                 child: CircularProgressIndicator(),

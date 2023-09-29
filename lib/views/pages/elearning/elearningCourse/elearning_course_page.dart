@@ -385,7 +385,7 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                                                                                             
                                                       return GestureDetector(
                                                         onTap: isLesson ? () {
-                                                          updateVideoPlayer('https://myplanet.enseval.com/${lesson.konten}', lesson.elearningLessonId.toString());
+                                                          updateVideoPlayer('${GlobalVariable.myplanetUrl}/${lesson.konten}', lesson.elearningLessonId.toString());
                                                         } 
                                                         : (){
                                                           showModalBottomSheet(

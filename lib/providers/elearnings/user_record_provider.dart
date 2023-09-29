@@ -124,13 +124,13 @@ class UserRecordProvider {
         }
       );
       if (response.statusCode == 200) {
-        print(response.body);
+        // print(response.body);
       } else {
-        print(response.body);
+        // print(response.body);
         // throw Exception('Failed to fetch data from API');
       }
     } catch (e) {
-      print(e);
+      // print(e);
       throw Exception('Error: $e');
     }
   }

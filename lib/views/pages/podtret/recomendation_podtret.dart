@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/widgets/card/card_top_eps_podtret.dart';
 
 class RecomendationPodtret extends StatelessWidget {
@@ -40,6 +42,8 @@ class RecomendationPodtret extends StatelessWidget {
     }
 
     Widget content() {
+      HomePageController homePageController = Get.find();
+
       return ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: defaultMargin,
@@ -48,26 +52,55 @@ class RecomendationPodtret extends StatelessWidget {
           // * LIST ITEM
           Container(
             margin: const EdgeInsets.only(top: defaultMargin),
-            child: const Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
-                CardTopEps(),
+                FutureBuilder(
+                  future: homePageController.newPodtrets,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Display a loading indicator while waiting for the future to complete
+                      return SizedBox(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      // Handle any errors that occurred during the Future execution
+                      return SizedBox(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: Text(
+                            'Error: Error: Data Load Failed',
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    } else {
+                      var podtrets = snapshot.data!;
+
+                      final podtretToShow = podtrets.data?.toList() ?? [];
+                      podtretToShow.sort((a, b) => a.views!.compareTo(b.views!));
+
+                      return SizedBox(
+                        height: Get.height - 175,
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          scrollDirection: Axis.vertical,
+                          itemCount: podtretToShow.length,
+                          itemBuilder: (context, index) {
+                            return CardTopEps(
+                              item: podtretToShow[index],
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  }
+                ),
               ],
             ),
           ),

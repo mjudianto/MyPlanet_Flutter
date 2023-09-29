@@ -1,11 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 
 class CardTopEps extends StatelessWidget {
-  const CardTopEps({super.key});
+  final dynamic item;
+
+  const CardTopEps({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
+    DateTime dateTime = DateTime.parse(item.publishDate.toString());
+    String publishDate = DateFormat('dd MMMM yyyy').format(dateTime);
+
     return GestureDetector(
       onTap: () {},
       child: Container(
@@ -21,11 +29,24 @@ class CardTopEps extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                child: Image.asset(
-                  'assets/podtret/thumbnail/eps72.png',
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                child: CachedNetworkImage(
+                  placeholder: (context, url) => Image.asset(
+                    'assets/loading.jpeg', // Placeholder image
+                    width: 122,
+                    height: 69,
+                    fit: BoxFit.cover,
+                  ),
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/podtret_placeholder.jpeg', // Default image for errors
+                    width: 122,
+                    height: 69,
+                    fit: BoxFit.cover,
+                  ),
+                  imageUrl: '${GlobalVariable.myplanetUrl}/${item.thumbnail}',
                   width: 122,
                   height: 69,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 10), // Jarak antara thumbnail dan teks
@@ -34,7 +55,7 @@ class CardTopEps extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 4.5),
+                      margin: const EdgeInsets.only(top: 4.5),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                             100), // Mengatur border radius
@@ -44,7 +65,7 @@ class CardTopEps extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 4),
                         child: Text(
-                          'Ngobrol Santai',
+                          item.nama,
                           style: blackTextStyle.copyWith(
                             fontSize: 8,
                             fontWeight: medium,
@@ -56,7 +77,7 @@ class CardTopEps extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Eps 72 : Jawabin Pertanyaan Lucu Gens dari IG',
+                      item.judul,
                       style: blackTextStyle.copyWith(
                         fontSize: 11,
                         fontWeight: semiBold,
@@ -66,7 +87,7 @@ class CardTopEps extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '349x Watching • 21 July 2023',
+                      '${item.views}x • $publishDate',
                       style: secondaryTextStyle.copyWith(
                         fontSize: 8,
                         fontWeight: regular,

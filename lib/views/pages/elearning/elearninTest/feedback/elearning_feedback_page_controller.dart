@@ -38,7 +38,7 @@ class ElearningFeedbackPageController extends GetxController {
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       await UserRecordProvider.sendUserFeedback(userToken ?? "", elearningTestPageController.elearningTestId, feedbacks);
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 }

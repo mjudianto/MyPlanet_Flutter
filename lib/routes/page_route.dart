@@ -8,7 +8,11 @@ import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_
 import 'package:myplanet/views/pages/elearning/elearning_page.dart';
 import 'package:myplanet/views/pages/home/home_page.dart';
 import 'package:myplanet/views/pages/login_page.dart';
+import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_page.dart';
 import 'package:myplanet/views/pages/podtret/podtret_page.dart';
+import 'package:myplanet/views/pages/podtret/recomendation_podtret.dart';
+import 'package:myplanet/views/pages/podtret/top_eps_podtret.dart';
 import 'package:myplanet/views/pages/profile/profile_page.dart';
 import 'package:myplanet/views/pages/splash_screen.dart';
 
@@ -53,6 +57,24 @@ class AppPage {
       name: RouteName.podtretPage,
       page: () => const PodtretPage(),
     ),
+    GetPage(
+      name: RouteName.recomendationPodtret,
+      page: () => const RecomendationPodtret(),
+    ),
+    GetPage(
+      name: RouteName.newEpisodePodtret,
+      page: () => const NewEpsPodtret(),
+    ),
+    GetPage(
+      name: RouteName.topEpisodePodtret,
+      page: () => const TopEpsPodtret(),
+    ),
+    GetPage(
+      name: RouteName.podtretContent,
+      page: () => PodtretContent(),
+    ),
+
+
     GetPage(
       name: RouteName.communityPage,
       page: () => const CommunityPage(),

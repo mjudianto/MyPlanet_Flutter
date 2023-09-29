@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 
 class CardVerticalWidget extends StatelessWidget {
@@ -45,7 +46,7 @@ class CardVerticalWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25.0),
                       child: FadeInImage(
                         placeholder: const AssetImage('assets/loading.jpeg'), // Replace with your placeholder image asset
-                        image: NetworkImage("https://myplanet.enseval.com/${thumbnail ?? ""}"),
+                        image: NetworkImage("${GlobalVariable.myplanetUrl}/${thumbnail ?? ""}"),
                         width: 140,
                         height: 120,
                         fit: BoxFit.cover,

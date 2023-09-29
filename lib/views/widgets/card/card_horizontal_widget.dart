@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/circular_progress_widget.dart';
 
@@ -72,7 +73,7 @@ class CardHorizontalWidget extends StatelessWidget {
                         children: [
                           FadeInImage(
                             placeholder: const AssetImage('assets/loading.jpeg'), // Replace with your placeholder image asset
-                            image: NetworkImage("https://myplanet.enseval.com/${thumbnail ?? ""}"),
+                            image: NetworkImage("${GlobalVariable.myplanetUrl}/${thumbnail ?? ""}"),
                             width: thumbnailWidht ?? 100,
                             height: thumbnailHeight ?? 85,
                             fit: BoxFit.cover,

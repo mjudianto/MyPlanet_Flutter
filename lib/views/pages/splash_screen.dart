@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart'; // Import the router library
 import 'package:myplanet/theme.dart';
 
 class SplashPage extends StatefulWidget {
@@ -14,9 +13,8 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // TODO: implement initState
     Timer(
-      Duration(seconds: 3),
+      const Duration(seconds: 3),
       () => Navigator.pushNamed(context, '/home'),
     );
 
@@ -31,7 +29,7 @@ class _SplashPageState extends State<SplashPage> {
         child: Container(
           width: 246,
           height: 90,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(image: AssetImage('assets/splash.png'))),
         ),
       ),
