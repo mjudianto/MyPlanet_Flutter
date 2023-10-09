@@ -97,26 +97,32 @@ class _PodtretPageState extends State<PodtretPage> {
                         // If the Future completed successfully, display the data
                         if (snapshot.data != null) {
                           var podtrets = snapshot.data!;
-              
-                        final podtretToShow = podtrets.data?.toList() ?? [];
-                        podtretToShow.sort((a, b) => a.views!.compareTo(b.views!));
 
-                        final top5LowestView = podtretToShow.take(5).toList();
+                          final podtretToShow = podtrets.data?.toList() ?? [];
+                          podtretToShow
+                              .sort((a, b) => a.views!.compareTo(b.views!));
 
-                        return SizedBox(
-                          width: Get.width,
-                          child: ListView.builder(
-                            padding: const EdgeInsets.only(left: defaultMargin, right: 5),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: top5LowestView.length,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4), // Adjust the right padding as needed
-                                child: CardRecomendation(item: top5LowestView[index]),
-                              );
-                            },
-                          ),
-                        );
+                          final top5LowestView = podtretToShow.take(5).toList();
+
+                          return SizedBox(
+                            width: Get.width,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(
+                                  left: defaultMargin, right: 5),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: top5LowestView.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0,
+                                      vertical:
+                                          4), // Adjust the right padding as needed
+                                  child: CardRecomendation(
+                                      item: top5LowestView[index]),
+                                );
+                              },
+                            ),
+                          );
                         } else {
                           // Handle the case when there is no data
                           return const Text('No data available.');
@@ -200,14 +206,16 @@ class _PodtretPageState extends State<PodtretPage> {
                         // If the Future completed successfully, display the data
                         if (snapshot.data != null) {
                           var podtrets = snapshot.data!;
-              
-                          final podtretToShow = podtrets.data?.take(10).toList() ?? [];
+
+                          final podtretToShow =
+                              podtrets.data?.take(10).toList() ?? [];
 
                           return SizedBox(
                             width: Get.width,
                             height: 130,
                             child: ListView.builder(
-                              padding: const EdgeInsets.only(left: defaultMargin, right: 5),
+                              padding: const EdgeInsets.only(
+                                  left: defaultMargin, right: 5),
                               scrollDirection: Axis.horizontal,
                               itemCount: podtretToShow.length,
                               itemBuilder: (context, index) {
@@ -268,62 +276,63 @@ class _PodtretPageState extends State<PodtretPage> {
             child: Row(
               children: [
                 FutureBuilder(
-                  future: homePageController.newPodtrets,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Display a loading indicator while waiting for the future to complete
-                      return SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      // Handle any errors that occurred during the Future execution
-                      return SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: Text(
-                            'Error: Error: Data Load Failed',
-                            textAlign: TextAlign.center,
+                    future: homePageController.newPodtrets,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Display a loading indicator while waiting for the future to complete
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: CircularProgressIndicator(),
                           ),
-                        ),
-                      );
-                    } else {
-                      var podtrets = snapshot.data!;
+                        );
+                      } else if (snapshot.hasError) {
+                        // Handle any errors that occurred during the Future execution
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: Text(
+                              'Error: Error: Data Load Failed',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      } else {
+                        var podtrets = snapshot.data!;
 
-                      final podtretToShow = podtrets.data?.toList() ?? [];
-                      podtretToShow.sort((a, b) => b.views!.compareTo(a.views!));
-              
-                      final top10Podtret = podtretToShow.take(10).toList();
+                        final podtretToShow = podtrets.data?.toList() ?? [];
+                        podtretToShow
+                            .sort((a, b) => b.views!.compareTo(a.views!));
 
-                      return SizedBox(
-                        width: Get.width,
-                        height: 155,
-                        child: ListView.builder(
-                          padding: const EdgeInsets.only(left: defaultMargin, right: 5),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: top10Podtret.length~/2,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                const SizedBox(width: defaultMargin),
-                                CardTopEps(
-                                  item: top10Podtret[index],
-                                ),
-                                CardTopEps(
-                                  item: top10Podtret[index+1],
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  }
-                ),
+                        final top10Podtret = podtretToShow.take(10).toList();
+
+                        return SizedBox(
+                          width: Get.width,
+                          height: 155,
+                          child: ListView.builder(
+                            padding: const EdgeInsets.only(
+                                left: defaultMargin, right: 5),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: top10Podtret.length ~/ 2,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  const SizedBox(width: defaultMargin),
+                                  CardTopEps(
+                                    item: top10Podtret[index],
+                                  ),
+                                  CardTopEps(
+                                    item: top10Podtret[index + 1],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        );
+                      }
+                    }),
               ],
             ),
           ));
@@ -352,7 +361,8 @@ class _PodtretPageState extends State<PodtretPage> {
                     child: FutureBuilder(
                       future: homePageController.newPodtrets,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           // Display a loading indicator while waiting for the future to complete
                           return SizedBox(
                             height: 100,
@@ -377,10 +387,14 @@ class _PodtretPageState extends State<PodtretPage> {
                           // If the Future completed successfully, display the data
                           if (snapshot.data != null) {
                             var podtrets = snapshot.data!;
-                  
-                            final podtretToShow = podtrets.data?.take(5).toList() ?? [];
-                            final thumbnailList = podtretToShow.map((podtret) => '${GlobalVariable.myplanetUrl}/${podtret.thumbnail}').toList();
-                  
+
+                            final podtretToShow =
+                                podtrets.data?.take(5).toList() ?? [];
+                            final thumbnailList = podtretToShow
+                                .map((podtret) =>
+                                    '${GlobalVariable.myplanetUrl}/${podtret.thumbnail}')
+                                .toList();
+
                             return ImageSliderWithIndicator(thumbnailList);
                           } else {
                             // Handle the case when there is no data
@@ -400,21 +414,15 @@ class _PodtretPageState extends State<PodtretPage> {
               ),
             ),
             PodtretCategory(
-              homePageController: homePageController,
-              categoryName: 'Ngobrol Santai'
-            ),
+                homePageController: homePageController,
+                categoryName: 'Ngobrol Santai'),
             PodtretCategory(
-              homePageController: homePageController,
-              categoryName: 'Sapa Mantan'
-            ),
+                homePageController: homePageController,
+                categoryName: 'Sapa Mantan'),
             PodtretCategory(
-              homePageController: homePageController,
-              categoryName: 'KUMIS'
-            ),
+                homePageController: homePageController, categoryName: 'KUMIS'),
             PodtretCategory(
-              homePageController: homePageController,
-              categoryName: 'TKMTS'
-            ),
+                homePageController: homePageController, categoryName: 'TKMTS'),
           ],
         ),
       );
@@ -456,53 +464,56 @@ class PodtretCategory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10,),
-          FutureBuilder(
-            future: homePageController.newPodtrets,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                // Display a loading indicator while waiting for the future to complete
-                return SizedBox(
-                  height: 100,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                // Handle any errors that occurred during the Future execution
-                return SizedBox(
-                  height: 100,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Center(
-                    child: Text(
-                      'Error: Error: Data Load Failed',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                );
-              } else {
-                var podtrets = snapshot.data!;
-
-                final podtretToShow = podtrets.data?.toList() ?? [];
-                final filteredPodtret = podtretToShow.where((item) => item.nama == categoryName).toList();
-
-                return SizedBox(
-                  height: Get.height - 350,
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    itemCount: filteredPodtret.length,
-                    itemBuilder: (context, index) {
-                      return CardTopEps(
-                        item: filteredPodtret[index],
-                      );
-                    },
-                  ),
-                );
-              }
-            }
+          const SizedBox(
+            height: 10,
           ),
+          FutureBuilder(
+              future: homePageController.newPodtrets,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Display a loading indicator while waiting for the future to complete
+                  return SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  // Handle any errors that occurred during the Future execution
+                  return SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: Text(
+                        'Error: Error: Data Load Failed',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  var podtrets = snapshot.data!;
+
+                  final podtretToShow = podtrets.data?.toList() ?? [];
+                  final filteredPodtret = podtretToShow
+                      .where((item) => item.nama == categoryName)
+                      .toList();
+
+                  return SizedBox(
+                    height: Get.height - 350,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: filteredPodtret.length,
+                      itemBuilder: (context, index) {
+                        return CardTopEps(
+                          item: filteredPodtret[index],
+                        );
+                      },
+                    ),
+                  );
+                }
+              }),
         ],
       ),
     );

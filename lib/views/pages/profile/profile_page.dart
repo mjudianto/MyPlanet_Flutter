@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/profile/account_info.dart';
+import 'package:myplanet/views/pages/profile/certificate.dart';
+import 'package:myplanet/views/pages/profile/test_history.dart';
+import 'package:myplanet/views/pages/profile/training_history.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -177,7 +180,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      print('meledak dUaaaAArrrRR!!!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TrainingHistory(), // Ganti dengan nama yang sesuai
+                        ),
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,7 +218,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('meledak dUaaaAArrrRR!!!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              TestHistory(), // Ganti dengan nama yang sesuai
+                        ),
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -273,7 +288,13 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print('meledak dUaaaAArrrRR!!!');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Certificate(), // Ganti dengan nama yang sesuai
+                        ),
+                      );
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
