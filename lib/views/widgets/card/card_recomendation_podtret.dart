@@ -6,7 +6,6 @@ import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
-import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_page.dart';
 
 class CardRecomendation extends StatelessWidget {
   final dynamic item;

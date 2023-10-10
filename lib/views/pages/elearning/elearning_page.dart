@@ -1,5 +1,7 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
 import 'package:myplanet/routes/route_name.dart';
@@ -42,8 +44,20 @@ class _ElearningPageState extends State<ElearningPage> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
-                    child: const Center(
-                      child: CircularProgressIndicator(),
+                    child: Center(
+                      child: DotLottieLoader.fromAsset(
+                        "assets/loading.lottie",
+                        frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                        if (dotlottie != null) {
+                          return Lottie.memory(
+                              dotlottie.animations.values.single,
+                              width: 250,
+                              height: 250,
+                              repeat: true);
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      }),
                     ),
                   );
                 } else if (snapshot.hasError) {

@@ -1,5 +1,9 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
+import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
@@ -17,17 +21,36 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    homePageController.userCoursesFuture = ElearningController.fetchUserCourses();
+    homePageController.newPodtrets = PodtretController.fetchNewPodtrets();
+
     return Scaffold(
       body: FutureBuilder(
-        future: homePageController.checkInternetConnection,
+        future: homePageController.userCoursesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return SizedBox(
-              height: Get.height,
-              width: MediaQuery.of(context).size.width,
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
+            return Column(
+              children: [
+                const HomePageAppBar(),
+                SizedBox(
+                  height: Get.height*0.2,
+                  child: Center(
+                    child: DotLottieLoader.fromAsset(
+                      "assets/loading.lottie",
+                      frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                      if (dotlottie != null) {
+                        return Lottie.memory(
+                            dotlottie.animations.values.single,
+                            width: 250,
+                            height: 250,
+                            repeat: true);
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }),
+                  ),
+                ),
+              ],
             );
           }
           if (snapshot.hasError) {
@@ -51,60 +74,49 @@ class HomePage extends StatelessWidget {
             );
           }
 
-          final bool connected = snapshot.data!;
-          if (!connected) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                child: Column(
-                  children: [
-                    const HomePageAppBar(),
-                    const SizedBox(
-                      height: 70,
-                    ),
-                    Image.asset(
-                      'assets/error planet.png', // Replace this with the path to your logo image
-                      width: 400, // Set the height of the logo image
-                    ),
-                    // Text(connected.toString()),
-                  ],
-                ),
-              ),
-            );
-          }
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 const HomePageAppBar(),
+                
                 const SectionTitle(title: 'New Course'),
                 FutureBuilder(
                   future: homePageController.userCoursesFuture,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Display a loading indicator while waiting for the future to complete
                       return SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
+                        child: Center(
+                          child: DotLottieLoader.fromAsset(
+                            "assets/loading.lottie",
+                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                            if (dotlottie != null) {
+                              return Lottie.memory(
+                                  dotlottie.animations.values.single,
+                                  width: 250,
+                                  height: 250,
+                                  repeat: true);
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          }),
                         ),
                       );
                     } else if (snapshot.hasError) {
-                      // Handle any errors that occurred during the Future execution
                       return SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
                         child: const Center(
                           child: Text(
-                            'Error: Error: Data Load Failed',
+                            'Error: Data Load Failed',
                             textAlign: TextAlign.center,
                           ),
                         ),
                       );
                     } else {
-                      // If the Future completed successfully, display the data
                       if (snapshot.data != null) {
                         var elearningCourses = snapshot.data!;
                         elearningCourses.data!.sort((course1, course2) =>
@@ -151,6 +163,7 @@ class HomePage extends StatelessWidget {
                     }
                   },
                 ),
+                
                 const SectionTitle(title: 'Continue Learning'),
                 FutureBuilder(
                   future: homePageController.userCoursesFuture,
@@ -160,8 +173,20 @@ class HomePage extends StatelessWidget {
                       return SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
+                        child: Center(
+                          child: DotLottieLoader.fromAsset(
+                            "assets/loading.lottie",
+                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                            if (dotlottie != null) {
+                              return Lottie.memory(
+                                  dotlottie.animations.values.single,
+                                  width: 250,
+                                  height: 250,
+                                  repeat: true);
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          }),
                         ),
                       );
                     } else if (snapshot.hasError) {
@@ -227,6 +252,7 @@ class HomePage extends StatelessWidget {
                     }
                   },
                 ),
+                
                 const SectionTitle(title: 'New Podtret'),
                 FutureBuilder(
                   future: homePageController.newPodtrets,
@@ -236,8 +262,20 @@ class HomePage extends StatelessWidget {
                       return SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
+                        child: Center(
+                          child: DotLottieLoader.fromAsset(
+                            "assets/loading.lottie",
+                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                            if (dotlottie != null) {
+                              return Lottie.memory(
+                                  dotlottie.animations.values.single,
+                                  width: 250,
+                                  height: 250,
+                                  repeat: true);
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          }),
                         ),
                       );
                     } else if (snapshot.hasError) {

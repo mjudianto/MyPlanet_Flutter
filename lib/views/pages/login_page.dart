@@ -111,7 +111,6 @@ class _LoginPageState extends State<LoginPage> {
 
                               // ignore: use_build_context_synchronously
                               Get.offNamed(RouteName.dashboardPage);
-
                             } catch (e) {
                               // Handle exceptions that might occur during the authentication process
                               // print('Error during authentication: $e');
@@ -217,7 +216,7 @@ class _InputWithTitleState extends State<InputWithTitle> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+                padding: EdgeInsets.only(left: widget.icon == null ? 0 : 15.0, right: widget.icon == null ? 0 : 10.0),
                 child: Icon(
                   widget.icon, // Change this to the desired icon
                   color: primaryColor,
@@ -245,7 +244,7 @@ class _InputWithTitleState extends State<InputWithTitle> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 15.0),
+                padding: EdgeInsets.only(left: widget.icon == null ? 20 : 15.0),
                 child: widget.suffixIcon,
               ),
              

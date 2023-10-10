@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/elearnings/user_record_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/elearnings/elearning_course_detail_model.dart';
@@ -168,8 +170,20 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                     SizedBox(
                       height: 100,
                       width: MediaQuery.of(context).size.width,
-                      child: const Center(
-                        child: CircularProgressIndicator(),
+                      child: Center(
+                        child: DotLottieLoader.fromAsset(
+                        "assets/loading.lottie",
+                        frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                        if (dotlottie != null) {
+                          return Lottie.memory(
+                              dotlottie.animations.values.single,
+                              width: 250,
+                              height: 250,
+                              repeat: true);
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      }),
                       ),
                     );
                   } else if (snapshot.hasError) {
@@ -292,7 +306,19 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                     future: _courseModulesFuture,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
+                        return DotLottieLoader.fromAsset(
+                        "assets/loading.lottie",
+                        frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                        if (dotlottie != null) {
+                          return Lottie.memory(
+                              dotlottie.animations.values.single,
+                              width: 250,
+                              height: 250,
+                              repeat: true);
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      });
                       } else if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else if (!snapshot.hasData || snapshot.data == null) {
@@ -356,9 +382,21 @@ class _ElearningCoursePageState extends State<ElearningCoursePage> {
                                             future: moduleDataFuture,
                                             builder: (context, snapshot) {
                                               if (snapshot.connectionState == ConnectionState.waiting) {
-                                                return const SizedBox(
+                                                return SizedBox(
                                                   height: 200,
-                                                  child: Center(child: CircularProgressIndicator())
+                                                  child: DotLottieLoader.fromAsset(
+                                                    "assets/loading.lottie",
+                                                    frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                                                    if (dotlottie != null) {
+                                                      return Lottie.memory(
+                                                          dotlottie.animations.values.single,
+                                                          width: 250,
+                                                          height: 250,
+                                                          repeat: true);
+                                                    } else {
+                                                      return const CircularProgressIndicator();
+                                                    }
+                                                  }),
                                                 );
                                               } else if (snapshot.hasError) {
                                                 return Text('Error: ${snapshot.error}');
@@ -611,10 +649,22 @@ class _StartPostTestConfirmationModalState extends State<StartPostTestConfirmati
       future: widget.future,
       builder: (context, snapshot)  {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const SizedBox(
+          return SizedBox(
             height: 200,
             child: Center(
-              child: CircularProgressIndicator()
+              child: DotLottieLoader.fromAsset(
+                "assets/loading.lottie",
+                frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                if (dotlottie != null) {
+                  return Lottie.memory(
+                      dotlottie.animations.values.single,
+                      width: 250,
+                      height: 250,
+                      repeat: true);
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
             )
           );
         } else if (snapshot.hasError) {

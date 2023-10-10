@@ -22,7 +22,7 @@ class MyPlanet extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/dashboard',
+      initialRoute: initialLocation,
       getPages: AppPage.pages,
     );
   }

@@ -62,8 +62,20 @@ class ElearningFeedbackPage extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return SizedBox(
                           height: MediaQuery.of(context).size.height * 0.5,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                          child: Center(
+                            child: DotLottieLoader.fromAsset(
+                              "assets/loading.lottie",
+                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                           ),
                         );
                       } else if (snapshot.hasError) {

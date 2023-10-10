@@ -13,6 +13,8 @@ import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_page.
 import 'package:myplanet/views/pages/podtret/podtret_page.dart';
 import 'package:myplanet/views/pages/podtret/recomendation_podtret.dart';
 import 'package:myplanet/views/pages/podtret/top_eps_podtret.dart';
+import 'package:myplanet/views/pages/profile/account_info.dart';
+import 'package:myplanet/views/pages/profile/mandatory/mandatory_page.dart';
 import 'package:myplanet/views/pages/profile/profile_page.dart';
 import 'package:myplanet/views/pages/splash_screen.dart';
 
@@ -53,6 +55,8 @@ class AppPage {
       page: () => ElearningFeedbackPage(),
     ),
 
+
+    // podtret 
     GetPage(
       name: RouteName.podtretPage,
       page: () => const PodtretPage(),
@@ -79,9 +83,19 @@ class AppPage {
       name: RouteName.communityPage,
       page: () => const CommunityPage(),
     ),
+
+    // profile  
     GetPage(
       name: RouteName.profilePage,
-      page: () => const ProfilePage(),
+      page: () => ProfilePage(),
+    ),
+    GetPage(
+      name: RouteName.accountInfo,
+      page: () => const AccountInfo(),
+    ),
+    GetPage(
+      name: RouteName.mandatoryPage,
+      page: () => const Mandatory(),
     ),
   ];
 }
