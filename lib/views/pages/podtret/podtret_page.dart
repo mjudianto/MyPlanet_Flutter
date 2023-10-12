@@ -1,5 +1,7 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
@@ -77,8 +79,20 @@ class _PodtretPageState extends State<PodtretPage> {
                         return SizedBox(
                           height: 100,
                           width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                          child: Center(
+                            child: DotLottieLoader.fromAsset(
+                              "assets/loading.lottie",
+                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                           ),
                         );
                       } else if (snapshot.hasError) {
@@ -186,8 +200,20 @@ class _PodtretPageState extends State<PodtretPage> {
                         return SizedBox(
                           height: 100,
                           width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                          child: Center(
+                            child: DotLottieLoader.fromAsset(
+                              "assets/loading.lottie",
+                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                           ),
                         );
                       } else if (snapshot.hasError) {
@@ -276,31 +302,43 @@ class _PodtretPageState extends State<PodtretPage> {
             child: Row(
               children: [
                 FutureBuilder(
-                    future: homePageController.newPodtrets,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        // Display a loading indicator while waiting for the future to complete
-                        return SizedBox(
-                          height: 100,
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: CircularProgressIndicator(),
+                  future: homePageController.newPodtrets,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Display a loading indicator while waiting for the future to complete
+                      return SizedBox(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        child: Center(
+                          child: DotLottieLoader.fromAsset(
+                            "assets/loading.lottie",
+                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                            if (dotlottie != null) {
+                              return Lottie.memory(
+                                  dotlottie.animations.values.single,
+                                  width: 250,
+                                  height: 250,
+                                  repeat: true);
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          }),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      // Handle any errors that occurred during the Future execution
+                      return SizedBox(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width,
+                        child: const Center(
+                          child: Text(
+                            'Error: Error: Data Load Failed',
+                            textAlign: TextAlign.center,
                           ),
-                        );
-                      } else if (snapshot.hasError) {
-                        // Handle any errors that occurred during the Future execution
-                        return SizedBox(
-                          height: 100,
-                          width: MediaQuery.of(context).size.width,
-                          child: const Center(
-                            child: Text(
-                              'Error: Error: Data Load Failed',
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        );
-                      } else {
-                        var podtrets = snapshot.data!;
+                        ),
+                      );
+                    } else {
+                      var podtrets = snapshot.data!;
 
                         final podtretToShow = podtrets.data?.toList() ?? [];
                         podtretToShow
@@ -367,8 +405,20 @@ class _PodtretPageState extends State<PodtretPage> {
                           return SizedBox(
                             height: 100,
                             width: MediaQuery.of(context).size.width,
-                            child: const Center(
-                              child: CircularProgressIndicator(),
+                            child: Center(
+                              child: DotLottieLoader.fromAsset(
+                                "assets/loading.lottie",
+                                frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                                if (dotlottie != null) {
+                                  return Lottie.memory(
+                                      dotlottie.animations.values.single,
+                                      width: 250,
+                                      height: 250,
+                                      repeat: true);
+                                } else {
+                                  return const CircularProgressIndicator();
+                                }
+                              }),
                             ),
                           );
                         } else if (snapshot.hasError) {
@@ -464,9 +514,7 @@ class PodtretCategory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10,),
           FutureBuilder(
               future: homePageController.newPodtrets,
               builder: (context, snapshot) {
@@ -493,6 +541,43 @@ class PodtretCategory extends StatelessWidget {
                   );
                 } else {
                   var podtrets = snapshot.data!;
+            future: homePageController.newPodtrets,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                // Display a loading indicator while waiting for the future to complete
+                return SizedBox(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: DotLottieLoader.fromAsset(
+                      "assets/loading.lottie",
+                      frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                      if (dotlottie != null) {
+                        return Lottie.memory(
+                            dotlottie.animations.values.single,
+                            width: 250,
+                            height: 250,
+                            repeat: true);
+                      } else {
+                        return const CircularProgressIndicator();
+                      }
+                    }),
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                // Handle any errors that occurred during the Future execution
+                return SizedBox(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Center(
+                    child: Text(
+                      'Error: Error: Data Load Failed',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              } else {
+                var podtrets = snapshot.data!;
 
                   final podtretToShow = podtrets.data?.toList() ?? [];
                   final filteredPodtret = podtretToShow

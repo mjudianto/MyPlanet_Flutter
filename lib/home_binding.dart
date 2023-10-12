@@ -6,6 +6,7 @@ import 'package:myplanet/views/pages/elearning/elearninTest/feedback/elearning_f
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
+import 'package:myplanet/views/pages/profile/profile_page_controller.dart';
 import 'package:myplanet/views/widgets/carousel/carouselPodtret/carousel_podtret_controller.dart';
 
 class HomeBinding implements Bindings {
@@ -24,5 +25,7 @@ class HomeBinding implements Bindings {
     Get.put<PodtretKontenController>(PodtretKontenController(), permanent: true);
 
     Get.put<HomePageController>(HomePageController(), permanent: true);
+
+    Get.put<ProfilePageController>(ProfilePageController(), permanent: true);
   }
 }

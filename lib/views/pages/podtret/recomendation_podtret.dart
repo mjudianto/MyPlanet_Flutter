@@ -1,5 +1,7 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/widgets/card/card_top_eps_podtret.dart';
@@ -63,8 +65,20 @@ class RecomendationPodtret extends StatelessWidget {
                       return SizedBox(
                         height: 100,
                         width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: CircularProgressIndicator(),
+                        child: Center(
+                          child: DotLottieLoader.fromAsset(
+                              "assets/loading.lottie",
+                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                         ),
                       );
                     } else if (snapshot.hasError) {

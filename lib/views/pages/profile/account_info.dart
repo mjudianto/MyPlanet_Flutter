@@ -1,20 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AccountInfo extends StatefulWidget {
+class AccountInfo extends StatelessWidget {
   const AccountInfo({super.key});
-
-  @override
-  State<AccountInfo> createState() => _AccountInfoState();
-}
-
-class _AccountInfoState extends State<AccountInfo> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +32,23 @@ class _AccountInfoState extends State<AccountInfo> {
                         .bottomRight, // Menempatkan ikon kamera di bawah kanan
                     children: [
                       ClipOval(
-                        child: Image.asset(
-                          'assets/nanda.jpg',
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) => Image.asset(
+                            'assets/loading.jpeg', // Placeholder image
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit.cover,
+                          ),
+                          errorWidget: (context, url, error) => Image.asset(
+                            'assets/icons/avatar.png', // Default image for errors
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit.cover,
+                          ),
+                          imageUrl: '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}',
                           width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Container(
@@ -65,7 +71,7 @@ class _AccountInfoState extends State<AccountInfo> {
                   height: 14,
                 ),
                 Text(
-                  'Nanda Raditya',
+                  GlobalVariable.userData['user']['EmpName'],
                   style: blackTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: semiBold,
@@ -101,7 +107,7 @@ class _AccountInfoState extends State<AccountInfo> {
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'Nanda Raditya',
+                      GlobalVariable.userData['user']['EmpName'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -140,7 +146,7 @@ class _AccountInfoState extends State<AccountInfo> {
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      '082124776437',
+                      GlobalVariable.userData['user']['empnik'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -179,7 +185,7 @@ class _AccountInfoState extends State<AccountInfo> {
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      '082124776437',
+                      GlobalVariable.userData['user']['PhoneNumberEmployee'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -218,7 +224,7 @@ class _AccountInfoState extends State<AccountInfo> {
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'nandaraditya80@gmail.com',
+                      GlobalVariable.userData['user']['EmailEmployee'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -257,7 +263,7 @@ class _AccountInfoState extends State<AccountInfo> {
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'EPM - Training',
+                      GlobalVariable.userData['user']['orgname'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -291,12 +297,12 @@ class _AccountInfoState extends State<AccountInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Company',
+                      'Location',
                       style: secondaryTextStyle.copyWith(
                           fontSize: 12, fontWeight: regular),
                     ),
                     Text(
-                      'EPM - Pusat',
+                      GlobalVariable.userData['user']['LocationName'],
                       style: blackTextStyle.copyWith(
                           fontSize: 12, fontWeight: semiBold),
                     ),
@@ -313,24 +319,21 @@ class _AccountInfoState extends State<AccountInfo> {
       );
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        // appBar: const PageAppBar(),
-        backgroundColor: backgroundColor,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const PageAppBar(
-                type: 'text',
-                title: 'Profle',
-              ),
-              header(),
-              content()
-            ],
-          ),
+    return Scaffold(
+      // appBar: const PageAppBar(),
+      backgroundColor: backgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const PageAppBar(
+              type: 'text',
+              title: 'Account Info',
+            ),
+            header(),
+            content()
+          ],
         ),
       ),
     );

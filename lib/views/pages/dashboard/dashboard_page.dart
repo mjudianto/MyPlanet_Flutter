@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/community/community_page.dart';
 import 'package:myplanet/views/pages/dashboard/dashboard_controller.dart';
@@ -17,7 +19,7 @@ class DashboardPage extends StatelessWidget {
     const ElearningPage(),
     const PodtretPage(),
     const CommunityPage(),
-    const ProfilePage(),
+    ProfilePage(),
     const RecomendationPodtret()
   ];
 
@@ -37,7 +39,8 @@ class DashboardPage extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               items: [
                 _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/home_icon.png', label: 'Home'),
+                    imagePath: 'assets/icons/home_icon.png', 
+                    label: 'Home'),
                 _bottomNavigationBarItem(
                     imagePath: 'assets/icons/elearning_icon.png',
                     label: 'Elearning'),
@@ -48,7 +51,7 @@ class DashboardPage extends StatelessWidget {
                     imagePath: 'assets/icons/community_icon.png',
                     label: 'Community'),
                 _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/home_icon.png', label: 'Profile'),
+                    imagePath: '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}', label: 'Profile'),
               ],
             ),
           );
@@ -62,11 +65,11 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                imagePath,
-                color: blackColor,
-                height: label == 'Community' ? 20 : 25,
-                // width: 25,
+              _icon(
+                imagePath: imagePath, 
+                type: label != 'Profile' ? 'asset' : 'network' , 
+                height: label == 'Community' ? 20 : (label == 'Profile' ? 28 : 25),
+                status: 'off',
               ),
               SizedBox(
                 height: label == 'Community' ? 15 : 10,
@@ -80,14 +83,14 @@ class DashboardPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image.asset(
-                imagePath,
-                color: primaryColor,
-                height: label == 'Community' ? 25 : 30,
-                // width: 25,
+              _icon(
+                imagePath: imagePath, 
+                type: label != 'Profile' ? 'asset' : 'network', 
+                height: label == 'Community' ? 25 : (label == 'Profile' ? 35 : 30),
+                status: 'on'
               ),
               SizedBox(
-                height: label == 'Community' ? 15 : 10,
+                height: label == 'Community' ? 15 : (label == 'Profile' ? 5 : 10),
               ),
             ],
           ),
@@ -97,3 +100,36 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
+
+ _icon({required String imagePath, required String type, double? height, required String status}) {
+  if (type == 'asset') {
+    return Image.asset(
+      imagePath,
+      color: status == 'off' ? blackColor : primaryColor,
+      height: height ?? 25,
+      // width: 25,
+    );
+  }
+
+  if (type == 'network') {
+    return ClipOval(
+      child: CachedNetworkImage(
+        placeholder: (context, url) => Image.asset(
+          'assets/loading.jpeg', // Placeholder image
+          height: 25,
+          fit: BoxFit.cover,
+        ),
+        errorWidget: (context, url, error) => Image.asset(
+          'assets/icons/avatar.png', // Default image for errors
+          height: 25,
+          fit: BoxFit.cover,
+        ),
+        imageUrl: imagePath,
+        height: height ?? 25,
+        fit: BoxFit.cover,
+        color: status == 'off' ? blackColor : primaryColor,
+      ),
+    );
+  }
+  
+ }

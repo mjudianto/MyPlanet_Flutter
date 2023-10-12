@@ -21,7 +21,7 @@ class CardNewEps extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                NewEpsPodtret(), // Ganti dengan nama yang sesuai
+                const NewEpsPodtret(), // Ganti dengan nama yang sesuai
           ),
         );
       },

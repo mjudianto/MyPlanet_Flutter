@@ -1,4 +1,3 @@
-import 'package:myplanet/models/podtrets/podtret_model.dart';
 
 abstract class RouteName {
   static const splashScreen = '/splash_screen';
@@ -19,5 +18,9 @@ abstract class RouteName {
   static const podtretContent = '/podtret/podtret_contents';
 
   static const communityPage = '/community';
+
+
   static const profilePage = '/profile';
+  static const accountInfo = '/profile/account_info';
+  static const mandatoryPage = '/profile/mandatory';
 }
