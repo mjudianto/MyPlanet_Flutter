@@ -81,8 +81,8 @@ class _PodtretPageState extends State<PodtretPage> {
                           width: MediaQuery.of(context).size.width,
                           child: Center(
                             child: DotLottieLoader.fromAsset(
-                              "assets/loading.lottie",
-                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                                "assets/loading.lottie", frameBuilder:
+                                    (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
                                 return Lottie.memory(
                                     dotlottie.animations.values.single,
@@ -202,8 +202,8 @@ class _PodtretPageState extends State<PodtretPage> {
                           width: MediaQuery.of(context).size.width,
                           child: Center(
                             child: DotLottieLoader.fromAsset(
-                              "assets/loading.lottie",
-                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                                "assets/loading.lottie", frameBuilder:
+                                    (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
                                 return Lottie.memory(
                                     dotlottie.animations.values.single,
@@ -302,43 +302,54 @@ class _PodtretPageState extends State<PodtretPage> {
             child: Row(
               children: [
                 FutureBuilder(
-                  future: homePageController.newPodtrets,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Display a loading indicator while waiting for the future to complete
-                      return SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: DotLottieLoader.fromAsset(
-                            "assets/loading.lottie",
-                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
-                            if (dotlottie != null) {
-                              return Lottie.memory(
-                                  dotlottie.animations.values.single,
-                                  width: 250,
-                                  height: 250,
-                                  repeat: true);
-                            } else {
-                              return const CircularProgressIndicator();
-                            }
-                          }),
-                        ),
-                      );
-                    } else if (snapshot.hasError) {
-                      // Handle any errors that occurred during the Future execution
-                      return SizedBox(
-                        height: 100,
-                        width: MediaQuery.of(context).size.width,
-                        child: const Center(
-                          child: Text(
-                            'Error: Error: Data Load Failed',
-                            textAlign: TextAlign.center,
+                    future: homePageController.newPodtrets,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Display a loading indicator while waiting for the future to complete
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: DotLottieLoader.fromAsset(
+                                "assets/loading.lottie", frameBuilder:
+                                    (BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
                           ),
-                        ),
-                      );
-                    } else {
-                      var podtrets = snapshot.data!;
+                        );
+                      } else if (snapshot.hasError) {
+                        // Handle any errors that occurred during the Future execution
+                        return SizedBox(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width,
+                            child: const Center(
+                              child: Text(
+                                'Error: Error: Data Load Failed',
+                                textAlign: TextAlign.center,
+                              ),
+                            ));
+                      } else if (snapshot.hasError) {
+                        // Handle any errors that occurred during the Future execution
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: Text(
+                              'Error: Error: Data Load Failed',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      } else {
+                        var podtrets = snapshot.data!;
 
                         final podtretToShow = podtrets.data?.toList() ?? [];
                         podtretToShow
@@ -407,8 +418,8 @@ class _PodtretPageState extends State<PodtretPage> {
                             width: MediaQuery.of(context).size.width,
                             child: Center(
                               child: DotLottieLoader.fromAsset(
-                                "assets/loading.lottie",
-                                frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                                  "assets/loading.lottie", frameBuilder:
+                                      (BuildContext ctx, DotLottie? dotlottie) {
                                 if (dotlottie != null) {
                                   return Lottie.memory(
                                       dotlottie.animations.values.single,
@@ -514,7 +525,68 @@ class PodtretCategory extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
+          FutureBuilder(
+              future: homePageController.newPodtrets,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  // Display a loading indicator while waiting for the future to complete
+                  return SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: DotLottieLoader.fromAsset("assets/loading.lottie",
+                          frameBuilder:
+                              (BuildContext ctx, DotLottie? dotlottie) {
+                        if (dotlottie != null) {
+                          return Lottie.memory(
+                              dotlottie.animations.values.single,
+                              width: 250,
+                              height: 250,
+                              repeat: true);
+                        } else {
+                          return const CircularProgressIndicator();
+                        }
+                      }),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  // Handle any errors that occurred during the Future execution
+                  return SizedBox(
+                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Center(
+                      child: Text(
+                        'Error: Error: Data Load Failed',
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                } else {
+                  var podtrets = snapshot.data!;
+
+                  final podtretToShow = podtrets.data?.toList() ?? [];
+                  final filteredPodtret = podtretToShow
+                      .where((item) => item.nama == categoryName)
+                      .toList();
+
+                  return SizedBox(
+                    height: Get.height - 350,
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      scrollDirection: Axis.vertical,
+                      itemCount: filteredPodtret.length,
+                      itemBuilder: (context, index) {
+                        return CardTopEps(
+                          item: filteredPodtret[index],
+                        );
+                      },
+                    ),
+                  );
+                }
+              }),
           FutureBuilder(
               future: homePageController.newPodtrets,
               builder: (context, snapshot) {
@@ -541,43 +613,6 @@ class PodtretCategory extends StatelessWidget {
                   );
                 } else {
                   var podtrets = snapshot.data!;
-            future: homePageController.newPodtrets,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                // Display a loading indicator while waiting for the future to complete
-                return SizedBox(
-                  height: 100,
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: DotLottieLoader.fromAsset(
-                      "assets/loading.lottie",
-                      frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
-                      if (dotlottie != null) {
-                        return Lottie.memory(
-                            dotlottie.animations.values.single,
-                            width: 250,
-                            height: 250,
-                            repeat: true);
-                      } else {
-                        return const CircularProgressIndicator();
-                      }
-                    }),
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                // Handle any errors that occurred during the Future execution
-                return SizedBox(
-                  height: 100,
-                  width: MediaQuery.of(context).size.width,
-                  child: const Center(
-                    child: Text(
-                      'Error: Error: Data Load Failed',
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                );
-              } else {
-                var podtrets = snapshot.data!;
 
                   final podtretToShow = podtrets.data?.toList() ?? [];
                   final filteredPodtret = podtretToShow
