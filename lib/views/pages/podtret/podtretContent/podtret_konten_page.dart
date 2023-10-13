@@ -705,7 +705,7 @@ class PodtretContent extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           child: Image.asset(
-                            'assets/podtret/thumbnail/eps72.png',
+                            'assets/podtret/thumbnail/eps66.jpg',
                             width: 122,
                             height: 69,
                           ),

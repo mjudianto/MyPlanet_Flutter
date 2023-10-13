@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/notification/notification_page.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
 
   @override
-  Size get preferredSize => const Size.fromHeight(155); // Adjust the height as needed
+  Size get preferredSize =>
+      const Size.fromHeight(155); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/appBarBackground.png'), // Replace this with the path to your background image
-          fit: BoxFit.cover, // Adjust the image fit to cover the entire container
+          image: AssetImage(
+              'assets/appBarBackground.png'), // Replace this with the path to your background image
+          fit: BoxFit
+              .cover, // Adjust the image fit to cover the entire container
         ),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(58), // Radius to make the corners round
@@ -21,7 +25,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         title: SizedBox(
-          height: preferredSize.height, // Set the height of the SizedBox to the preferredSize height
+          height: preferredSize
+              .height, // Set the height of the SizedBox to the preferredSize height
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -44,7 +49,13 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     IconButton(
                       onPressed: () {
-                        
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NotificationPage(), // Ganti dengan nama yang sesuai
+                          ),
+                        );
                       },
                       icon: const Icon(Icons.notifications_none_outlined),
                     ),
@@ -69,12 +80,14 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                             decoration: InputDecoration(
                               hintText: 'Cari E-learning atau PODTRET',
                               border: InputBorder.none,
-                              prefixIcon: Icon(Icons.search, size: 20,), // Search icon inside the search bar
+                              prefixIcon: Icon(
+                                Icons.search,
+                                size: 20,
+                              ), // Search icon inside the search bar
                               hintStyle: TextStyle(
-                                color: secondaryColor,
-                                fontSize: 14,
-                                fontFamily: 'Poppins'
-                              ),
+                                  color: secondaryColor,
+                                  fontSize: 14,
+                                  fontFamily: 'Poppins'),
                             ),
                           ),
                         ),
@@ -87,7 +100,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
         ),
-        toolbarHeight: preferredSize.height, // Set the toolbar height to the preferredSize height
+        toolbarHeight: preferredSize
+            .height, // Set the toolbar height to the preferredSize height
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
