@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/news/news_page.dart';
 import 'package:myplanet/views/pages/notification/notification_page.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -43,7 +44,13 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                     const Spacer(), // Add a spacer to push the widgets to the edges
                     IconButton(
                       onPressed: () {
-                        // Handle the first alert circular button action here
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NewsPage(), // Ganti dengan nama yang sesuai
+                          ),
+                        );
                       },
                       icon: const Icon(Icons.newspaper),
                     ),
