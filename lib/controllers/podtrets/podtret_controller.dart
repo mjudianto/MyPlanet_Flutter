@@ -11,6 +11,7 @@ class PodtretController {
       userCourses = await PodtretsProvider.getActivePodtrets(userToken ?? "");
       return userCourses;
     } on Exception catch(e) {
+      print('error: $e');
       throw Exception('error: $e');
     }
   }

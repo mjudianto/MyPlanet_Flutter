@@ -2,6 +2,7 @@ import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
@@ -30,6 +31,7 @@ class _PodtretPageState extends State<PodtretPage> {
   @override
   Widget build(BuildContext context) {
     final HomePageController homePageController = Get.find();
+    homePageController.newPodtrets = PodtretController.fetchNewPodtrets();
 
     Widget rekomendasiPodtretTitle() {
       return Container(

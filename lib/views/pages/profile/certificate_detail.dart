@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CertificateDetail extends StatefulWidget {
   const CertificateDetail({super.key});
@@ -82,7 +81,7 @@ class _CertificateDetailState extends State<CertificateDetail> {
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                primary: primaryColor,
+                backgroundColor: primaryColor,
                 minimumSize: const Size.fromHeight(50),
                 shape: RoundedRectangleBorder(
                   borderRadius:
@@ -90,7 +89,7 @@ class _CertificateDetailState extends State<CertificateDetail> {
                 ),
               ),
               onPressed: () {
-                print('download!');
+                // print('download!');
               },
               child: Text(
                 'Download',

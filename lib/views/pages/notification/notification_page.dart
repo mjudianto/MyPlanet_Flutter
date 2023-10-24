@@ -81,7 +81,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            print('test');
+                            // print('test');
                           },
                           child: SvgPicture.asset(
                             'assets/icons/ic_more.svg',
