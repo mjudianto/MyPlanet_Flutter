@@ -80,6 +80,7 @@ flutter:
   assets:
     - assets/
     - assets/icons/
+    - assets/icons/community/
     - assets/podtret/thumbnail/
   #   - images/a_dot_ham.jpeg
 
