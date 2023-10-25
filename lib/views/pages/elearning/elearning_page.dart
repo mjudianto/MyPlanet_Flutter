@@ -5,9 +5,11 @@ import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
 import 'package:myplanet/routes/route_name.dart';
+import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
+import 'package:myplanet/views/widgets/elearning/btn_categories.dart';
 
 class ElearningPage extends StatefulWidget {
   const ElearningPage({super.key});
@@ -30,6 +32,7 @@ class _ElearningPageState extends State<ElearningPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: const PageAppBar(),
+      backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,6 +41,7 @@ class _ElearningPageState extends State<ElearningPage> {
             const PageAppBar(
               type: 'search',
             ),
+            BtnCategories(),
             FutureBuilder(
               future: _userCoursesFuture,
               builder: (context, snapshot) {
@@ -45,9 +49,9 @@ class _ElearningPageState extends State<ElearningPage> {
                   return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: Center(
-                      child: DotLottieLoader.fromAsset(
-                        "assets/loading.lottie",
-                        frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                      child: DotLottieLoader.fromAsset("assets/loading.lottie",
+                          frameBuilder:
+                              (BuildContext ctx, DotLottie? dotlottie) {
                         if (dotlottie != null) {
                           return Lottie.memory(
                               dotlottie.animations.values.single,
