@@ -358,7 +358,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                     ? 'Lulus'
                                     : 'Gagal';
 
-                                // elearningTestPageController.submitTestRecord(score);
+                                elearningTestPageController.submitTestRecord(score);
 
                                 Get.offNamed(RouteName.elearningFeedbackPage);
                               }
