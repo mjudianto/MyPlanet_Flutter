@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/podtrets/podtret_comment_models.dart';
@@ -18,6 +21,7 @@ class PodtretContent extends StatelessWidget {
   final HomePageController homePageController = Get.find();
   late CustomVideoPlayerController customVideoPlayerController;
   TextEditingController commentController = TextEditingController();
+  TextEditingController replyController = TextEditingController();
 
 
   PodtretContent({super.key});
@@ -26,8 +30,9 @@ class PodtretContent extends StatelessWidget {
   Widget build(BuildContext context) {
     podtretKontenController.initializeVideoPlayer();
     RxBool liked = RxBool(podtretKontenController.podtret.likeState == 1);
-    // podtretKontenController.fetchPodtretComments(podtretKontenController.podtret.podtretId.toString());
     Rx<Future<PodtretComment>> podtretComments = podtretKontenController.fetchPodtretComments(podtretKontenController.podtret.podtretId.toString()).obs;
+    RxList<Reply>? commentReply;
+    
 
     Widget vidio() {
       return InkWell(
@@ -88,12 +93,15 @@ class PodtretContent extends StatelessWidget {
     }
 
     Widget replyComment(PodtretCommentElement? comment) {
+      // print(comment?.reply);
+      
       return InkWell(
         onTap: () {
           showModalBottomSheet<void>(
             context: context,
             backgroundColor: Colors.transparent,
             builder: (BuildContext context) {
+                commentReply = comment.reply?.obs;
                 return Container(
                   height: 600,
                   decoration: const BoxDecoration(
@@ -208,73 +216,75 @@ class PodtretContent extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: comment.reply!.map((reply) {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                          left: 60,
-                                          right: 20,
-                                          bottom: 10,
-                                        ),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            ClipOval(
-                                              child: CachedNetworkImage(
-                                                placeholder: (context, url) => Image.asset(
-                                                  'assets/loading.jpeg', // Placeholder image
+                                  Obx(() => 
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: commentReply!.map((reply) {
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                            left: 60,
+                                            right: 20,
+                                            bottom: 10,
+                                          ),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              ClipOval(
+                                                child: CachedNetworkImage(
+                                                  placeholder: (context, url) => Image.asset(
+                                                    'assets/loading.jpeg', // Placeholder image
+                                                    width: 30,
+                                                    height: 30,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  errorWidget: (context, url, error) => Image.asset(
+                                                    'assets/icons/avatar.png', // Default image for errors
+                                                    width: 30,
+                                                    height: 30,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  imageUrl: '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${reply.userNik}.png',
                                                   width: 30,
                                                   height: 30,
                                                   fit: BoxFit.cover,
                                                 ),
-                                                errorWidget: (context, url, error) => Image.asset(
-                                                  'assets/icons/avatar.png', // Default image for errors
-                                                  width: 30,
-                                                  height: 30,
-                                                  fit: BoxFit.cover,
+                                              ),
+                                              const SizedBox(
+                                                width: 12,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.6,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '${reply.nama.toString()} • ${podtretKontenController.timeCommentUploaded(reply.uploadDate.toString())}',
+                                                      style: secondaryTextStyle.copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight: regular,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 3,
+                                                    ),
+                                                    Text(
+                                                      reply.comment.toString(),
+                                                      style: blackTextStyle.copyWith(
+                                                        fontSize: 12,
+                                                        fontWeight: regular,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 4,
+                                                    ),
+                                                  ],
                                                 ),
-                                                imageUrl: '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${reply.userNik}.png',
-                                                width: 30,
-                                                height: 30,
-                                                fit: BoxFit.cover,
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 12,
-                                            ),
-                                            SizedBox(
-                                              width: Get.width * 0.6,
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    '${reply.nama.toString()} • ${podtretKontenController.timeCommentUploaded(reply.uploadDate.toString())}',
-                                                    style: secondaryTextStyle.copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight: regular,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 3,
-                                                  ),
-                                                  Text(
-                                                    reply.comment.toString(),
-                                                    style: blackTextStyle.copyWith(
-                                                      fontSize: 12,
-                                                      fontWeight: regular,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 4,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }).toList(),
+                                            ],
+                                          ),
+                                        );
+                                      }).toList(),
+                                    )
                                   )
                                 ],
                               ),
@@ -336,6 +346,20 @@ class PodtretContent extends StatelessWidget {
                                 height: 50,
                                 width: Get.width * 0.75,
                                 child: TextFormField(
+                                  controller: replyController,
+                                  onFieldSubmitted: (value) {
+                                    Reply newReply = Reply();
+                                    newReply.userNik = GlobalVariable.userData['user']['empnik'];
+                                    newReply.uploadDate = DateTime.parse(DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()));
+                                    newReply.nama = GlobalVariable.userData['user']['EmpName'];
+                                    newReply.comment = value;
+
+                                    podtretKontenController.submitPodtretCommentReply(comment.podtretCommentId.toString(), value);
+                                    podtretComments.value = podtretKontenController.fetchPodtretComments(podtretKontenController.podtret.podtretId.toString());
+
+                                    replyController.clear();
+                                    commentReply?.add(newReply);
+                                  },
                                   decoration: InputDecoration(
                                     hintText: "Tambahkan komentar",
                                     hintStyle: secondaryTextStyle.copyWith(
@@ -444,7 +468,13 @@ class PodtretContent extends StatelessWidget {
                               } else {
                                 // Assuming your data is a list of YourDataType objects
                                 var comments = snapshot.data;
-                                // print(comments?.podtretComment);
+                                
+                                if (comments?.podtretComment == null) {
+                                  return const SizedBox(
+                                    height: 300,
+                                    child: Center(child: Text('No Comment'))
+                                  );
+                                }
 
                                 return SizedBox(
                                   height: 300,
@@ -470,7 +500,7 @@ class PodtretContent extends StatelessWidget {
                                                   height: 30,
                                                   fit: BoxFit.cover,
                                                 ),
-                                                imageUrl: '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${comments!.podtretComment![index].userNik}.png',
+                                                imageUrl: '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${comments.podtretComment![index].userNik}.png',
                                                 width: 30,
                                                 height: 30,
                                                 fit: BoxFit.cover,
@@ -567,7 +597,9 @@ class PodtretContent extends StatelessWidget {
                                       controller: commentController,
                                       onFieldSubmitted: (value) {
                                         podtretKontenController.submitPodtretComment(podtretKontenController.podtret.podtretId.toString(), value);
-                                        podtretComments.value = podtretKontenController.fetchPodtretComments(podtretKontenController.podtret.podtretId.toString());
+                                        Timer(const Duration(seconds: 1), () {
+                                          podtretComments.value = podtretKontenController.fetchPodtretComments(podtretKontenController.podtret.podtretId.toString());
+                                        });
                                         commentController.clear();
                                       },
                                       decoration: InputDecoration(
@@ -622,12 +654,14 @@ class PodtretContent extends StatelessWidget {
                         const SizedBox(
                           width: 4,
                         ),
-                        Text(
-                          "7",
-                          style: secondaryTextStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: regular,
-                          ),
+                        Obx(() => 
+                          Text(
+                            podtretKontenController.totalComment.value.toString(),
+                            style: secondaryTextStyle.copyWith(
+                              fontSize: 14,
+                              fontWeight: regular,
+                            ),
+                          )
                         ),
                       ],
                     ),

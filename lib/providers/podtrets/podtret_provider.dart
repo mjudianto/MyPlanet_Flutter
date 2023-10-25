@@ -56,7 +56,8 @@ class PodtretsProvider {
         var jsonResponse = response.body;
         return podtretCommentFromJson(jsonResponse);
       } else {
-        throw Exception('Failed to fetch data from API');
+        return PodtretComment();
+        // throw Exception('Failed to fetch data from API');
       }
     } catch (e) {
       throw Exception('Error: $e');
@@ -72,6 +73,51 @@ class PodtretsProvider {
         },
         body: {
           "comment" : comment
+        }
+      );
+      if (response.statusCode == 200) {
+        // var jsonResponse = response.body;
+        // print(jsonResponse);
+      } else {
+        throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  static submitPodtretCommentReply(String userToken, String podtretCommentId, String comment) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${GlobalVariable.apiUrl}/podtrets/podtretCommentReply'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        },
+        body: {
+          "podtretCommentId" : podtretCommentId,
+          "comment" : comment
+        }
+      );
+      if (response.statusCode == 200) {
+        // var jsonResponse = response.body;
+        // print(jsonResponse);
+      } else {
+        throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
+  static setUserPodtretRecord(String userToken, String podtretId) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${GlobalVariable.apiUrl}/userRecords/userPodtretRecord'),
+        headers: {
+          'Authorization' : 'bearer $userToken',
+        },
+        body: {
+          "podtretId" : podtretId,
         }
       );
       if (response.statusCode == 200) {
