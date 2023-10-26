@@ -40,6 +40,8 @@ class Datum {
     int? state;
     String? publishDate;
     String? nama;
+    String? totalLike;
+    int? likeState;
 
     Datum({
         this.podtretId,
@@ -53,6 +55,8 @@ class Datum {
         this.state,
         this.publishDate,
         this.nama,
+        this.totalLike,
+        this.likeState,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -67,6 +71,8 @@ class Datum {
         state: json["state"],
         publishDate: json["publishDate"],
         nama: json["nama"],
+        totalLike: json["totalLike"],
+        likeState: json["likeState"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -81,5 +87,7 @@ class Datum {
         "state": state,
         "publishDate": publishDate,
         "nama": nama,
+        "totalLike": totalLike,
+        "likeState": likeState,
     };
 }

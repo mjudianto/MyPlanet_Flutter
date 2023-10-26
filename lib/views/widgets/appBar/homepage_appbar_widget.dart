@@ -61,7 +61,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NotificationPage(), // Ganti dengan nama yang sesuai
+                                const NotificationPage(), // Ganti dengan nama yang sesuai
                           ),
                         );
                       },

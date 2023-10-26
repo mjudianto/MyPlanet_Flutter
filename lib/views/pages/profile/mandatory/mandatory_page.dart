@@ -30,7 +30,7 @@ class Mandatory extends StatelessWidget {
               child: ScrollableTab(
                 isScrollable: true,
                 labelColor: blackColor,
-                tabs: [
+                tabs: const [
                   Tab(text: 'On Progress'),
                   Tab(text: 'Completed'),
                   Tab(text: 'Uncomplete'),

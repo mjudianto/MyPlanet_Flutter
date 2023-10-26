@@ -57,7 +57,7 @@ class ProfilePage extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                           imageUrl:
-                              '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}',
+                              '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${GlobalVariable.userData['user']['empnik']}.png',
                           width: 90,
                           height: 90,
                           fit: BoxFit.cover,
@@ -424,7 +424,7 @@ class ProfilePage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              TrainingHistory(), // Ganti dengan nama yang sesuai
+                              const TrainingHistory(), // Ganti dengan nama yang sesuai
                         ),
                       );
                     },
@@ -462,7 +462,7 @@ class ProfilePage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              TestHistory(), // Ganti dengan nama yang sesuai
+                              const TestHistory(), // Ganti dengan nama yang sesuai
                         ),
                       );
                     },
@@ -532,7 +532,7 @@ class ProfilePage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              Certificate(), // Ganti dengan nama yang sesuai
+                              const Certificate(), // Ganti dengan nama yang sesuai
                         ),
                       );
                     },

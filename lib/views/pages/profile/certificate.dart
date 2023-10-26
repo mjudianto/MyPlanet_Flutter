@@ -32,7 +32,7 @@ class _CertificateState extends State<Certificate> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        CertificateDetail(), // Ganti dengan nama yang sesuai
+                        const CertificateDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
