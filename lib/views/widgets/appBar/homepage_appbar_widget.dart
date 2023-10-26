@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/news/news_page.dart';
 import 'package:myplanet/views/pages/notification/notification_page.dart';
+import 'package:searchfield/searchfield.dart';
 
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomePageAppBar({Key? key}) : super(key: key);
@@ -69,38 +70,11 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 17.0),
+              const Padding(
+                padding: const EdgeInsets.only(top: 17.0, left: 10, right: 10),
                 child: Row(
                   children: [
-                    const SizedBox(width: 12), // Add some spacing to the left
-                    Expanded(
-                      child: Container(
-                        width: 350,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: const Center(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: 'Cari E-learning atau PODTRET',
-                              border: InputBorder.none,
-                              prefixIcon: Icon(
-                                Icons.search,
-                                size: 20,
-                              ), // Search icon inside the search bar
-                              hintStyle: TextStyle(
-                                  color: secondaryColor,
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins'),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 16), // Add some spacing to the right
+                    Expanded(child: SearchBar()),
                   ],
                 ),
               ),
@@ -112,6 +86,74 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
+      ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 45,
+      width: 330,
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Center(
+        child: SearchField(
+          hint: "Cari E-learning atau PODTRET",
+          searchInputDecoration: InputDecoration(
+            enabledBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 2),
+                borderRadius: BorderRadius.circular(100)),
+            hintStyle: const TextStyle(
+              fontSize: 13,
+              color: secondaryColor,
+            ),
+            prefixIcon: Icon(
+              Icons.search,
+              color: secondaryColor,
+            ),
+          ),
+          itemHeight: 50,
+          maxSuggestionsInViewPort: 6,
+          suggestionsDecoration: SuggestionDecoration(
+              padding: const EdgeInsets.all(4),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          onSuggestionTap: (value) {
+            print("E-learning");
+          },
+          suggestions: [
+            'Neop General',
+            'BEP',
+            'CDOB',
+            'Enseval Bootcamp',
+            'Neop Warehouse',
+            'Etika Bisnis',
+            'Innochamp',
+            'Test'
+          ]
+              .map((e) => SearchFieldListItem(
+                    e,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        e,
+                        style: blackTextStyle.copyWith(
+                            fontSize: 13, fontWeight: medium),
+                      ),
+                    ),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }

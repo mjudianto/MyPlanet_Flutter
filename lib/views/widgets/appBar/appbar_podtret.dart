@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
+import 'package:searchfield/searchfield.dart';
 
 class AppBarPodtret extends StatelessWidget implements PreferredSizeWidget {
   const AppBarPodtret({Key? key, required this.type, this.title})
@@ -98,24 +99,69 @@ class SearchBar extends StatelessWidget {
               width:
                   10), // Menambahkan ruang di antara logo dan kotak pencarian
           Expanded(
-            child: Container(
-              height: 40,
-              decoration: BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: const Center(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Cari PODTRET',
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons
-                        .search), // Ikon pencarian di dalam kotak pencarian
+              child: Container(
+            height: 45,
+            width: 330,
+            decoration: BoxDecoration(
+              color:
+                  whiteColor, // Ganti dengan warna latar belakang yang Anda inginkan
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Center(
+              child: SearchField(
+                hint: "Cari PODTRET",
+                searchInputDecoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor, width: 2),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  hintStyle: const TextStyle(
+                    fontSize: 13,
+                    color: secondaryColor,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: secondaryColor,
                   ),
                 ),
+                itemHeight: 50,
+                maxSuggestionsInViewPort: 6,
+                suggestionsDecoration: SuggestionDecoration(
+                  padding: const EdgeInsets.all(4),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                onSuggestionTap: (value) {
+                  print("E-learning");
+                },
+                suggestions: [
+                  'Neop General',
+                  'BEP',
+                  'CDOB',
+                  'Enseval Bootcamp',
+                  'Neop Warehouse',
+                  'Etika Bisnis',
+                  'Innochamp',
+                  'Test'
+                ]
+                    .map((e) => SearchFieldListItem(
+                          e,
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(
+                              e,
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 13, fontWeight: medium),
+                            ),
+                          ),
+                        ))
+                    .toList(),
               ),
             ),
-          ),
+          )),
         ],
       ),
     );

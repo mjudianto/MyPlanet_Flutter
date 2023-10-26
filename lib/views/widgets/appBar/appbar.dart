@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myplanet/theme.dart';
+import 'package:searchfield/searchfield.dart';
 
 class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PageAppBar({Key? key, required this.type, this.title})
@@ -83,15 +85,56 @@ class SearchBar extends StatelessWidget {
       width: 330,
       decoration: BoxDecoration(
         color: whiteColor,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(100),
       ),
-      child: const Center(
-        child: TextField(
-          decoration: InputDecoration(
-            hintText: 'Cari E-learning atau PODTRET',
-            border: InputBorder.none,
-            prefixIcon: Icon(Icons.search), // Search icon inside the search bar
+      child: Center(
+        child: SearchField(
+          hint: "Cari E-learning atau PODTRET",
+          searchInputDecoration: InputDecoration(
+            enabledBorder:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: primaryColor, width: 2),
+                borderRadius: BorderRadius.circular(100)),
+            hintStyle: const TextStyle(
+              fontSize: 13,
+              color: secondaryColor,
+            ),
+            prefixIcon: Icon(
+              Icons.search,
+              color: secondaryColor,
+            ),
           ),
+          itemHeight: 50,
+          maxSuggestionsInViewPort: 6,
+          suggestionsDecoration: SuggestionDecoration(
+              padding: const EdgeInsets.all(4),
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          onSuggestionTap: (value) {
+            print("E-learning");
+          },
+          suggestions: [
+            'Neop General',
+            'BEP',
+            'CDOB',
+            'Enseval Bootcamp',
+            'Neop Warehouse',
+            'Etika Bisnis',
+            'Innochamp',
+            'Test'
+          ]
+              .map((e) => SearchFieldListItem(
+                    e,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                      child: Text(
+                        e,
+                        style: blackTextStyle.copyWith(
+                            fontSize: 13, fontWeight: medium),
+                      ),
+                    ),
+                  ))
+              .toList(),
         ),
       ),
     );
