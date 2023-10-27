@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/routes/route_name.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 
 class CardTopEps extends StatelessWidget {
   final dynamic item;
@@ -13,9 +16,13 @@ class CardTopEps extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(item.publishDate.toString());
     String publishDate = DateFormat('dd MMMM yyyy').format(dateTime);
-
+    PodtretKontenController podtretKontenController = Get.find();
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        podtretKontenController.podtret = item;
+
+        Get.toNamed(RouteName.podtretContent);
+      },
       child: Container(
           width: 300,
           margin: const EdgeInsets.only(

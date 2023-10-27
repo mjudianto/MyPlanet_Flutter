@@ -4,26 +4,26 @@ import 'package:intl/intl.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/routes/route_name.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 
 class CardNewEps extends StatelessWidget {
-  final dynamic item; 
-  
+  final dynamic item;
+
   const CardNewEps({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
     DateTime dateTime = DateTime.parse(item.publishDate.toString());
     String publishDate = DateFormat('dd MMMM yyyy').format(dateTime);
+    PodtretKontenController podtretKontenController = Get.find();
 
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                const NewEpsPodtret(), // Ganti dengan nama yang sesuai
-          ),
-        );
+        podtretKontenController.podtret = item;
+
+        Get.toNamed(RouteName.podtretContent);
       },
       child: Container(
           width: 136,
@@ -59,41 +59,39 @@ class CardNewEps extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.judul,
-                      style: blackTextStyle.copyWith(
-                          fontSize: 11, fontWeight: semiBold),
-                      overflow: TextOverflow
-                          .ellipsis, // klo tulisannya panjang jadi titik titik
-                      maxLines: 1,
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      '${item.views}x watched • $publishDate',
-                      style: secondaryTextStyle.copyWith(
-                        fontSize: 8,
-                        fontWeight: regular,
-                      ),
-                      overflow: TextOverflow
-                          .ellipsis, // klo tulisannya panjang jadi titik titik
-                      maxLines: 1, // maksimal tulisan 1 baris
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      item.nama,
-                      style: secondaryTextStyle.copyWith(
-                        fontSize: 8,
-                        fontWeight: regular,
-                      ),
-                    ),
-                  ])
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  item.judul,
+                  style: blackTextStyle.copyWith(
+                      fontSize: 11, fontWeight: semiBold),
+                  overflow: TextOverflow
+                      .ellipsis, // klo tulisannya panjang jadi titik titik
+                  maxLines: 1,
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  '${item.views}x watched • $publishDate',
+                  style: secondaryTextStyle.copyWith(
+                    fontSize: 8,
+                    fontWeight: regular,
+                  ),
+                  overflow: TextOverflow
+                      .ellipsis, // klo tulisannya panjang jadi titik titik
+                  maxLines: 1, // maksimal tulisan 1 baris
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  item.nama,
+                  style: secondaryTextStyle.copyWith(
+                    fontSize: 8,
+                    fontWeight: regular,
+                  ),
+                ),
+              ])
             ],
           )),
     );

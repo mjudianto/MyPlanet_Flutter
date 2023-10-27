@@ -8,7 +8,8 @@ class BtnCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(defaultMargin),
+      margin: const EdgeInsets.only(
+          left: defaultMargin, right: defaultMargin, top: 15, bottom: 5),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(

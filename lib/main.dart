@@ -3,7 +3,6 @@ import 'package:get/route_manager.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/home_binding.dart';
 import 'package:myplanet/routes/page_route.dart';
-import 'package:searchfield/searchfield.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

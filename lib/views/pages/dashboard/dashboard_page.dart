@@ -39,19 +39,19 @@ class DashboardPage extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               items: [
                 _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/home_icon.png', 
-                    label: 'Home'),
+                    imagePath: 'assets/icons/ic_home.png', label: 'Home'),
                 _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/elearning_icon.png',
-                    label: 'Elearning'),
+                    imagePath: 'assets/icons/ic_book.png', label: 'E-learning'),
                 _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/podtret_icon.png',
+                    imagePath: 'assets/icons/ic_podtret_appbar.png',
                     label: 'Podtret'),
                 _bottomNavigationBarItem(
                     imagePath: 'assets/icons/community_icon.png',
                     label: 'Community'),
                 _bottomNavigationBarItem(
-                    imagePath: '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}', label: 'Profile'),
+                    imagePath:
+                        '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}',
+                    label: 'Profile'),
               ],
             ),
           );
@@ -66,9 +66,10 @@ class DashboardPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _icon(
-                imagePath: imagePath, 
-                type: label != 'Profile' ? 'asset' : 'network' , 
-                height: label == 'Community' ? 20 : (label == 'Profile' ? 28 : 25),
+                imagePath: imagePath,
+                type: label != 'Profile' ? 'asset' : 'network',
+                height:
+                    label == 'Community' ? 20 : (label == 'Profile' ? 28 : 25),
                 status: 'off',
               ),
               SizedBox(
@@ -84,13 +85,15 @@ class DashboardPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               _icon(
-                imagePath: imagePath, 
-                type: label != 'Profile' ? 'asset' : 'network', 
-                height: label == 'Community' ? 25 : (label == 'Profile' ? 35 : 30),
-                status: 'on'
-              ),
+                  imagePath: imagePath,
+                  type: label != 'Profile' ? 'asset' : 'network',
+                  height: label == 'Community'
+                      ? 25
+                      : (label == 'Profile' ? 35 : 30),
+                  status: 'on'),
               SizedBox(
-                height: label == 'Community' ? 15 : (label == 'Profile' ? 5 : 10),
+                height:
+                    label == 'Community' ? 15 : (label == 'Profile' ? 5 : 10),
               ),
             ],
           ),
@@ -101,7 +104,11 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
- _icon({required String imagePath, required String type, double? height, required String status}) {
+_icon(
+    {required String imagePath,
+    required String type,
+    double? height,
+    required String status}) {
   if (type == 'asset') {
     return Image.asset(
       imagePath,
@@ -131,5 +138,4 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-  
- }
+}

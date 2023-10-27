@@ -41,12 +41,13 @@ class CardVerticalWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    
                     ClipRRect(
                       borderRadius: BorderRadius.circular(25.0),
                       child: FadeInImage(
-                        placeholder: const AssetImage('assets/loading.jpeg'), // Replace with your placeholder image asset
-                        image: NetworkImage("${GlobalVariable.myplanetUrl}/${thumbnail ?? ""}"),
+                        placeholder: const AssetImage(
+                            'assets/loading.jpeg'), // Replace with your placeholder image asset
+                        image: NetworkImage(
+                            "${GlobalVariable.myplanetUrl}/${thumbnail ?? ""}"),
                         width: 140,
                         height: 120,
                         fit: BoxFit.cover,
@@ -69,9 +70,11 @@ class CardVerticalWidget extends StatelessWidget {
                             fontSize: 12,
                             color: blackColor,
                             fontWeight: semiBold,
-                            fontFamily: 'Poppins', // Set the font family to Poppins
+                            fontFamily:
+                                'Poppins', // Set the font family to Poppins
                           ),
-                          overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                          overflow: TextOverflow
+                              .ellipsis, // Add ellipsis when text overflows
                           maxLines: 1, // Limit the text to a single line
                         ),
                       ),
@@ -93,28 +96,39 @@ class CardVerticalWidget extends StatelessWidget {
                             fontSize: 10,
                             color: secondaryColor,
                             fontWeight: medium,
-                            fontFamily: 'Poppins', // Set the font family to Poppins
+                            fontFamily:
+                                'Poppins', // Set the font family to Poppins
                           ),
                         ),
-                        Visibility(visible: rating == null ? false : true , child: const Icon(Icons.star, color: Color(0xffFFCE31), size: 12,)),
-                        Text(
-                          rating.toString() == 'null' ? "" : rating.toString(),
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: secondaryColor,
-                            fontWeight: medium,
-                            fontFamily: 'Poppins', // Set the font family to Poppins
-                          ),
-                        ),
-                        Text(
-                          ratingCount.toString() == 'null' ? "" : ' (${ratingCount.toString()})',
-                          style: TextStyle(
-                            fontSize: 10,
-                            color: secondaryColor,
-                            fontWeight: medium,
-                            fontFamily: 'Poppins', // Set the font family to Poppins
-                          ),
-                        ),
+                        // Visibility(
+                        //     visible: rating == null ? false : true,
+                        //     child: const Icon(
+                        //       Icons.star,
+                        //       color: Color(0xffFFCE31),
+                        //       size: 12,
+                        //     )),
+                        // Text(
+                        //   rating.toString() == 'null' ? "" : rating.toString(),
+                        //   style: TextStyle(
+                        //     fontSize: 10,
+                        //     color: secondaryColor,
+                        //     fontWeight: medium,
+                        //     fontFamily:
+                        //         'Poppins', // Set the font family to Poppins
+                        //   ),
+                        // ),
+                        // Text(
+                        //   ratingCount.toString() == 'null'
+                        //       ? ""
+                        //       : ' (${ratingCount.toString()})',
+                        //   style: TextStyle(
+                        //     fontSize: 10,
+                        //     color: secondaryColor,
+                        //     fontWeight: medium,
+                        //     fontFamily:
+                        //         'Poppins', // Set the font family to Poppins
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -142,9 +156,11 @@ class CardVerticalWidget extends StatelessWidget {
                               fontSize: 10,
                               color: blackColor,
                               fontWeight: medium,
-                              fontFamily: 'Poppins', // Set the font family to Poppins
+                              fontFamily:
+                                  'Poppins', // Set the font family to Poppins
                             ),
-                            overflow: TextOverflow.ellipsis, // Add ellipsis when text overflows
+                            overflow: TextOverflow
+                                .ellipsis, // Add ellipsis when text overflows
                             maxLines: 1, // Limit the text to a single line
                           ),
                         )

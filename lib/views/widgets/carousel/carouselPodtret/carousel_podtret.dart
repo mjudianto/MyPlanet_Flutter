@@ -31,20 +31,32 @@ class ImageSliderWithIndicator extends StatelessWidget {
             },
           ),
           items: imageAssetNames
+              .asMap()
+              .entries
               .map(
-                (imageUrl) => ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                  child: FadeInImage(
-                    placeholder: const AssetImage('assets/loading.jpeg'), // Placeholder image
-                    image: NetworkImage(imageUrl), // Network image
-                    fit: BoxFit.cover,
-                    width: 1000.0,
+                (entry) => GestureDetector(
+                  onTap: () {
+                    // Tambahkan tindakan yang ingin Anda lakukan saat item diklik di sini
+                    print('Item ${entry.key} diklik');
+                    // Misalnya, navigasi ke halaman tertentu
+                    // Navigator.push(context, MaterialPageRoute(builder: (context) => YourPage()));
+                  },
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                    child: FadeInImage(
+                      placeholder: const AssetImage('assets/loading.jpeg'),
+                      image: NetworkImage(entry.value),
+                      fit: BoxFit.cover,
+                      width: 1000.0,
+                    ),
                   ),
                 ),
               )
               .toList(),
         ),
-        const SizedBox(height: 8,),
+        const SizedBox(
+          height: 8,
+        ),
         Obx(() => _buildIndicators(context)),
       ],
     );
@@ -63,9 +75,13 @@ class ImageSliderWithIndicator extends StatelessWidget {
             height: 8.0,
             margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 3.0),
             decoration: BoxDecoration(
-              shape: current == entry.key ? BoxShape.rectangle : BoxShape.circle,
-              borderRadius: current == entry.key ? BorderRadius.circular(5.0) : null,
-              color: (Theme.of(context).brightness == Brightness.dark ? secondaryColor : primaryColor)
+              shape:
+                  current == entry.key ? BoxShape.rectangle : BoxShape.circle,
+              borderRadius:
+                  current == entry.key ? BorderRadius.circular(5.0) : null,
+              color: (Theme.of(context).brightness == Brightness.dark
+                      ? secondaryColor
+                      : primaryColor)
                   .withOpacity(
                 current == entry.key ? 0.9 : 0.4,
               ),
