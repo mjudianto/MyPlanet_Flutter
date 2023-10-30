@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/community/reactions.dart';
-import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myplanet/views/widgets/community/head_post.dart';
 
@@ -21,29 +20,25 @@ class _PostDetailState extends State<PostDetail> {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Container(
-          child: Container(
-        // margin: const EdgeInsets.only(left: 10.0, top: 20.0),
-        child: AppBar(
-          leading: Align(
-            alignment: Alignment.centerLeft,
-            child: IconButton(
-              icon: SvgPicture.asset(
-                'assets/icons/ic_back.svg',
-                width: 14,
-                height: 14,
-              ),
-              onPressed: () {
-                Navigator.pop(
-                    context); // Fungsi untuk kembali ke halaman sebelumnya
-              },
-            ),
-          ),
-          elevation: 1,
-          centerTitle: true,
-          backgroundColor: whiteColor,
+      return AppBar(
+      leading: Align(
+      alignment: Alignment.centerLeft,
+      child: IconButton(
+        icon: SvgPicture.asset(
+          'assets/icons/ic_back.svg',
+          width: 14,
+          height: 14,
         ),
-      ));
+        onPressed: () {
+          Navigator.pop(
+              context); // Fungsi untuk kembali ke halaman sebelumnya
+        },
+      ),
+      ),
+      elevation: 1,
+      centerTitle: true,
+      backgroundColor: whiteColor,
+      );
     }
 
     Widget btnMore() {
@@ -67,11 +62,11 @@ class _PostDetailState extends State<PostDetail> {
                       SizedBox(
                         child: Column(
                           children: [
-                            Container(
+                            SizedBox(
                               height: 30,
                               child: TextButton(
                                 onPressed: () {
-                                  print('Terlapor!');
+                                  // print('Terlapor!');
                                 },
                                 style: TextButton.styleFrom(
                                   backgroundColor: whiteColor,
@@ -104,11 +99,11 @@ class _PostDetailState extends State<PostDetail> {
                             const SizedBox(
                               height: 8,
                             ),
-                            Container(
+                            SizedBox(
                               height: 30,
                               child: TextButton(
                                 onPressed: () {
-                                  print('Terlapor!');
+                                  // print('Terlapor!');
                                 },
                                 style: TextButton.styleFrom(
                                   backgroundColor: whiteColor,
@@ -160,7 +155,7 @@ class _PostDetailState extends State<PostDetail> {
 
     Widget commentReply() {
       return Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
             left: 40, bottom: 8), // Tambahkan margin kiri di sini
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +171,7 @@ class _PostDetailState extends State<PostDetail> {
             ),
             Expanded(
               child: Container(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: pastelSecondaryColor,
                   borderRadius: BorderRadius.circular(5),
@@ -230,7 +225,7 @@ class _PostDetailState extends State<PostDetail> {
 
     Widget commentPrimary() {
       return Container(
-        margin: EdgeInsets.only(bottom: 16),
+        margin: const EdgeInsets.only(bottom: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -298,10 +293,10 @@ class _PostDetailState extends State<PostDetail> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(left: 48, top: 8, bottom: 8),
+              padding: const EdgeInsets.only(left: 48, top: 8, bottom: 8),
               child: InkWell(
                 onTap: () {
-                  print("Balas!");
+                  // print("Balas!");
                 },
                 child: Text(
                   "Balas",
@@ -329,7 +324,7 @@ class _PostDetailState extends State<PostDetail> {
         ),
         child: Column(
           children: [
-            Headpost(),
+            const Headpost(),
             const SizedBox(
               height: 8,
             ),
@@ -400,7 +395,7 @@ class _PostDetailState extends State<PostDetail> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            PostDetail(), // Ganti dengan nama yang sesuai
+                            const PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
@@ -434,7 +429,7 @@ class _PostDetailState extends State<PostDetail> {
             const SizedBox(
               height: 6,
             ),
-            Reactions(),
+            const Reactions(),
             const SizedBox(
               height: 12,
             ),
@@ -459,18 +454,16 @@ class _PostDetailState extends State<PostDetail> {
     }
 
     Widget content() {
-      return Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [posting()],
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [posting()],
       );
     }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(

@@ -69,7 +69,7 @@ class Headpost extends StatelessWidget {
             ],
           ),
         ),
-        BtnMore()
+        const BtnMore()
       ],
     );
   }

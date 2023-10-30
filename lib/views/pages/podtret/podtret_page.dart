@@ -492,14 +492,14 @@ class _PodtretPageState extends State<PodtretPage> {
     }
 
     return Scaffold(
-      // appBar: const PageAppBar(),
+      // appBar: PageAppBar(),
       backgroundColor: backgroundColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const AppBarPodtret(
+            AppBarPodtret(
               type: 'search',
             ),
             categories(),

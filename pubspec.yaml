@@ -54,6 +54,7 @@ dependencies:
   lottie: ^2.6.0
   cached_network_image: ^3.2.3
   searchfield: ^0.8.6
+  syncfusion_flutter_pdfviewer: ^23.1.42
 
 dev_dependencies:
   flutter_test:

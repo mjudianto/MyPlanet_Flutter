@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
+import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
@@ -16,6 +17,7 @@ import 'package:intl/intl.dart';
 class HomePage extends StatelessWidget {
 
   final HomePageController homePageController = Get.find();
+  final GlobalVariable globalVariable = GlobalVariable();
 
   HomePage({super.key});
 
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Column(
               children: [
-                const HomePageAppBar(),
+                HomePageAppBar(),
                 SizedBox(
                   height: Get.height*0.2,
                   child: Center(
@@ -59,7 +61,7 @@ class HomePage extends StatelessWidget {
               child: Center(
                 child: Column(
                   children: [
-                    const HomePageAppBar(),
+                    HomePageAppBar(),
                     const SizedBox(
                       height: 70,
                     ),
@@ -74,12 +76,16 @@ class HomePage extends StatelessWidget {
             );
           }
 
+          GlobalVariable.setElearningSearchBarData(snapshot.data!.data);
+
+          // print(GlobalVariable.elearningSearchData);
+
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const HomePageAppBar(),
+                HomePageAppBar(),
                 
                 const SectionTitle(title: 'New Course'),
                 FutureBuilder(
@@ -293,6 +299,10 @@ class HomePage extends StatelessWidget {
                     } else {
                       // If the Future completed successfully, display the data
                       if (snapshot.data != null) {
+                        GlobalVariable.setPodtretSearchBarData(snapshot.data!.data);
+
+                        GlobalVariable.combineSearchData();
+
                         var podtrets = snapshot.data!;
 
                         final podtretToShow =

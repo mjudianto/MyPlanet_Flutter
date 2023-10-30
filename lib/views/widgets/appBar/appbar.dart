@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:searchfield/searchfield.dart';
 
+// ignore: must_be_immutable
 class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const PageAppBar({Key? key, required this.type, this.title})
+  PageAppBar({Key? key, required this.type, this.title})
       : super(key: key);
 
   final String type;
   final String? title;
+
+  dynamic data;
 
   @override
   Size get preferredSize =>
@@ -16,6 +22,8 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    data = GlobalVariable.elearningSearchData ?? [];
+    
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -38,7 +46,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               type == 'search'
-                  ? const SearchBar()
+                  ? SearchBar(data: data)
                   : Title(
                       title: title ?? "",
                     ),
@@ -73,10 +81,14 @@ class Title extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
-  const SearchBar({
+  SearchBar({
     super.key,
+    this.data
   });
+
+  List<dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +106,13 @@ class SearchBar extends StatelessWidget {
             enabledBorder:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 2),
+                borderSide: const BorderSide(color: primaryColor, width: 2),
                 borderRadius: BorderRadius.circular(100)),
             hintStyle: const TextStyle(
               fontSize: 13,
               color: secondaryColor,
             ),
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.search,
               color: secondaryColor,
             ),
@@ -109,30 +121,25 @@ class SearchBar extends StatelessWidget {
           maxSuggestionsInViewPort: 6,
           suggestionsDecoration: SuggestionDecoration(
               padding: const EdgeInsets.all(4),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           onSuggestionTap: (value) {
-            print("E-learning");
+            ElearningCoursePageController elearningCoursePageController = Get.find();
+            elearningCoursePageController.setElearningCourseId(value.item.toString());
+
+            Get.toNamed(RouteName.elearningCoursePage);
           },
-          suggestions: [
-            'Neop General',
-            'BEP',
-            'CDOB',
-            'Enseval Bootcamp',
-            'Neop Warehouse',
-            'Etika Bisnis',
-            'Innochamp',
-            'Test'
-          ]
+          suggestions: data!
               .map((e) => SearchFieldListItem(
-                    e,
+                    e.judul,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
-                        e,
+                        e.judul,
                         style: blackTextStyle.copyWith(
                             fontSize: 13, fontWeight: medium),
                       ),
                     ),
+                    item: e.elearningCourseId
                   ))
               .toList(),
         ),

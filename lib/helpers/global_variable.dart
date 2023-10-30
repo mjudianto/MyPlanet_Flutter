@@ -11,6 +11,10 @@ class GlobalVariable {
   static Map<String, dynamic> userData = {};
   static String myplanetUrl = 'https://myplanet.enseval.com';
 
+  static dynamic elearningSearchData;
+  static dynamic podtretSearchData;
+  static dynamic combinedElearningPodtretSearchData;
+
 
   static Future<bool> userAuth() async {
     String? storedToken = await GlobalVariable.secureStorage.read(key: 'user_token');
@@ -41,4 +45,20 @@ class GlobalVariable {
     }
   }    
   
+  static setElearningSearchBarData(dynamic data) {
+    if (data != null) {
+      elearningSearchData = data;
+    }
+  }
+
+  static setPodtretSearchBarData(dynamic data) {
+    if (data != null) {
+      podtretSearchData = data;
+    }
+  }
+
+  static combineSearchData() {
+    combinedElearningPodtretSearchData = [...elearningSearchData, ...podtretSearchData];
+  }
+
 }

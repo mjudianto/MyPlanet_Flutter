@@ -4,6 +4,7 @@ import 'package:myplanet/views/pages/dashboard/dashboard_controller.dart';
 import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_controller.dart';
 import 'package:myplanet/views/pages/elearning/elearninTest/feedback/elearning_feedback_page_controller.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
+import 'package:myplanet/views/pages/elearning/pdf_page/pdf_page_controller.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 import 'package:myplanet/views/pages/profile/profile_page_controller.dart';
@@ -27,5 +28,7 @@ class HomeBinding implements Bindings {
     Get.put<HomePageController>(HomePageController(), permanent: true);
 
     Get.put<ProfilePageController>(ProfilePageController(), permanent: true);
+
+    Get.put<PdfPageController>(PdfPageController(), permanent: true);
   }
 }

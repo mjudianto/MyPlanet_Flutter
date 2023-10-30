@@ -37,7 +37,7 @@ class ImageSliderWithIndicator extends StatelessWidget {
                 (entry) => GestureDetector(
                   onTap: () {
                     // Tambahkan tindakan yang ingin Anda lakukan saat item diklik di sini
-                    print('Item ${entry.key} diklik');
+                    // print('Item ${entry.key} diklik');
                     // Misalnya, navigasi ke halaman tertentu
                     // Navigator.push(context, MaterialPageRoute(builder: (context) => YourPage()));
                   },

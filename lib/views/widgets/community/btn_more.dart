@@ -27,11 +27,11 @@ class BtnMore extends StatelessWidget {
                     SizedBox(
                       child: Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 30,
                             child: TextButton(
                               onPressed: () {
-                                print('Terlapor!');
+                                // print('Terlapor!');
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: whiteColor,
@@ -64,11 +64,11 @@ class BtnMore extends StatelessWidget {
                           const SizedBox(
                             height: 8,
                           ),
-                          Container(
+                          SizedBox(
                             height: 30,
                             child: TextButton(
                               onPressed: () {
-                                print('Terlapor!');
+                                // print('Terlapor!');
                               },
                               style: TextButton.styleFrom(
                                 backgroundColor: whiteColor,

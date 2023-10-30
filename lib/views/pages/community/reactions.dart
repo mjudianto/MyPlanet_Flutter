@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:myplanet/theme.dart';
 
 class Reactions extends StatelessWidget {
   const Reactions({super.key});
@@ -120,7 +119,7 @@ class Reactions extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            print("more!!!");
+            // print("more!!!");
           },
           child: SvgPicture.asset(
             "assets/icons/community/ic_more_like.svg",

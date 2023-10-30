@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             // Fetch the user token when the button is pressed
                             try {
-                              print('start');
+                              // print('start');
                               
                               User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text);
 
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                               // ignore: use_build_context_synchronously
                               Get.offNamed(RouteName.dashboardPage);
                               
-                              print('success');
+                              // print('success');
                             } catch (e) {
                               // Handle exceptions that might occur during the authentication process
                               // print('Error during authentication: $e');

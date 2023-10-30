@@ -26,7 +26,7 @@ class _NotificationPageState extends State<NotificationPage> {
           children: [
             InkWell(
               onTap: () {
-                print("Notif Check");
+                // print("Notif Check");
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment
@@ -133,7 +133,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                   height: 54,
                                                   child: TextButton(
                                                     onPressed: () {
-                                                      print('WKWK!');
+                                                      // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
                                                       backgroundColor:
@@ -252,7 +252,7 @@ class _NotificationPageState extends State<NotificationPage> {
             InkWell(
               onTap: () {
                 // Tambahkan aksi yang diinginkan ketika diklik di sini.
-                print('Klik pada elemen Column');
+                // print('Klik pada elemen Column');
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment
@@ -359,7 +359,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                   height: 54,
                                                   child: TextButton(
                                                     onPressed: () {
-                                                      print('WKWK!');
+                                                      // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
                                                       backgroundColor:
@@ -483,14 +483,14 @@ class _NotificationPageState extends State<NotificationPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const PageAppBar(
+              PageAppBar(
                 type: 'text',
                 title: 'Notification',
               ),

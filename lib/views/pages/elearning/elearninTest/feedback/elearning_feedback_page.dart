@@ -26,7 +26,7 @@ class ElearningFeedbackPage extends StatelessWidget {
     return Obx(() {
       if (!elearningFeedbackPageController.feedbackSent.value && lulus) {
         return Scaffold(
-          appBar: const PageAppBar(
+          appBar: PageAppBar(
             type: 'text',
             title: 'Feedback',
           ),
@@ -184,7 +184,7 @@ class ElearningFeedbackPage extends StatelessWidget {
         );
       } else {
         return Scaffold(
-          appBar: const PageAppBar(
+          appBar: PageAppBar(
             type: 'text',
             title: 'Result',
           ),

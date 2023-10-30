@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
+import 'package:myplanet/views/pages/elearning/pdf_page/pdf_page_controller.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
+
+class PdfPage extends StatelessWidget {
+  PdfPage({super.key});
+
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+
+  PdfPageController pdfPageController = Get.find();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Syncfusion Flutter PDF Viewer'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.bookmark,
+              color: Colors.white,
+              semanticLabel: 'Bookmark',
+            ),
+            onPressed: () {
+              _pdfViewerKey.currentState?.openBookmarkView();
+            },
+          ),
+        ],
+      ),
+      body: Obx(() => 
+        SfPdfViewer.network(
+          '${GlobalVariable.myplanetUrl}/${pdfPageController.pdfPath.value}',
+          key: _pdfViewerKey,
+        )
+      ),
+      // SfPdfViewer.network(
+      //   '${GlobalVariable.myplanetUrl}/${pdfPageController.pdfPath}',
+      //   key: _pdfViewerKey,
+      // ),
+    );
+  }
+}

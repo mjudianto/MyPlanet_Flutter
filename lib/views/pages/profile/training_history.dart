@@ -145,14 +145,14 @@ class _TrainingHistoryState extends State<TrainingHistory> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const PageAppBar(
+              PageAppBar(
                 type: 'text',
                 title: 'Training History',
               ),

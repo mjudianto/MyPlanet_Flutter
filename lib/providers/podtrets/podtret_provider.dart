@@ -121,8 +121,8 @@ class PodtretsProvider {
         }
       );
       if (response.statusCode == 200) {
-        var jsonResponse = response.body;
-        print(jsonResponse);
+        // var jsonResponse = response.body;
+        // print(jsonResponse);
       } else {
         throw Exception('Failed to fetch data from API');
       }

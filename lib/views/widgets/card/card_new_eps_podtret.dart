@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/theme.dart';
-import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
 import 'package:get/get.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';

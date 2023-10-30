@@ -20,7 +20,7 @@ class Mandatory extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const AppBarPodtret(
+          AppBarPodtret(
               type: 'text',
               title: 'Mandatory',
             ),

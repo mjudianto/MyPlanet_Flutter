@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/pages/news/news_page.dart';
 import 'package:myplanet/views/pages/notification/notification_page.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 import 'package:searchfield/searchfield.dart';
 
+// ignore: must_be_immutable
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomePageAppBar({Key? key}) : super(key: key);
+  HomePageAppBar({Key? key,}) : super(key: key);
+
+  dynamic data;
 
   @override
   Size get preferredSize =>
@@ -13,6 +21,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    data = GlobalVariable.combinedElearningPodtretSearchData ?? [];
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -49,7 +59,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                NewsPage(), // Ganti dengan nama yang sesuai
+                                const NewsPage(), // Ganti dengan nama yang sesuai
                           ),
                         );
                       },
@@ -70,11 +80,11 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
               ),
-              const Padding(
+              Padding(
                 padding: const EdgeInsets.only(top: 17.0, left: 10, right: 10),
                 child: Row(
                   children: [
-                    Expanded(child: SearchBar()),
+                    Expanded(child: SearchBar(data: data,)),
                   ],
                 ),
               ),
@@ -91,10 +101,14 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
-  const SearchBar({
+  SearchBar({
     super.key,
+    this.data
   });
+
+  List<dynamic>? data;
 
   @override
   Widget build(BuildContext context) {
@@ -112,13 +126,13 @@ class SearchBar extends StatelessWidget {
             enabledBorder:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: primaryColor, width: 2),
+                borderSide: const BorderSide(color: primaryColor, width: 2),
                 borderRadius: BorderRadius.circular(100)),
             hintStyle: const TextStyle(
               fontSize: 13,
               color: secondaryColor,
             ),
-            prefixIcon: Icon(
+            prefixIcon: const Icon(
               Icons.search,
               color: secondaryColor,
             ),
@@ -127,30 +141,32 @@ class SearchBar extends StatelessWidget {
           maxSuggestionsInViewPort: 6,
           suggestionsDecoration: SuggestionDecoration(
               padding: const EdgeInsets.all(4),
-              borderRadius: BorderRadius.all(Radius.circular(10))),
+              borderRadius: const BorderRadius.all(Radius.circular(10))),
           onSuggestionTap: (value) {
-            print("E-learning");
+            if(value.searchKey.toString().toLowerCase().startsWith('eps'.toLowerCase())) {
+              PodtretKontenController podtretKontenController = Get.find();
+              podtretKontenController.podtret = value.item;
+
+              Get.toNamed(RouteName.podtretContent);
+            } else {
+              ElearningCoursePageController elearningCoursePageController = Get.find();
+              elearningCoursePageController.setElearningCourseId(value.item.toString());
+
+              Get.toNamed(RouteName.elearningCoursePage);
+            }
           },
-          suggestions: [
-            'Neop General',
-            'BEP',
-            'CDOB',
-            'Enseval Bootcamp',
-            'Neop Warehouse',
-            'Etika Bisnis',
-            'Innochamp',
-            'Test'
-          ]
+          suggestions: data!
               .map((e) => SearchFieldListItem(
-                    e,
+                    e.judul,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Text(
-                        e,
+                        e.judul,
                         style: blackTextStyle.copyWith(
                             fontSize: 13, fontWeight: medium),
                       ),
                     ),
+                    item: e.judul.toString().toLowerCase().startsWith('eps'.toLowerCase()) ? e : e.elearningCourseId
                   ))
               .toList(),
         ),

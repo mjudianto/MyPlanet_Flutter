@@ -31,7 +31,7 @@ class _NewsPageState extends State<NewsPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        NewsDetail(), // Ganti dengan nama yang sesuai
+                        const NewsDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
@@ -137,7 +137,7 @@ class _NewsPageState extends State<NewsPage> {
                                                   height: 54,
                                                   child: TextButton(
                                                     onPressed: () {
-                                                      print('WKWK!');
+                                                      // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
                                                       backgroundColor:
@@ -261,14 +261,14 @@ class _NewsPageState extends State<NewsPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const PageAppBar(
+              PageAppBar(
                 type: 'text',
                 title: 'News',
               ),

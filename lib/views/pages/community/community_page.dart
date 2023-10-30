@@ -157,11 +157,11 @@ class _CommunityPageState extends State<CommunityPage> {
                           SizedBox(
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   height: 30,
                                   child: TextButton(
                                     onPressed: () {
-                                      print('Terlapor!');
+                                      // print('Terlapor!');
                                     },
                                     style: TextButton.styleFrom(
                                       backgroundColor: whiteColor,
@@ -237,7 +237,7 @@ class _CommunityPageState extends State<CommunityPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) =>
-                        PostDetail(), // Ganti dengan nama yang sesuai
+                        const PostDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
@@ -284,7 +284,7 @@ class _CommunityPageState extends State<CommunityPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            PostDetail(), // Ganti dengan nama yang sesuai
+                            const PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
@@ -324,7 +324,7 @@ class _CommunityPageState extends State<CommunityPage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            PostDetail(), // Ganti dengan nama yang sesuai
+                            const PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
@@ -352,14 +352,14 @@ class _CommunityPageState extends State<CommunityPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const PageAppBar(
+              PageAppBar(
                 type: 'logo',
               ),
               createStatus(),

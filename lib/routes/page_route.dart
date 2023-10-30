@@ -6,6 +6,7 @@ import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page.
 import 'package:myplanet/views/pages/elearning/elearninTest/feedback/elearning_feedback_page.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page.dart';
 import 'package:myplanet/views/pages/elearning/elearning_page.dart';
+import 'package:myplanet/views/pages/elearning/pdf_page/pdf_page.dart';
 import 'package:myplanet/views/pages/home/home_page.dart';
 import 'package:myplanet/views/pages/login_page.dart';
 import 'package:myplanet/views/pages/podtret/new_eps_podtret.dart';
@@ -53,6 +54,10 @@ class AppPage {
     GetPage(
       name: RouteName.elearningFeedbackPage,
       page: () => ElearningFeedbackPage(),
+    ),
+    GetPage(
+      name: RouteName.elearningPdfPage,
+      page: () => PdfPage(),
     ),
 
 

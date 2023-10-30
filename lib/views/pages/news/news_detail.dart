@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
-import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NewsDetail extends StatefulWidget {
@@ -49,7 +48,7 @@ class _NewsDetailState extends State<NewsDetail> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 13,
                     ),
                     Text(
@@ -128,7 +127,7 @@ class _NewsDetailState extends State<NewsDetail> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const PageAppBar(),
+        // appBar: PageAppBar(),
         backgroundColor: backgroundColor,
         body: SingleChildScrollView(
           child: Column(

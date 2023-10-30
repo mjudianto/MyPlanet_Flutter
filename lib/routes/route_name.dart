@@ -10,6 +10,7 @@ abstract class RouteName {
   static const elearningCoursePage = '/elearning/course';
   static const elearningTestPage = '/elearning/course/test';
   static const elearningFeedbackPage = '/elearning/course/feedback';
+  static const elearningPdfPage = '/elearning/course/pdf';
 
   static const podtretPage = '/podtret';
   static const recomendationPodtret = '/podtret/recomendation_podtret';
