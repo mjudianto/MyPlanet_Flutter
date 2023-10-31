@@ -266,6 +266,126 @@ class _PodtretPageState extends State<PodtretPage> {
       );
     }
 
+    Widget kumisPodtretTitle() {
+      return Container(
+        margin: const EdgeInsets.only(
+            top: 15, left: defaultMargin, right: defaultMargin),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment
+              .spaceBetween, // Untuk menjaga ikon di pojok kanan
+          children: [
+            Text(
+              'Top KUMIS',
+              style: blackTextStyle.copyWith(
+                fontSize: 18,
+                fontWeight: semiBold,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.toNamed(RouteName.newEpisodePodtret);
+              },
+              child: SvgPicture.asset(
+                'assets/icons/arrow_right.svg',
+                width: 14,
+                height: 14,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    Widget kumisPodtret() {
+      return Container(
+        margin: const EdgeInsets.only(top: 10),
+        child: SingleChildScrollView(
+          // untuk scroll horizontal products
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Row(
+                children: [
+                  FutureBuilder(
+                    future: homePageController.newPodtrets,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Display a loading indicator while waiting for the future to complete
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: DotLottieLoader.fromAsset(
+                                "assets/loading.lottie", frameBuilder:
+                                    (BuildContext ctx, DotLottie? dotlottie) {
+                              if (dotlottie != null) {
+                                return Lottie.memory(
+                                    dotlottie.animations.values.single,
+                                    width: 250,
+                                    height: 250,
+                                    repeat: true);
+                              } else {
+                                return const CircularProgressIndicator();
+                              }
+                            }),
+                          ),
+                        );
+                      } else if (snapshot.hasError) {
+                        // Handle any errors that occurred during the Future execution
+                        return SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width,
+                          child: const Center(
+                            child: Text(
+                              'Error: Error: Data Load Failed',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      } else {
+                        // If the Future completed successfully, display the data
+                        if (snapshot.data != null) {
+                          var podtrets = snapshot.data!;
+
+                          // final podtretToShow =
+                          //     podtrets.data?.take(10).toList() ?? [];
+
+                          final podtretToShow = podtrets.data?.toList() ?? [];
+                          podtretToShow
+                              .sort((a, b) => b.views!.compareTo(a.views!));
+
+                          final topKumis = podtretToShow
+                              .where((item) => item.nama == 'KUMIS')
+                              .toList();
+
+                          return SizedBox(
+                            width: Get.width,
+                            height: 130,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(
+                                  left: defaultMargin, right: 5),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: topKumis.length,
+                              itemBuilder: (context, index) {
+                                return CardNewEps(item: topKumis[index]);
+                              },
+                            ),
+                          );
+                        } else {
+                          // Handle the case when there is no data
+                          return const Text('No data available.');
+                        }
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
     Widget topEpsPodtretTitle() {
       return Container(
         margin: const EdgeInsets.only(
@@ -471,6 +591,8 @@ class _PodtretPageState extends State<PodtretPage> {
                   rekomendasiPodtret(),
                   newEpsPodtretTitle(),
                   newEpsPodtret(),
+                  kumisPodtretTitle(),
+                  kumisPodtret(),
                   topEpsPodtretTitle(),
                   topEpsPodtret(),
                 ],

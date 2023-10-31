@@ -78,24 +78,26 @@ class _ElearningPageState extends State<ElearningPage> {
                 } else {
                   if (snapshot.data != null) {
                     var elearningCourses = snapshot.data!.obs;
-                    
 
                     elearningCourses.value.data!.sort((course1, course2) =>
-                        (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
+                        (course2.elearningCourseId ?? 0)
+                            .compareTo(course1.elearningCourseId ?? 0));
 
                     return SizedBox(
-                      height: 0.62 * MediaQuery.of(context).size.height,
+                      height: 0.70 * MediaQuery.of(context).size.height,
                       child: Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: ListView.builder(
                           padding: EdgeInsets.zero,
-                          itemCount: (elearningCourses.value.data!.length / 2).ceil(),
+                          itemCount:
+                              (elearningCourses.value.data!.length / 2).ceil(),
                           itemBuilder: (context, index) {
-                            final course1 = elearningCourses.value.data![index * 2];
-                            final course2 =
-                                (index * 2 + 1 < elearningCourses.value.data!.length)
-                                    ? elearningCourses.value.data![index * 2 + 1]
-                                    : null;
+                            final course1 =
+                                elearningCourses.value.data![index * 2];
+                            final course2 = (index * 2 + 1 <
+                                    elearningCourses.value.data!.length)
+                                ? elearningCourses.value.data![index * 2 + 1]
+                                : null;
 
                             return SizedBox(
                               height: 220,
