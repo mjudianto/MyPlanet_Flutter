@@ -5,6 +5,7 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/elearning/pdf_page/pdf_page_controller.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+// ignore: must_be_immutable
 class PdfPage extends StatelessWidget {
   PdfPage({super.key});
 
