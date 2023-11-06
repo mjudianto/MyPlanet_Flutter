@@ -363,7 +363,8 @@ class _CommunityPageState extends State<CommunityPage> {
                 type: 'logo',
               ),
               createStatus(),
-              posting()
+              posting(),
+              createStatus(),
             ],
           ),
         ),

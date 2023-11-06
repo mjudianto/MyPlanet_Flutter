@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:myplanet/controllers/users/user_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/users/user_model.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/login_appbar.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';  
+import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';  
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _nikController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isPasswordVisible = true;
+  final RxBool _loginButtonClicked = false.obs;
 
   @override
   void initState() {
@@ -99,48 +102,56 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 50,
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            // Fetch the user token when the button is pressed
-                            try {
-                              // print('start');
-                              
-                              User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text);
+                        child: Obx(() => 
+                          ElevatedButton(
+                            onPressed: () async {
+                              _loginButtonClicked.value = true;
+                              // Fetch the user token when the button is pressed
+                              try {
+                                User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text).timeout(const Duration(seconds: 10));
 
-                              await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
+                                await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
 
-                              GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
+                                GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
 
-                              // ignore: use_build_context_synchronously
-                              Get.offNamed(RouteName.dashboardPage);
-                              
-                              // print('success');
-                            } catch (e) {
-                              // Handle exceptions that might occur during the authentication process
-                              // print('Error during authentication: $e');
-                              // Display an error message or take appropriate actions
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                                // ignore: use_build_context_synchronously
+                                Get.offNamed(RouteName.dashboardPage);
+                              } catch (e) {
+                                _loginButtonClicked.value = false;
+                                
+                                return showTopSnackBar(
+                                    // ignore: use_build_context_synchronously
+                                    Overlay.of(context),
+                                    const CustomSnackBar.error(
+                                      message:
+                                          "Something went wrong. Please check your credentials and try again",
+                                    ),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            child: _loginButtonClicked.value
+                            ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: whiteColor,))
+                            : Text(
+                              'Masuk',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: semiBold,
+                              ),
                             ),
                           ),
-                          child: Text(
-                            'Masuk',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: semiBold,
-                            ),
-                          ),
-                        ),
+                        )
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 192,),
+              SizedBox(height: Get.height * 0.2,),
               Center(
                 child: GestureDetector(
                   onTap: () {

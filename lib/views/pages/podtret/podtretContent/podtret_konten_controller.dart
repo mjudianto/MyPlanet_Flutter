@@ -6,30 +6,39 @@ import 'package:myplanet/models/podtrets/podtret_comment_models.dart';
 import 'package:myplanet/providers/podtrets/podtret_provider.dart';
 
 class PodtretKontenController extends GetxController {
-  late VideoPlayerController videoPlayerController;
+  VideoPlayerController? videoPlayerController;
   dynamic podtret;
 
   RxBool isVideoInitialized = false.obs;
   late Rx<Future<PodtretComment>> podtretComments;
   RxInt totalComment = 0.obs;
   bool podtretRecorded = false;
+  String currentVideo = '';
 
-  Future<void> initializeVideoPlayer() async {
-    if (isVideoInitialized.value) {
-      await videoPlayerController.dispose();
-      isVideoInitialized.value = false;
+  initializeVideoPlayer() async {
+    if (currentVideo != podtret.video) {
+      await disposeVideoPlayer();
+      currentVideo = podtret.video;
+
+      videoPlayerController = VideoPlayerController.networkUrl(Uri.parse('${GlobalVariable.myplanetUrl}/${podtret.video}'));
+
+      await videoPlayerController!.initialize();
+
+      podtretRecorded = false;
+      videoPlayerController?.addListener(onVideoPositionChanged);
+
+      isVideoInitialized.value = true;
+
+      update();
     }
+  }
 
-    videoPlayerController = VideoPlayerController.networkUrl(Uri.parse('${GlobalVariable.myplanetUrl}/${podtret.video}'));
+  disposeVideoPlayer() async {
+    isVideoInitialized.value = false;
 
-    await videoPlayerController.initialize();
-
-    podtretRecorded = false;
-    videoPlayerController.addListener(onVideoPositionChanged);
-
-    isVideoInitialized.value = true;
-
-    update(); // This triggers a rebuild of the widget using this controller.
+    if (videoPlayerController != null) {
+      await videoPlayerController!.dispose();
+    }
   }
 
   publishDate() {
@@ -102,13 +111,13 @@ class PodtretKontenController extends GetxController {
   }
 
   void onVideoPositionChanged() {
-    final currentPosition = videoPlayerController.value.position.inSeconds;
-    updateUserRecord(currentPosition);
+    final currentPosition = videoPlayerController?.value.position.inSeconds;
+    updateUserRecord(currentPosition!);
   }
 
   void updateUserRecord(int positionInSeconds) async {
     const targetDuration = Duration(seconds: 5);
-    if (videoPlayerController.value.position >= targetDuration) {
+    if (videoPlayerController!.value.position >= targetDuration) {
       if (!podtretRecorded) {
         podtretRecorded = true;
 
@@ -120,7 +129,7 @@ class PodtretKontenController extends GetxController {
 
   @override
   void onClose() {
-    videoPlayerController.dispose();
+    videoPlayerController?.dispose();
     isVideoInitialized.value = false;
     super.onClose();
   }
