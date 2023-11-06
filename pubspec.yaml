@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.2.3
   searchfield: ^0.8.6
   syncfusion_flutter_pdfviewer: ^23.1.42
+  buttons_tabbar: ^1.3.8
 
 dev_dependencies:
   flutter_test:
