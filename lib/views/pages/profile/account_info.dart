@@ -28,8 +28,7 @@ class AccountInfo extends StatelessWidget {
                     // Tambahkan kode untuk mengganti foto profil di sini
                   },
                   child: Stack(
-                    alignment: Alignment
-                        .bottomRight, // Menempatkan ikon kamera di bawah kanan
+                    alignment: Alignment.bottomRight, // Menempatkan ikon kamera di bawah kanan
                     children: [
                       ClipOval(
                         child: CachedNetworkImage(
@@ -52,8 +51,7 @@ class AccountInfo extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(
-                            6), // Atur padding sesuai kebutuhan
+                        padding: const EdgeInsets.all(6), // Atur padding sesuai kebutuhan
                         decoration: BoxDecoration(
                           color: primaryColor,
                           shape: BoxShape.circle,
@@ -86,8 +84,7 @@ class AccountInfo extends StatelessWidget {
 
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, top: defaultMargin),
+        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: defaultMargin),
         child: Column(
           children: [
             Row(
@@ -103,13 +100,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Nama',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['EmpName'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
@@ -142,13 +137,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'NIK',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['empnik'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
@@ -181,13 +174,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Phone',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['PhoneNumberEmployee'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
@@ -220,13 +211,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Mail',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['EmailEmployee'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
@@ -259,13 +248,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Organization',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['orgname'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
@@ -298,13 +285,11 @@ class AccountInfo extends StatelessWidget {
                   children: [
                     Text(
                       'Location',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     ),
                     Text(
                       GlobalVariable.userData['user']['LocationName'],
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     ),
                     const Divider(
                       height: 2,
