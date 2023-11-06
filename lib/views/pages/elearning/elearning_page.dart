@@ -1,3 +1,4 @@
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -31,144 +32,181 @@ class _ElearningPageState extends State<ElearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: PageAppBar(),
-      backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            PageAppBar(
-              type: 'search',
-            ),
-            const BtnCategories(),
-            FutureBuilder(
-              future: _userCoursesFuture,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: Center(
-                      child: DotLottieLoader.fromAsset("assets/loading.lottie",
-                          frameBuilder:
-                              (BuildContext ctx, DotLottie? dotlottie) {
-                        if (dotlottie != null) {
-                          return Lottie.memory(
-                              dotlottie.animations.values.single,
-                              width: 250,
-                              height: 250,
-                              repeat: true);
-                        } else {
-                          return const CircularProgressIndicator();
-                        }
-                      }),
+        appBar: PageAppBar(
+          type: 'search',
+        ),
+        backgroundColor: backgroundColor,
+        body: DefaultTabController(
+          length: 8,
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: ButtonsTabBar(
+                  borderColor: pastelSecondaryColor,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+                  borderWidth: 1,
+                  unselectedBorderColor: pastelSecondaryColor,
+                  backgroundColor: primaryColor,
+                  unselectedBackgroundColor: whiteColor,
+                  unselectedLabelStyle: const TextStyle(color: blackColor),
+                  radius: 100,
+                  labelStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                  tabs: const [
+                    Tab(
+                      text: "All",
                     ),
-                  );
-                } else if (snapshot.hasError) {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.65,
-                    width: MediaQuery.of(context).size.width,
-                    child: Center(
-                      child: Image.asset(
-                        'assets/error planet.png', // Replace this with the path to your logo image
-                        height: 600, // Set the height of the logo image
-                      ),
+                    Tab(
+                      text: "General",
                     ),
-                  );
-                } else {
-                  if (snapshot.data != null) {
-                    var elearningCourses = snapshot.data!.obs;
-
-                    elearningCourses.value.data!.sort((course1, course2) =>
-                        (course2.elearningCourseId ?? 0)
-                            .compareTo(course1.elearningCourseId ?? 0));
-
-                    return SizedBox(
-                      height: 0.70 * MediaQuery.of(context).size.height,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          itemCount:
-                              (elearningCourses.value.data!.length / 2).ceil(),
-                          itemBuilder: (context, index) {
-                            final course1 =
-                                elearningCourses.value.data![index * 2];
-                            final course2 = (index * 2 + 1 <
-                                    elearningCourses.value.data!.length)
-                                ? elearningCourses.value.data![index * 2 + 1]
-                                : null;
-
+                    Tab(
+                      text: "QA & Security",
+                    ),
+                    Tab(
+                      text: "Technical",
+                    ),
+                    Tab(
+                      text: "Soft Skill",
+                    ),
+                    Tab(
+                      text: "SOP IK",
+                    ),
+                    Tab(
+                      text: "InnoChamp",
+                    ),
+                    Tab(
+                      text: "Enseval Bootcamp",
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  children: <Widget>[
+                    Center(
+                      child: FutureBuilder(
+                        future: _userCoursesFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
                             return SizedBox(
-                              height: 220,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: CardVerticalWidget(
-                                      thumbnail: course1.thumbnail,
-                                      title: course1.judul,
-                                      subTitle:
-                                          '${(course1.totalLesson ?? 0) + (course1.totalTest ?? 0)} lessons • ',
-                                      subTitle2: course1.createdBy,
-                                      rating: course1.averageRating,
-                                      ratingCount: course1.responseCount,
-                                      onTap: () {
-                                        ElearningCoursePageController
-                                            elearningCoursePageController =
-                                            Get.find();
-                                        elearningCoursePageController
-                                            .setElearningCourseId(course1
-                                                .elearningCourseId
-                                                .toString());
-
-                                        Get.toNamed(
-                                            RouteName.elearningCoursePage);
-                                      },
-                                    ),
-                                  ),
-                                  if (course2 != null) const SizedBox(width: 8),
-                                  if (course2 != null)
-                                    Expanded(
-                                      child: CardVerticalWidget(
-                                        thumbnail: course2.thumbnail,
-                                        title: course2.judul,
-                                        subTitle:
-                                            '${(course2.totalLesson ?? 0) + (course2.totalTest ?? 0)} lessons • ',
-                                        subTitle2: course2.createdBy,
-                                        rating: course2.averageRating,
-                                        ratingCount: course2.responseCount,
-                                        onTap: () {
-                                          ElearningCoursePageController
-                                              elearningCoursePageController =
-                                              Get.find();
-                                          elearningCoursePageController
-                                              .setElearningCourseId(course2
-                                                  .elearningCourseId
-                                                  .toString());
-
-                                          Get.toNamed(
-                                              RouteName.elearningCoursePage);
-                                        },
-                                      ),
-                                    ),
-                                ],
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: Center(
+                                child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
+                                  if (dotlottie != null) {
+                                    return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
+                                  } else {
+                                    return const CircularProgressIndicator();
+                                  }
+                                }),
                               ),
                             );
-                          },
-                        ),
+                          } else if (snapshot.hasError) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.65,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: Image.asset(
+                                  'assets/error planet.png', // Replace this with the path to your logo image
+                                  height: 600, // Set the height of the logo image
+                                ),
+                              ),
+                            );
+                          } else {
+                            if (snapshot.data != null) {
+                              var elearningCourses = snapshot.data!.obs;
+
+                              elearningCourses.value.data!
+                                  .sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
+
+                              return SizedBox(
+                                height: 0.70 * MediaQuery.of(context).size.height,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    itemCount: (elearningCourses.value.data!.length / 2).ceil(),
+                                    itemBuilder: (context, index) {
+                                      final course1 = elearningCourses.value.data![index * 2];
+                                      final course2 =
+                                          (index * 2 + 1 < elearningCourses.value.data!.length) ? elearningCourses.value.data![index * 2 + 1] : null;
+
+                                      return SizedBox(
+                                        height: 220,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                                          children: [
+                                            Expanded(
+                                              child: CardVerticalWidget(
+                                                thumbnail: course1.thumbnail,
+                                                title: course1.judul,
+                                                subTitle: '${(course1.totalLesson ?? 0) + (course1.totalTest ?? 0)} lessons • ',
+                                                subTitle2: course1.createdBy,
+                                                rating: course1.averageRating,
+                                                ratingCount: course1.responseCount,
+                                                onTap: () {
+                                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                                  elearningCoursePageController.setElearningCourseId(course1.elearningCourseId.toString());
+
+                                                  Get.toNamed(RouteName.elearningCoursePage);
+                                                },
+                                              ),
+                                            ),
+                                            if (course2 != null) const SizedBox(width: 8),
+                                            if (course2 != null)
+                                              Expanded(
+                                                child: CardVerticalWidget(
+                                                  thumbnail: course2.thumbnail,
+                                                  title: course2.judul,
+                                                  subTitle: '${(course2.totalLesson ?? 0) + (course2.totalTest ?? 0)} lessons • ',
+                                                  subTitle2: course2.createdBy,
+                                                  rating: course2.averageRating,
+                                                  ratingCount: course2.responseCount,
+                                                  onTap: () {
+                                                    ElearningCoursePageController elearningCoursePageController = Get.find();
+                                                    elearningCoursePageController.setElearningCourseId(course2.elearningCourseId.toString());
+
+                                                    Get.toNamed(RouteName.elearningCoursePage);
+                                                  },
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const Text('No data available.');
+                            }
+                          }
+                        },
                       ),
-                    );
-                  } else {
-                    return const Text('No data available.');
-                  }
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-    );
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_transit),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_bike),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_car),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_transit),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_bike),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

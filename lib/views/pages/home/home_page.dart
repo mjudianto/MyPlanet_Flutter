@@ -15,7 +15,6 @@ import 'package:myplanet/theme.dart';
 import 'package:intl/intl.dart';
 
 class HomePage extends StatelessWidget {
-
   final HomePageController homePageController = Get.find();
   final GlobalVariable globalVariable = GlobalVariable();
 
@@ -35,17 +34,11 @@ class HomePage extends StatelessWidget {
               children: [
                 HomePageAppBar(),
                 SizedBox(
-                  height: Get.height*0.2,
+                  height: Get.height * 0.2,
                   child: Center(
-                    child: DotLottieLoader.fromAsset(
-                      "assets/loading.lottie",
-                      frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                    child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                       if (dotlottie != null) {
-                        return Lottie.memory(
-                            dotlottie.animations.values.single,
-                            width: 250,
-                            height: 250,
-                            repeat: true);
+                        return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                       } else {
                         return const CircularProgressIndicator();
                       }
@@ -86,7 +79,6 @@ class HomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 HomePageAppBar(),
-                
                 const SectionTitle(title: 'New Course'),
                 FutureBuilder(
                   future: homePageController.userCoursesFuture,
@@ -96,15 +88,9 @@ class HomePage extends StatelessWidget {
                         height: 100,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
-                          child: DotLottieLoader.fromAsset(
-                            "assets/loading.lottie",
-                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                          child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                             if (dotlottie != null) {
-                              return Lottie.memory(
-                                  dotlottie.animations.values.single,
-                                  width: 250,
-                                  height: 250,
-                                  repeat: true);
+                              return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                             } else {
                               return const CircularProgressIndicator();
                             }
@@ -125,11 +111,8 @@ class HomePage extends StatelessWidget {
                     } else {
                       if (snapshot.data != null) {
                         var elearningCourses = snapshot.data!;
-                        elearningCourses.data!.sort((course1, course2) =>
-                            (course2.elearningCourseId ?? 0)
-                                .compareTo(course1.elearningCourseId ?? 0));
-                        final coursesToShow =
-                            elearningCourses.data?.take(5).toList() ?? [];
+                        elearningCourses.data!.sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
+                        final coursesToShow = elearningCourses.data?.take(5).toList() ?? [];
 
                         return SizedBox(
                           height: 220,
@@ -138,17 +121,13 @@ class HomePage extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             scrollDirection: Axis.horizontal,
                             itemCount: coursesToShow.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                                    width:
-                                        8.0), // Separator width equals padding
+                            separatorBuilder: (context, index) => const SizedBox(width: 8.0), // Separator width equals padding
                             itemBuilder: (context, index) {
                               final course = coursesToShow[index];
                               return CardVerticalWidget(
                                 thumbnail: course.thumbnail,
                                 title: course.judul,
-                                subTitle:
-                                    '${(course.totalLesson ?? 0) + (course.totalTest ?? 0)} lessons • ',
+                                subTitle: '${(course.totalLesson ?? 0) + (course.totalTest ?? 0)} lessons • ',
                                 subTitle2: course.createdBy,
                                 rating: course.averageRating,
                                 ratingCount: course.responseCount,
@@ -169,7 +148,6 @@ class HomePage extends StatelessWidget {
                     }
                   },
                 ),
-                
                 const SectionTitle(title: 'Continue Learning'),
                 FutureBuilder(
                   future: homePageController.userCoursesFuture,
@@ -180,15 +158,9 @@ class HomePage extends StatelessWidget {
                         height: 100,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
-                          child: DotLottieLoader.fromAsset(
-                            "assets/loading.lottie",
-                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                          child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                             if (dotlottie != null) {
-                              return Lottie.memory(
-                                  dotlottie.animations.values.single,
-                                  width: 250,
-                                  height: 250,
-                                  repeat: true);
+                              return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                             } else {
                               return const CircularProgressIndicator();
                             }
@@ -211,15 +183,11 @@ class HomePage extends StatelessWidget {
                       // If the Future completed successfully, display the data
                       if (snapshot.data != null) {
                         var elearningCourses = snapshot.data!;
-                        elearningCourses.data!.sort((course1, course2) => double
-                                .parse(course2.percentage.toString())
-                            .compareTo(
-                                double.parse(course1.percentage.toString())));
+                        elearningCourses.data!.sort(
+                            (course1, course2) => double.parse(course2.percentage.toString()).compareTo(double.parse(course1.percentage.toString())));
 
                         final coursesToShow = elearningCourses.data!
-                            .where((course) =>
-                                course.percentage.toString() != '0.00' &&
-                                course.percentage.toString() != '100.00')
+                            .where((course) => course.percentage.toString() != '0.00' && course.percentage.toString() != '100.00')
                             .toList();
 
                         return SizedBox(
@@ -229,25 +197,20 @@ class HomePage extends StatelessWidget {
                             padding: const EdgeInsets.only(left: 15, right: 15),
                             scrollDirection: Axis.horizontal,
                             itemCount: coursesToShow.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                                    width:
-                                        8.0), // Separator width equals padding
+                            separatorBuilder: (context, index) => const SizedBox(width: 8.0), // Separator width equals padding
                             itemBuilder: (context, index) {
                               final course = coursesToShow[index];
                               return CardHorizontalWidget(
-                                thumbnail: course.thumbnail,
-                                category: course.kategori,
-                                title: course.judul,
-                                percentage:
-                                    double.parse(course.percentage.toString()),
-                                onTap: () {
-                                  ElearningCoursePageController elearningCoursePageController = Get.find();
-                                  elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
-                                  
-                                  Get.toNamed(RouteName.elearningCoursePage);
-                                }
-                              );
+                                  thumbnail: course.thumbnail,
+                                  category: course.kategori,
+                                  title: course.judul,
+                                  percentage: double.parse(course.percentage.toString()),
+                                  onTap: () {
+                                    ElearningCoursePageController elearningCoursePageController = Get.find();
+                                    elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
+
+                                    Get.toNamed(RouteName.elearningCoursePage);
+                                  });
                             },
                           ),
                         );
@@ -258,7 +221,6 @@ class HomePage extends StatelessWidget {
                     }
                   },
                 ),
-                
                 const SectionTitle(title: 'New Podtret'),
                 FutureBuilder(
                   future: homePageController.newPodtrets,
@@ -269,15 +231,9 @@ class HomePage extends StatelessWidget {
                         height: 100,
                         width: MediaQuery.of(context).size.width,
                         child: Center(
-                          child: DotLottieLoader.fromAsset(
-                            "assets/loading.lottie",
-                            frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                          child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                             if (dotlottie != null) {
-                              return Lottie.memory(
-                                  dotlottie.animations.values.single,
-                                  width: 250,
-                                  height: 250,
-                                  repeat: true);
+                              return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                             } else {
                               return const CircularProgressIndicator();
                             }
@@ -305,32 +261,26 @@ class HomePage extends StatelessWidget {
 
                         var podtrets = snapshot.data!;
 
-                        final podtretToShow =
-                            podtrets.data?.take(5).toList() ?? [];
+                        final podtretToShow = podtrets.data?.take(5).toList() ?? [];
 
                         return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 15, right: 15, bottom: 15),
+                          padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                           child: Column(
-                              children:
-                                  List.generate(podtretToShow.length, (index) {
+                              children: List.generate(podtretToShow.length, (index) {
                             final podtret = podtretToShow[index];
-                            DateTime dateTime =
-                                DateTime.parse(podtret.publishDate.toString());
-                            String publishDate =
-                                DateFormat('dd MMMM yyyy').format(dateTime);
+                            DateTime dateTime = DateTime.parse(podtret.publishDate.toString());
+                            String publishDate = DateFormat('dd MMMM yyyy').format(dateTime);
 
                             return CardHorizontalWidget(
                               thumbnail: podtret.thumbnail,
                               category: podtret.nama,
                               title: podtret.judul,
-                              subTitle:
-                                  '${podtret.views}x watched • $publishDate',
-                              width: 350,
+                              subTitle: '${podtret.views}x watched • $publishDate',
+                              // width: 350,
                               height: 90,
                               thumbnailHeight: 65,
                               thumbnailWidht: 120,
-                              titleWidth: 185,
+                              // titleWidth: 185,
                               subTitleWidth: 185,
                             );
                           })),
@@ -362,8 +312,7 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-          top: 20.0, left: 20.0, right: 20.0, bottom: 10.0),
+      padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0, bottom: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

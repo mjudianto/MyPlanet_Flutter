@@ -8,8 +8,7 @@ import 'package:searchfield/searchfield.dart';
 
 // ignore: must_be_immutable
 class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  PageAppBar({Key? key, required this.type, this.title})
-      : super(key: key);
+  PageAppBar({Key? key, required this.type, this.title}) : super(key: key);
 
   final String type;
   final String? title;
@@ -17,20 +16,17 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   dynamic data;
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(105); // Adjust the height as needed
+  Size get preferredSize => const Size.fromHeight(105); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
     data = GlobalVariable.elearningSearchData ?? [];
-    
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              'assets/appBarBackground.png'), // Replace this with the path to your background image
-          fit: BoxFit
-              .cover, // Adjust the image fit to cover the entire container
+          image: AssetImage('assets/appBarBackground.png'), // Replace this with the path to your background image
+          fit: BoxFit.cover, // Adjust the image fit to cover the entire container
         ),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(58), // Radius to make the corners round
@@ -38,8 +34,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         title: SizedBox(
-          height: preferredSize
-              .height, // Set the height of the SizedBox to the preferredSize height
+          height: preferredSize.height, // Set the height of the SizedBox to the preferredSize height
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,8 +48,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
         ),
-        toolbarHeight: preferredSize
-            .height, // Set the toolbar height to the preferredSize height
+        toolbarHeight: preferredSize.height, // Set the toolbar height to the preferredSize height
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -72,21 +66,14 @@ class Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
-          color: whiteColor,
-          fontFamily: 'Poppins',
-          fontSize: 16,
-          fontWeight: bold),
+      style: TextStyle(color: whiteColor, fontFamily: 'Poppins', fontSize: 16, fontWeight: bold),
     );
   }
 }
 
 // ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
-  SearchBar({
-    super.key,
-    this.data
-  });
+  SearchBar({super.key, this.data});
 
   List<dynamic>? data;
 
@@ -101,13 +88,10 @@ class SearchBar extends StatelessWidget {
       ),
       child: Center(
         child: SearchField(
-          hint: "Cari E-learning atau PODTRET",
+          hint: "Cari E-learning",
           searchInputDecoration: InputDecoration(
-            enabledBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: primaryColor, width: 2),
-                borderRadius: BorderRadius.circular(100)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: primaryColor, width: 2), borderRadius: BorderRadius.circular(100)),
             hintStyle: const TextStyle(
               fontSize: 13,
               color: secondaryColor,
@@ -119,9 +103,7 @@ class SearchBar extends StatelessWidget {
           ),
           itemHeight: 50,
           maxSuggestionsInViewPort: 6,
-          suggestionsDecoration: SuggestionDecoration(
-              padding: const EdgeInsets.all(4),
-              borderRadius: const BorderRadius.all(Radius.circular(10))),
+          suggestionsDecoration: SuggestionDecoration(padding: const EdgeInsets.all(4), borderRadius: const BorderRadius.all(Radius.circular(10))),
           onSuggestionTap: (value) {
             ElearningCoursePageController elearningCoursePageController = Get.find();
             elearningCoursePageController.setElearningCourseId(value.item.toString());
@@ -129,18 +111,15 @@ class SearchBar extends StatelessWidget {
             Get.toNamed(RouteName.elearningCoursePage);
           },
           suggestions: data!
-              .map((e) => SearchFieldListItem(
-                    e.judul,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Text(
-                        e.judul,
-                        style: blackTextStyle.copyWith(
-                            fontSize: 13, fontWeight: medium),
-                      ),
+              .map((e) => SearchFieldListItem(e.judul,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Text(
+                      e.judul,
+                      style: blackTextStyle.copyWith(fontSize: 13, fontWeight: medium),
                     ),
-                    item: e.elearningCourseId
-                  ))
+                  ),
+                  item: e.elearningCourseId))
               .toList(),
         ),
       ),

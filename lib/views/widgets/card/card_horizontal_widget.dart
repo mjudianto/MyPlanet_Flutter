@@ -8,22 +8,17 @@ class CardHorizontalWidget extends StatelessWidget {
     super.key,
     this.category,
     this.percentage,
-
     this.width,
     this.height,
-
     this.thumbnail,
     this.thumbnailWidht,
     this.thumbnailHeight,
-
     this.title,
     this.titleWidth,
     this.titleHeight,
-
     this.subTitle,
     this.subTitleWidth,
     this.subTitleHeight,
-
     this.onTap,
   });
 
@@ -50,7 +45,7 @@ class CardHorizontalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? 335,
+      // width: width ?? 335,
       height: height ?? 115,
       child: GestureDetector(
         onTap: onTap,
@@ -83,7 +78,6 @@ class CardHorizontalWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-      
                 Padding(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Column(
@@ -116,10 +110,10 @@ class CardHorizontalWidget extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: titleWidth ?? 130,
+                            width: titleWidth ?? 200,
                             child: Text(
-                            title ?? "",
-                            style: TextStyle(
+                              title ?? "",
+                              style: TextStyle(
                                 fontSize: 14,
                                 color: blackColor,
                                 fontWeight: semiBold,
@@ -153,7 +147,6 @@ class CardHorizontalWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                
                 Visibility(
                   visible: percentage == null ? false : true,
                   child: Expanded(

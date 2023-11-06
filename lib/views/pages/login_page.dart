@@ -8,7 +8,7 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/login_appbar.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';  
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -31,17 +31,17 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // appBar: const HomePageAppBar(),
-        body: SingleChildScrollView(
+        appBar: const LoginAppBar(),
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const LoginAppBar(),
-
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20),
+              Container(
+                margin: const EdgeInsets.all(defaultMargin),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -53,7 +53,9 @@ class _LoginPageState extends State<LoginPage> {
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       'Masuk untuk melanjutkan',
                       style: TextStyle(
@@ -67,7 +69,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                ),
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: Column(
@@ -81,88 +86,94 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: 20),
                       InputWithTitle(
-                        title: 'Kata Sandi',
-                        controller: _passwordController,
-                        hintText: 'Masukkan Kata Sandi',
-                        obscureText: _isPasswordVisible,
-                        icon: Icons.lock_outline,
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                            color: primaryColor,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
-                          }
-                        )
-                      ),
+                          title: 'Kata Sandi',
+                          controller: _passwordController,
+                          hintText: 'Masukkan Kata Sandi',
+                          obscureText: _isPasswordVisible,
+                          icon: Icons.lock_outline,
+                          suffixIcon: IconButton(
+                              icon: Icon(
+                                _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+                                color: primaryColor,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _isPasswordVisible = !_isPasswordVisible;
+                                });
+                              })),
                       const SizedBox(height: 50),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: 50,
-                        child: Obx(() => 
-                          ElevatedButton(
-                            onPressed: () async {
-                              _loginButtonClicked.value = true;
-                              // Fetch the user token when the button is pressed
-                              try {
-                                User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text).timeout(const Duration(seconds: 10));
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          child: Obx(
+                            () => ElevatedButton(
+                              onPressed: () async {
+                                _loginButtonClicked.value = true;
+                                // Fetch the user token when the button is pressed
+                                try {
+                                  User userToken = await UserController.fetchUserToken(_nikController.text, _passwordController.text)
+                                      .timeout(const Duration(seconds: 10));
 
-                                await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
+                                  await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
 
-                                GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
+                                  GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
 
-                                // ignore: use_build_context_synchronously
-                                Get.offNamed(RouteName.dashboardPage);
-                              } catch (e) {
-                                _loginButtonClicked.value = false;
-                                
-                                return showTopSnackBar(
+                                  // ignore: use_build_context_synchronously
+                                  Get.offNamed(RouteName.dashboardPage);
+                                } catch (e) {
+                                  _loginButtonClicked.value = false;
+
+                                  return showTopSnackBar(
                                     // ignore: use_build_context_synchronously
                                     Overlay.of(context),
                                     const CustomSnackBar.error(
-                                      message:
-                                          "Something went wrong. Please check your credentials and try again",
+                                      message: "Kata sandi salah. Mohon periksa ulang kata sandi yang anda masukkan",
                                     ),
-                                );
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: primaryColor,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                               ),
+                              child: _loginButtonClicked.value
+                                  ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        color: whiteColor,
+                                      ))
+                                  : Text(
+                                      'Masuk',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: semiBold,
+                                      ),
+                                    ),
                             ),
-                            child: _loginButtonClicked.value
-                            ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(color: whiteColor,))
-                            : Text(
-                              'Masuk',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: semiBold,
-                              ),
-                            ),
-                          ),
-                        )
-                      ),
+                          )),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: Get.height * 0.2,),
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    // Handle the "Lupa kata sandi?" action here
-                  },
-                  child: Text(
-                    'Lupa kata sandi? Disini',
-                    style: TextStyle(
-                      color: primaryColor,
-                      fontSize: 15,
-                      fontWeight: medium,
+              // SizedBox(height: Get.height * 0.2,),
+              const Spacer(),
+              Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      // Handle the "Lupa kata sandi?" action here
+                    },
+                    child: Text(
+                      'Lupa kata sandi? Disini',
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontSize: 15,
+                        fontWeight: medium,
+                      ),
                     ),
                   ),
                 ),
@@ -184,7 +195,7 @@ class InputWithTitle extends StatefulWidget {
   final Widget? suffixIcon;
 
   const InputWithTitle({
-    super.key, 
+    super.key,
     required this.title,
     required this.controller,
     required this.hintText,
@@ -262,7 +273,6 @@ class _InputWithTitleState extends State<InputWithTitle> {
                 padding: EdgeInsets.only(left: widget.icon == null ? 20 : 15.0),
                 child: widget.suffixIcon,
               ),
-             
             ],
           ),
         ),
@@ -270,4 +280,3 @@ class _InputWithTitleState extends State<InputWithTitle> {
     );
   }
 }
-
