@@ -55,12 +55,11 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     HomePageAppBar(),
-                    const SizedBox(
-                      height: 70,
-                    ),
-                    Image.asset(
-                      'assets/error planet.png', // Replace this with the path to your logo image
-                      width: 400, // Set the height of the logo image
+                    Center(
+                      child: Image.asset(
+                        'assets/error planet.png', // Replace this with the path to your logo image
+                        width: 400, // Set the height of the logo image
+                      ),
                     ),
                     // Text(connected.toString()),
                   ],
@@ -276,11 +275,11 @@ class HomePage extends StatelessWidget {
                               category: podtret.nama,
                               title: podtret.judul,
                               subTitle: '${podtret.views}x watched • $publishDate',
-                              // width: 350,
+                              width: MediaQuery.of(context).size.width,
                               height: 90,
                               thumbnailHeight: 65,
                               thumbnailWidht: 120,
-                              // titleWidth: 185,
+                              titleWidth: 200,
                               subTitleWidth: 185,
                             );
                           })),

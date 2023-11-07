@@ -45,7 +45,7 @@ class CardHorizontalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // width: width ?? 335,
+      width: width ?? 335,
       height: height ?? 115,
       child: GestureDetector(
         onTap: onTap,
@@ -110,7 +110,7 @@ class CardHorizontalWidget extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(
-                            width: titleWidth ?? 200,
+                            width: titleWidth ?? 130,
                             child: Text(
                               title ?? "",
                               style: TextStyle(
