@@ -8,8 +8,6 @@ import 'package:myplanet/views/pages/dashboard/dashboard_controller.dart';
 import 'package:myplanet/views/pages/login_page.dart';
 import 'package:myplanet/views/pages/profile/profile_page_controller.dart';
 import 'package:myplanet/views/pages/profile/certificate.dart';
-import 'package:myplanet/views/pages/profile/test_history.dart';
-import 'package:myplanet/views/pages/profile/training_history.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,8 +37,7 @@ class ProfilePage extends StatelessWidget {
                     // Tambahkan kode untuk mengganti foto profil di sini
                   },
                   child: Stack(
-                    alignment: Alignment
-                        .bottomRight, // Menempatkan ikon kamera di bawah kanan
+                    alignment: Alignment.bottomRight, // Menempatkan ikon kamera di bawah kanan
                     children: [
                       ClipOval(
                         child: CachedNetworkImage(
@@ -56,16 +53,14 @@ class ProfilePage extends StatelessWidget {
                             height: 90,
                             fit: BoxFit.cover,
                           ),
-                          imageUrl:
-                              '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${GlobalVariable.userData['user']['empnik']}.png',
+                          imageUrl: '${GlobalVariable.myplanetUrl}/userAssets/Foto_emos/${GlobalVariable.userData['user']['empnik']}.png',
                           width: 90,
                           height: 90,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(
-                            6), // Atur padding sesuai kebutuhan
+                        padding: const EdgeInsets.all(6), // Atur padding sesuai kebutuhan
                         decoration: BoxDecoration(
                           color: primaryColor,
                           shape: BoxShape.circle,
@@ -98,14 +93,12 @@ class ProfilePage extends StatelessWidget {
 
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, top: defaultMargin),
+        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: defaultMargin),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors
-                    .white, // Ganti dengan warna background yang diinginkan
+                color: Colors.white, // Ganti dengan warna background yang diinginkan
                 borderRadius: BorderRadius.circular(20),
               ),
               padding: const EdgeInsets.all(16),
@@ -127,8 +120,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Account Info',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -154,10 +146,8 @@ class ProfilePage extends StatelessWidget {
                             decoration: const BoxDecoration(
                               color: whiteColor,
                               borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(
-                                    50), // Atur border radius sudut kiri atas
-                                topRight: Radius.circular(
-                                    50), // Atur border radius sudut kanan atas
+                                topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                                topRight: Radius.circular(50), // Atur border radius sudut kanan atas
                               ),
                             ),
                             // color: whiteColor,
@@ -169,8 +159,7 @@ class ProfilePage extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: <Widget>[
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Center(
@@ -197,29 +186,19 @@ class ProfilePage extends StatelessWidget {
                                     Obx(() {
                                       return InputWithTitle(
                                         title: 'Kata Sandi Lama',
-                                        controller: profilePageController
-                                            .oldPasswordController,
+                                        controller: profilePageController.oldPasswordController,
                                         hintText: 'Kata Sandi Lama',
-                                        obscureText: profilePageController
-                                            .isOldPasswordHidden.value,
+                                        obscureText: profilePageController.isOldPasswordHidden.value,
                                         suffixIcon: IconButton(
                                             icon: Icon(
-                                              profilePageController
-                                                      .isOldPasswordHidden.value
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility_outlined,
+                                              profilePageController.isOldPasswordHidden.value ? Icons.visibility_off : Icons.visibility_outlined,
                                               color: primaryColor,
                                             ),
                                             onPressed: () {
-                                              if (profilePageController
-                                                  .isOldPasswordHidden.value) {
-                                                profilePageController
-                                                    .isOldPasswordHidden
-                                                    .value = false;
+                                              if (profilePageController.isOldPasswordHidden.value) {
+                                                profilePageController.isOldPasswordHidden.value = false;
                                               } else {
-                                                profilePageController
-                                                    .isOldPasswordHidden
-                                                    .value = true;
+                                                profilePageController.isOldPasswordHidden.value = true;
                                               }
                                             }),
                                       );
@@ -228,29 +207,19 @@ class ProfilePage extends StatelessWidget {
                                     Obx(() {
                                       return InputWithTitle(
                                         title: 'Kata Sandi Baru',
-                                        controller: profilePageController
-                                            .newPasswordController,
+                                        controller: profilePageController.newPasswordController,
                                         hintText: 'Kata Sandi Baru',
-                                        obscureText: profilePageController
-                                            .isNewPasswordHidden.value,
+                                        obscureText: profilePageController.isNewPasswordHidden.value,
                                         suffixIcon: IconButton(
                                             icon: Icon(
-                                              profilePageController
-                                                      .isNewPasswordHidden.value
-                                                  ? Icons.visibility_off
-                                                  : Icons.visibility_outlined,
+                                              profilePageController.isNewPasswordHidden.value ? Icons.visibility_off : Icons.visibility_outlined,
                                               color: primaryColor,
                                             ),
                                             onPressed: () {
-                                              if (profilePageController
-                                                  .isNewPasswordHidden.value) {
-                                                profilePageController
-                                                    .isNewPasswordHidden
-                                                    .value = false;
+                                              if (profilePageController.isNewPasswordHidden.value) {
+                                                profilePageController.isNewPasswordHidden.value = false;
                                               } else {
-                                                profilePageController
-                                                    .isNewPasswordHidden
-                                                    .value = true;
+                                                profilePageController.isNewPasswordHidden.value = true;
                                               }
                                             }),
                                       );
@@ -259,31 +228,21 @@ class ProfilePage extends StatelessWidget {
                                     Obx(() {
                                       return InputWithTitle(
                                         title: 'Konfirmasi Sandi Baru',
-                                        controller: profilePageController
-                                            .confirmNewPasswordController,
+                                        controller: profilePageController.confirmNewPasswordController,
                                         hintText: 'Konfirmasi Sandi Baru',
-                                        obscureText: profilePageController
-                                            .isConfirmNewPasswordHidden.value,
+                                        obscureText: profilePageController.isConfirmNewPasswordHidden.value,
                                         suffixIcon: IconButton(
                                             icon: Icon(
-                                              profilePageController
-                                                      .isConfirmNewPasswordHidden
-                                                      .value
+                                              profilePageController.isConfirmNewPasswordHidden.value
                                                   ? Icons.visibility_off
                                                   : Icons.visibility_outlined,
                                               color: primaryColor,
                                             ),
                                             onPressed: () {
-                                              if (profilePageController
-                                                  .isConfirmNewPasswordHidden
-                                                  .value) {
-                                                profilePageController
-                                                    .isConfirmNewPasswordHidden
-                                                    .value = false;
+                                              if (profilePageController.isConfirmNewPasswordHidden.value) {
+                                                profilePageController.isConfirmNewPasswordHidden.value = false;
                                               } else {
-                                                profilePageController
-                                                    .isConfirmNewPasswordHidden
-                                                    .value = true;
+                                                profilePageController.isConfirmNewPasswordHidden.value = true;
                                               }
                                             }),
                                       );
@@ -301,65 +260,42 @@ class ProfilePage extends StatelessWidget {
                                             height: 54,
                                             child: TextButton(
                                               onPressed: () {
-                                                if (profilePageController
-                                                        .newPasswordController
-                                                        .text ==
-                                                    profilePageController
-                                                        .confirmNewPasswordController
-                                                        .text) {
-                                                  profilePageController.changePassword(
-                                                      profilePageController
-                                                          .oldPasswordController
-                                                          .text,
-                                                      profilePageController
-                                                          .newPasswordController
-                                                          .text);
+                                                if (profilePageController.newPasswordController.text ==
+                                                    profilePageController.confirmNewPasswordController.text) {
+                                                  profilePageController.changePassword(profilePageController.oldPasswordController.text,
+                                                      profilePageController.newPasswordController.text);
                                                   Get.back();
 
                                                   Get.defaultDialog(
-                                                    title: profilePageController
-                                                            .passwordChangedSuccessfully
-                                                        ? 'SUCCESS'
-                                                        : 'FAILED',
-                                                    titlePadding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    middleText: profilePageController
-                                                            .passwordChangedSuccessfully
+                                                    title: profilePageController.passwordChangedSuccessfully ? 'SUCCESS' : 'FAILED',
+                                                    titlePadding: const EdgeInsets.all(20.0),
+                                                    middleText: profilePageController.passwordChangedSuccessfully
                                                         ? 'Password change SUCCESS'
                                                         : 'Password change FAILED',
                                                   );
                                                 } else {
                                                   Get.defaultDialog(
                                                     title: 'FAILED',
-                                                    titlePadding:
-                                                        const EdgeInsets.all(
-                                                            20.0),
-                                                    middleText:
-                                                        'konfirmasi sandi baru tidak cocok',
+                                                    titlePadding: const EdgeInsets.all(20.0),
+                                                    middleText: 'konfirmasi sandi baru tidak cocok',
                                                   );
                                                 }
                                               },
                                               style: TextButton.styleFrom(
                                                 backgroundColor: primaryColor,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
+                                                padding: const EdgeInsets.symmetric(
                                                   horizontal: 20,
                                                 ),
                                                 shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          100),
+                                                  borderRadius: BorderRadius.circular(100),
                                                 ),
                                               ),
                                               child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
                                                   Text(
                                                     'Submit',
-                                                    style:
-                                                        whiteTextStyle.copyWith(
+                                                    style: whiteTextStyle.copyWith(
                                                       fontSize: 16,
                                                       fontWeight: semiBold,
                                                     ),
@@ -391,8 +327,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Change Password',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -411,8 +346,7 @@ class ProfilePage extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors
-                    .white, // Ganti dengan warna background yang diinginkan
+                color: Colors.white, // Ganti dengan warna background yang diinginkan
                 borderRadius: BorderRadius.circular(20),
               ),
               padding: const EdgeInsets.all(16),
@@ -420,13 +354,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TrainingHistory(), // Ganti dengan nama yang sesuai
-                        ),
-                      );
+                      Get.toNamed(RouteName.trainingHistoryPage);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -440,8 +368,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Training History',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -458,13 +385,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TestHistory(), // Ganti dengan nama yang sesuai
-                        ),
-                      );
+                      Get.toNamed(RouteName.testHistoryPage);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -478,8 +399,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Test History',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -510,8 +430,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Mandatory',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -531,8 +450,7 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const Certificate(), // Ganti dengan nama yang sesuai
+                          builder: (context) => const Certificate(), // Ganti dengan nama yang sesuai
                         ),
                       );
                     },
@@ -548,8 +466,7 @@ class ProfilePage extends StatelessWidget {
                             const SizedBox(width: 14),
                             Text(
                               'Training Certificate',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 14, fontWeight: semiBold),
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
                           ],
                         ),
@@ -577,10 +494,8 @@ class ProfilePage extends StatelessWidget {
                       decoration: const BoxDecoration(
                         color: whiteColor,
                         borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(
-                              50), // Atur border radius sudut kiri atas
-                          topRight: Radius.circular(
-                              50), // Atur border radius sudut kanan atas
+                          topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                          topRight: Radius.circular(50), // Atur border radius sudut kanan atas
                         ),
                       ),
                       // color: whiteColor,
@@ -613,10 +528,8 @@ class ProfilePage extends StatelessWidget {
                                     height: 54,
                                     child: TextButton(
                                       onPressed: () async {
-                                        await GlobalVariable.secureStorage
-                                            .delete(key: 'user_token');
-                                        DashboardController
-                                            dashboardController = Get.find();
+                                        await GlobalVariable.secureStorage.delete(key: 'user_token');
+                                        DashboardController dashboardController = Get.find();
                                         dashboardController.tabIndex = 0;
 
                                         Get.offAllNamed('/login');
@@ -627,13 +540,11 @@ class ProfilePage extends StatelessWidget {
                                           horizontal: 20,
                                         ),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(100),
                                         ),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Keluar',
@@ -668,13 +579,11 @@ class ProfilePage extends StatelessWidget {
                                           horizontal: 20,
                                         ),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(100),
                                         ),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Kembali',
@@ -703,17 +612,14 @@ class ProfilePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 shadowColor: Colors.transparent,
-                backgroundColor: Colors
-                    .transparent, // Atur warna background menjadi transparan
+                backgroundColor: Colors.transparent, // Atur warna background menjadi transparan
               ),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Container(
-                  padding:
-                      const EdgeInsets.all(16), // Atur padding sesuai kebutuhan
+                  padding: const EdgeInsets.all(16), // Atur padding sesuai kebutuhan
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                        20), // Atur border radius sesuai kebutuhan
+                    borderRadius: BorderRadius.circular(20), // Atur border radius sesuai kebutuhan
                     color: whiteColor, // Atur warna background sesuai kebutuhan
                   ),
                   child: Row(
@@ -731,16 +637,14 @@ class ProfilePage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors
-                                  .black, // Ganti dengan warna teks yang diinginkan
+                              color: Colors.black, // Ganti dengan warna teks yang diinginkan
                             ),
                           ),
                         ],
                       ),
                       const Icon(
                         Icons.chevron_right,
-                        color: Colors
-                            .black, // Ganti dengan warna ikon yang diinginkan
+                        color: Colors.black, // Ganti dengan warna ikon yang diinginkan
                       ),
                     ],
                   ),

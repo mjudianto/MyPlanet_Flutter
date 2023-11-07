@@ -14,11 +14,11 @@ class ElearningCoursePageController extends GetxController {
   Future<ElearningCourseDetail> fetchSingleCourseDetail() async {
     try {
       ElearningCourseDetail courseDetail = ElearningCourseDetail();
-      
+
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       courseDetail = await ElearningProvider.getSingleCourseDetail(userToken ?? "", elearningCourseId);
       return courseDetail;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       throw Exception('error: $e');
     }
   }
@@ -26,11 +26,11 @@ class ElearningCoursePageController extends GetxController {
   Future<ElearningModule> fetchCourseModules() async {
     try {
       ElearningModule modules = ElearningModule();
-      
+
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       modules = await ElearningProvider.getCourseModules(userToken ?? "", elearningCourseId);
       return modules;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       throw Exception('error: $e');
     }
   }
@@ -38,11 +38,11 @@ class ElearningCoursePageController extends GetxController {
   Future<ElearningLesson> fetchModuleLessons(String elearningModuleId) async {
     try {
       ElearningLesson lessons = ElearningLesson();
-      
+
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       lessons = await ElearningProvider.getModuleLessons(userToken ?? "", elearningModuleId);
       return lessons;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       throw Exception('error: $e');
     }
   }
@@ -50,7 +50,7 @@ class ElearningCoursePageController extends GetxController {
   Future<UserTestRecord> fetchModuleTests(String elearningModuleId) async {
     try {
       UserTestRecord tests = UserTestRecord();
-      
+
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       tests = await ElearningProvider.getModuleTests(userToken ?? "", elearningModuleId);
       return tests;
