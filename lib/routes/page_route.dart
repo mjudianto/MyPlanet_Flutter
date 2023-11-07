@@ -17,6 +17,8 @@ import 'package:myplanet/views/pages/podtret/top_eps_podtret.dart';
 import 'package:myplanet/views/pages/profile/account_info.dart';
 import 'package:myplanet/views/pages/profile/mandatory/mandatory_page.dart';
 import 'package:myplanet/views/pages/profile/profile_page.dart';
+import 'package:myplanet/views/pages/profile/userLessonRecord/training_history.dart';
+import 'package:myplanet/views/pages/profile/userTestRecord/test_history.dart';
 import 'package:myplanet/views/pages/splash_screen.dart';
 
 class AppPage {
@@ -60,8 +62,7 @@ class AppPage {
       page: () => PdfPage(),
     ),
 
-
-    // podtret 
+    // podtret
     GetPage(
       name: RouteName.podtretPage,
       page: () => const PodtretPage(),
@@ -83,13 +84,12 @@ class AppPage {
       page: () => PodtretContent(),
     ),
 
-
     GetPage(
       name: RouteName.communityPage,
       page: () => const CommunityPage(),
     ),
 
-    // profile  
+    // profile
     GetPage(
       name: RouteName.profilePage,
       page: () => ProfilePage(),
@@ -101,6 +101,14 @@ class AppPage {
     GetPage(
       name: RouteName.mandatoryPage,
       page: () => const Mandatory(),
+    ),
+    GetPage(
+      name: RouteName.trainingHistoryPage,
+      page: () => TrainingHistory(),
+    ),
+    GetPage(
+      name: RouteName.testHistoryPage,
+      page: () => TestHistory(),
     ),
   ];
 }

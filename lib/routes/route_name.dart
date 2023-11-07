@@ -1,4 +1,3 @@
-
 abstract class RouteName {
   static const splashScreen = '/splash_screen';
 
@@ -20,8 +19,9 @@ abstract class RouteName {
 
   static const communityPage = '/community';
 
-
   static const profilePage = '/profile';
   static const accountInfo = '/profile/account_info';
   static const mandatoryPage = '/profile/mandatory';
+  static const trainingHistoryPage = '/profile/training_history';
+  static const testHistoryPage = '/profile/test_history';
 }

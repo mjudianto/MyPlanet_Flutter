@@ -17,7 +17,7 @@ class UserProvider {
         throw Exception('Failed to fetch data from API');
       }
     } catch (e) {
-      print(e);
+      // print(e);
       throw Exception('Error: $e');
     }
   }

@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import 'package:myplanet/views/pages/dashboard/dashboard_controller.dart';
 import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_controller.dart';
@@ -8,15 +7,16 @@ import 'package:myplanet/views/pages/elearning/pdf_page/pdf_page_controller.dart
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 import 'package:myplanet/views/pages/profile/profile_page_controller.dart';
+import 'package:myplanet/views/pages/profile/userLessonRecord/training_history_controller.dart';
+import 'package:myplanet/views/pages/profile/userTestRecord/test_history_page_controller.dart';
 import 'package:myplanet/views/widgets/carousel/carouselPodtret/carousel_podtret_controller.dart';
 
 class HomeBinding implements Bindings {
   @override
-
   void dependencies() {
     Get.put<DashboardController>(DashboardController(), permanent: true);
 
-    // elearning 
+    // elearning
     Get.put<ElearningCoursePageController>(ElearningCoursePageController(), permanent: true);
     Get.put<ElearningTestPageController>(ElearningTestPageController(), permanent: true);
     Get.put<ElearningFeedbackPageController>(ElearningFeedbackPageController(), permanent: true);
@@ -30,5 +30,8 @@ class HomeBinding implements Bindings {
     Get.put<ProfilePageController>(ProfilePageController(), permanent: true);
 
     Get.put<PdfPageController>(PdfPageController(), permanent: true);
+
+    Get.put<TrainingHistoryPageController>(TrainingHistoryPageController(), permanent: true);
+    Get.put<TestHistoryPageController>(TestHistoryPageController(), permanent: true);
   }
 }

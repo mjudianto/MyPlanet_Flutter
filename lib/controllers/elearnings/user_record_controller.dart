@@ -9,7 +9,7 @@ class UserRecordController {
       await UserRecordProvider.setUserLessonRecord(userToken ?? "", elearningLessonId);
 
       return "success";
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       return e;
     }
   }
@@ -20,7 +20,7 @@ class UserRecordController {
       await UserRecordProvider.sendUserPostTestAccessRequest(userToken ?? "", elearningTestId, message);
 
       return "success";
-    } on Exception catch(e) {
+    } on Exception catch (e) {
       return e;
     }
   }
@@ -37,5 +37,4 @@ class UserRecordController {
       return UserPostTestAccessRequest();
     }
   }
-
 }
