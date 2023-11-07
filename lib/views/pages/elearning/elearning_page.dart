@@ -10,7 +10,6 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
-import 'package:myplanet/views/widgets/elearning/btn_categories.dart';
 
 class ElearningPage extends StatefulWidget {
   const ElearningPage({super.key});
@@ -37,14 +36,14 @@ class _ElearningPageState extends State<ElearningPage> {
         ),
         backgroundColor: backgroundColor,
         body: DefaultTabController(
-          length: 8,
+          length: 6,
           child: Column(
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                margin: const EdgeInsets.symmetric(horizontal: defaultMargin),
                 child: ButtonsTabBar(
                   borderColor: pastelSecondaryColor,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
@@ -72,12 +71,6 @@ class _ElearningPageState extends State<ElearningPage> {
                       text: "Soft Skill",
                     ),
                     Tab(
-                      text: "SOP IK",
-                    ),
-                    Tab(
-                      text: "InnoChamp",
-                    ),
-                    Tab(
                       text: "Enseval Bootcamp",
                     ),
                   ],
@@ -87,120 +80,22 @@ class _ElearningPageState extends State<ElearningPage> {
                 child: TabBarView(
                   children: <Widget>[
                     Center(
-                      child: FutureBuilder(
-                        future: _userCoursesFuture,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.5,
-                              child: Center(
-                                child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
-                                  if (dotlottie != null) {
-                                    return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
-                                  } else {
-                                    return const CircularProgressIndicator();
-                                  }
-                                }),
-                              ),
-                            );
-                          } else if (snapshot.hasError) {
-                            return SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.65,
-                              width: MediaQuery.of(context).size.width,
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/error planet.png', // Replace this with the path to your logo image
-                                  height: 600, // Set the height of the logo image
-                                ),
-                              ),
-                            );
-                          } else {
-                            if (snapshot.data != null) {
-                              var elearningCourses = snapshot.data!.obs;
-
-                              elearningCourses.value.data!
-                                  .sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
-
-                              return SizedBox(
-                                height: 0.70 * MediaQuery.of(context).size.height,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    itemCount: (elearningCourses.value.data!.length / 2).ceil(),
-                                    itemBuilder: (context, index) {
-                                      final course1 = elearningCourses.value.data![index * 2];
-                                      final course2 =
-                                          (index * 2 + 1 < elearningCourses.value.data!.length) ? elearningCourses.value.data![index * 2 + 1] : null;
-
-                                      return SizedBox(
-                                        height: 220,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                                          children: [
-                                            Expanded(
-                                              child: CardVerticalWidget(
-                                                thumbnail: course1.thumbnail,
-                                                title: course1.judul,
-                                                subTitle: '${(course1.totalLesson ?? 0) + (course1.totalTest ?? 0)} lessons • ',
-                                                subTitle2: course1.createdBy,
-                                                rating: course1.averageRating,
-                                                ratingCount: course1.responseCount,
-                                                onTap: () {
-                                                  ElearningCoursePageController elearningCoursePageController = Get.find();
-                                                  elearningCoursePageController.setElearningCourseId(course1.elearningCourseId.toString());
-
-                                                  Get.toNamed(RouteName.elearningCoursePage);
-                                                },
-                                              ),
-                                            ),
-                                            if (course2 != null) const SizedBox(width: 8),
-                                            if (course2 != null)
-                                              Expanded(
-                                                child: CardVerticalWidget(
-                                                  thumbnail: course2.thumbnail,
-                                                  title: course2.judul,
-                                                  subTitle: '${(course2.totalLesson ?? 0) + (course2.totalTest ?? 0)} lessons • ',
-                                                  subTitle2: course2.createdBy,
-                                                  rating: course2.averageRating,
-                                                  ratingCount: course2.responseCount,
-                                                  onTap: () {
-                                                    ElearningCoursePageController elearningCoursePageController = Get.find();
-                                                    elearningCoursePageController.setElearningCourseId(course2.elearningCourseId.toString());
-
-                                                    Get.toNamed(RouteName.elearningCoursePage);
-                                                  },
-                                                ),
-                                              ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return const Text('No data available.');
-                            }
-                          }
-                        },
-                      ),
+                      child: courseByKategori('all'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_transit),
+                      child: courseByKategori('General'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_bike),
+                      child: courseByKategori('QA & Security'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_car),
+                      child: courseByKategori('Technical'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_transit),
+                      child: courseByKategori('Soft Skill'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_bike),
+                      child: courseByKategori('Enseval Bootcamp'),
                     ),
                   ],
                 ),
@@ -208,5 +103,109 @@ class _ElearningPageState extends State<ElearningPage> {
             ],
           ),
         ));
+  }
+
+  FutureBuilder<ElearningCourse> courseByKategori(String kategori) {
+    return FutureBuilder(
+      future: _userCoursesFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.5,
+            child: Center(
+              child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
+                if (dotlottie != null) {
+                  return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height * 0.65,
+            width: MediaQuery.of(context).size.width,
+            child: Center(
+              child: Image.asset(
+                'assets/error planet.png', // Replace this with the path to your logo image
+                height: 600, // Set the height of the logo image
+              ),
+            ),
+          );
+        } else {
+          if (snapshot.data != null) {
+            var elearningCourses = snapshot.data!;
+
+            List<Datum> filteredAndSortedCourses = elearningCourses.data != null && kategori != 'all'
+                ? elearningCourses.data!.where((course) => course.kategori.toString().toLowerCase() == kategori.toLowerCase()).toList()
+                : elearningCourses.data?.toList() ?? [];
+
+            filteredAndSortedCourses.sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
+
+            return SizedBox(
+              height: 0.70 * MediaQuery.of(context).size.height,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: (filteredAndSortedCourses.length / 2).ceil(),
+                  itemBuilder: (context, index) {
+                    final course1 = filteredAndSortedCourses[index * 2];
+                    final course2 = (index * 2 + 1 < filteredAndSortedCourses.length) ? filteredAndSortedCourses[index * 2 + 1] : null;
+
+                    return SizedBox(
+                      height: 220,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
+                            child: CardVerticalWidget(
+                              thumbnail: course1.thumbnail,
+                              title: course1.judul,
+                              subTitle: '${(course1.totalLesson ?? 0) + (course1.totalTest ?? 0)} lessons • ',
+                              subTitle2: course1.createdBy,
+                              rating: course1.averageRating,
+                              ratingCount: course1.responseCount,
+                              onTap: () {
+                                ElearningCoursePageController elearningCoursePageController = Get.find();
+                                elearningCoursePageController.setElearningCourseId(course1.elearningCourseId.toString());
+
+                                Get.toNamed(RouteName.elearningCoursePage);
+                              },
+                            ),
+                          ),
+                          if (course2 != null) const SizedBox(width: 8),
+                          if (course2 != null)
+                            Expanded(
+                              child: CardVerticalWidget(
+                                thumbnail: course2.thumbnail,
+                                title: course2.judul,
+                                subTitle: '${(course2.totalLesson ?? 0) + (course2.totalTest ?? 0)} lessons • ',
+                                subTitle2: course2.createdBy,
+                                rating: course2.averageRating,
+                                ratingCount: course2.responseCount,
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController.setElearningCourseId(course2.elearningCourseId.toString());
+
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                },
+                              ),
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          } else {
+            return const Text('No data available.');
+          }
+        }
+      },
+    );
   }
 }
