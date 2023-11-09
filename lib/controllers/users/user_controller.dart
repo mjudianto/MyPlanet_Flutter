@@ -7,7 +7,18 @@ class UserController {
       User userToken = User();
       userToken = await UserProvider.userAuth(userNik, password);
       return userToken;
-    } on Exception catch(e) {
+    } on Exception catch (e) {
+      throw Exception('error: $e');
+    }
+  }
+
+  // forgotPassword
+  static Future<String> forgotPassword(String userNik) async {
+    try {
+      String forgotPassword = '';
+      forgotPassword = await UserProvider.forgotPassword(userNik);
+      return forgotPassword;
+    } on Exception catch (e) {
       throw Exception('error: $e');
     }
   }

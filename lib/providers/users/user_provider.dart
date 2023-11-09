@@ -41,4 +41,24 @@ class UserProvider {
       return 'failed';
     }
   }
+
+  // forgotPassword
+  static Future<String> forgotPassword(String userNik) async {
+    try {
+      final response = await http.post(
+        Uri.parse('${GlobalVariable.apiUrl}/users/forgotPassword'),
+        body: {'userNik': userNik},
+      );
+
+      if (response.statusCode == 200) {
+        var jsonResponse = response.body;
+        return jsonResponse;
+      } else {
+        throw Exception('Failed to fetch data from API');
+      }
+    } catch (e) {
+      // print(e);
+      throw Exception('Error: $e');
+    }
+  }
 }

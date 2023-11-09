@@ -9,6 +9,7 @@ import 'package:myplanet/views/widgets/appBar/login_appbar.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -165,7 +166,112 @@ class _LoginPageState extends State<LoginPage> {
                 child: Center(
                   child: GestureDetector(
                     onTap: () {
-                      // Handle the "Lupa kata sandi?" action here
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context).viewInsets.bottom,
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                color: whiteColor,
+                                child: Center(
+                                  child: ListView(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Center(
+                                              child: Text(
+                                                'Lupa Sandi',
+                                                style: blackTextStyle.copyWith(
+                                                  fontSize: 18,
+                                                  fontWeight: medium,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            icon: const Icon(Icons.close),
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 40,
+                                      ),
+                                      Text(
+                                        'Silahkan masukan NIK anda untuk mereset kata sandi. Lalu periksa email anda secara berkala',
+                                        style: blackTextStyle.copyWith(
+                                          fontSize: 12,
+                                          fontWeight: regular,
+                                        ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      InputWithTitle(
+                                        title: 'NIK',
+                                        controller: _nikController,
+                                        hintText: 'Masukkan NIK',
+                                        icon: Icons.person,
+                                      ),
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      SizedBox(
+                                        width: MediaQuery.of(context).size.width,
+                                        height: 50,
+                                        child: ElevatedButton(
+                                          onPressed: () async {
+                                            try {
+                                              await UserController.forgotPassword(_nikController.text);
+
+                                              Get.back();
+
+                                              return showTopSnackBar(
+                                                // ignore: use_build_context_synchronously
+                                                Overlay.of(context),
+                                                const CustomSnackBar.success(
+                                                  message: "Kata sandi baru telah dikirim ke email anda",
+                                                ),
+                                              );
+                                            } catch (e) {
+                                              return showTopSnackBar(
+                                                // ignore: use_build_context_synchronously
+                                                Overlay.of(context),
+                                                const CustomSnackBar.error(
+                                                  message: "NIK tidak ditemukan",
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: primaryColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            'Submit',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: semiBold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
                     },
                     child: Text(
                       'Lupa kata sandi? Disini',

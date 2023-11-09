@@ -38,20 +38,11 @@ class DashboardPage extends StatelessWidget {
               showUnselectedLabels: true,
               type: BottomNavigationBarType.fixed,
               items: [
-                _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/ic_home.png', label: 'Home'),
-                _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/ic_book.png', label: 'E-learning'),
-                _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/ic_podtret_appbar.png',
-                    label: 'Podtret'),
-                _bottomNavigationBarItem(
-                    imagePath: 'assets/icons/community_icon.png',
-                    label: 'Community'),
-                _bottomNavigationBarItem(
-                    imagePath:
-                        '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}',
-                    label: 'Profile'),
+                _bottomNavigationBarItem(imagePath: 'assets/icons/ic_home.png', label: 'Home'),
+                _bottomNavigationBarItem(imagePath: 'assets/icons/elearning_icon.png', label: 'E-learning'),
+                _bottomNavigationBarItem(imagePath: 'assets/icons/ic_podtret_appbar.png', label: 'Podtret'),
+                _bottomNavigationBarItem(imagePath: 'assets/icons/community_icon.png', label: 'Community'),
+                _bottomNavigationBarItem(imagePath: '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}', label: 'Profile'),
               ],
             ),
           );
@@ -68,8 +59,7 @@ class DashboardPage extends StatelessWidget {
               _icon(
                 imagePath: imagePath,
                 type: label != 'Profile' ? 'asset' : 'network',
-                height:
-                    label == 'Community' ? 20 : (label == 'Profile' ? 28 : 25),
+                height: label == 'Community' ? 20 : (label == 'Profile' ? 28 : 25),
                 status: 'off',
               ),
               SizedBox(
@@ -87,13 +77,10 @@ class DashboardPage extends StatelessWidget {
               _icon(
                   imagePath: imagePath,
                   type: label != 'Profile' ? 'asset' : 'network',
-                  height: label == 'Community'
-                      ? 25
-                      : (label == 'Profile' ? 35 : 30),
+                  height: label == 'Community' ? 25 : (label == 'Profile' ? 35 : 30),
                   status: 'on'),
               SizedBox(
-                height:
-                    label == 'Community' ? 15 : (label == 'Profile' ? 5 : 10),
+                height: label == 'Community' ? 15 : (label == 'Profile' ? 5 : 10),
               ),
             ],
           ),
@@ -104,11 +91,7 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
-_icon(
-    {required String imagePath,
-    required String type,
-    double? height,
-    required String status}) {
+_icon({required String imagePath, required String type, double? height, required String status}) {
   if (type == 'asset') {
     return Image.asset(
       imagePath,

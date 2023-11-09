@@ -63,15 +63,17 @@ class TestHistory extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                "${testRecord!.judulTest}", // Replace with how you access the title
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 12,
-                                  fontWeight: semiBold,
+                              Expanded(
+                                child: Text(
+                                  "${testRecord!.judulTest}", // Replace with how you access the title
+                                  style: blackTextStyle.copyWith(
+                                    fontSize: 12,
+                                    fontWeight: semiBold,
+                                  ),
                                 ),
                               ),
                               Text(
-                                testRecord.attempt.toString(), // Replace with how you access the count
+                                "Percobaan ke - ${testRecord.attempt}",
                                 style: blackTextStyle.copyWith(
                                   fontSize: 12,
                                   fontWeight: semiBold,
@@ -86,7 +88,7 @@ class TestHistory extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                '${testRecord.status.toString()} - ${testRecord.score}', // Replace with how you access the subtitle
+                                '${testRecord.status.toString()} | Score: ${testRecord.score}', // Replace with how you access the subtitle
                                 style: secondaryTextStyle.copyWith(
                                     fontSize: 12, fontWeight: bold, color: testRecord.status.toString() == 'Lulus' ? successColor : dangerColor),
                               ),
