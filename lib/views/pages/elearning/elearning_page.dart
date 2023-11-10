@@ -188,19 +188,25 @@ class _ElearningPageState extends State<ElearningPage> {
                       ),
                     ),
                     Center(
-                      child: Icon(Icons.directions_transit),
+                      child: Text('General'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_bike),
+                      child: Text('QA & Security'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_car),
+                      child: Text('Technical'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_transit),
+                      child: Text('Soft Skill'),
                     ),
                     Center(
-                      child: Icon(Icons.directions_bike),
+                      child: Text('SOP IK'),
+                    ),
+                    Center(
+                      child: Text('InnoChamp'),
+                    ),
+                    Center(
+                      child: Text('Enseval Bootcamp'),
                     ),
                   ],
                 ),
