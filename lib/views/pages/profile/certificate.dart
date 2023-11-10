@@ -3,6 +3,7 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/profile/certificate_detail.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myplanet/views/widgets/under_construction.dart';
 
 class Certificate extends StatefulWidget {
   const Certificate({super.key});
@@ -21,8 +22,7 @@ class _CertificateState extends State<Certificate> {
   Widget build(BuildContext context) {
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, top: 30),
+        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,8 +31,7 @@ class _CertificateState extends State<Certificate> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const CertificateDetail(), // Ganti dengan nama yang sesuai
+                    builder: (context) => const CertificateDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
@@ -100,9 +99,10 @@ class _CertificateState extends State<Certificate> {
             children: [
               PageAppBar(
                 type: 'text',
-                title: 'Test History',
+                title: 'Certificate',
               ),
-              content()
+              // content()
+              UnderConstruction()
             ],
           ),
         ),

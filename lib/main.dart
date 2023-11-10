@@ -12,7 +12,13 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   final isUserLoggedIn = await GlobalVariable.userAuth();
-  final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
+  // final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
+  String initialLocation = '/';
+  if (isUserLoggedIn) {
+    initialLocation = '/dashboard';
+  } else {
+    initialLocation = '/login';
+  }
   HomeBinding().dependencies();
 
   runApp(MyPlanet(initialLocation: initialLocation));

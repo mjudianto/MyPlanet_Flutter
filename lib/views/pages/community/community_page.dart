@@ -1,8 +1,11 @@
+import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/community/post_detail.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
+import 'package:myplanet/views/widgets/under_construction.dart';
 // import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
 
 class CommunityPage extends StatefulWidget {
@@ -49,13 +52,11 @@ class _CommunityPageState extends State<CommunityPage> {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(100),
                     borderSide: const BorderSide(
-                      color:
-                          secondaryColor, // Ganti dengan warna border yang Anda inginkan
+                      color: secondaryColor, // Ganti dengan warna border yang Anda inginkan
                     ),
                   ),
                   filled: true,
-                  fillColor:
-                      whiteColor, // Ganti dengan warna latar belakang yang Anda inginkan
+                  fillColor: whiteColor, // Ganti dengan warna latar belakang yang Anda inginkan
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 14,
                     vertical: 10,
@@ -236,8 +237,7 @@ class _CommunityPageState extends State<CommunityPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const PostDetail(), // Ganti dengan nama yang sesuai
+                    builder: (context) => const PostDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
@@ -245,8 +245,7 @@ class _CommunityPageState extends State<CommunityPage> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   '...lebih banyak',
-                  style: secondaryTextStyle.copyWith(
-                      fontSize: 12, fontWeight: semiBold),
+                  style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                 ),
               ),
             ),
@@ -273,8 +272,7 @@ class _CommunityPageState extends State<CommunityPage> {
                     ),
                     Text(
                       '25',
-                      style: blackTextStyle.copyWith(
-                          fontSize: 12, fontWeight: regular),
+                      style: blackTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                     )
                   ],
                 ),
@@ -283,15 +281,13 @@ class _CommunityPageState extends State<CommunityPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const PostDetail(), // Ganti dengan nama yang sesuai
+                        builder: (context) => const PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
                   child: Text(
                     '1 komentar',
-                    style: secondaryTextStyle.copyWith(
-                        fontSize: 12, fontWeight: regular),
+                    style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                   ),
                 )
               ],
@@ -313,8 +309,7 @@ class _CommunityPageState extends State<CommunityPage> {
                     ),
                     Text(
                       'Like',
-                      style: secondaryTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                      style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                     )
                   ],
                 ),
@@ -323,8 +318,7 @@ class _CommunityPageState extends State<CommunityPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const PostDetail(), // Ganti dengan nama yang sesuai
+                        builder: (context) => const PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
@@ -336,8 +330,7 @@ class _CommunityPageState extends State<CommunityPage> {
                       ),
                       Text(
                         'Komentar',
-                        style: secondaryTextStyle.copyWith(
-                            fontSize: 12, fontWeight: semiBold),
+                        style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
                       )
                     ],
                   ),
@@ -362,9 +355,9 @@ class _CommunityPageState extends State<CommunityPage> {
               PageAppBar(
                 type: 'logo',
               ),
-              createStatus(),
-              posting(),
-              createStatus(),
+              // createStatus(),
+              // posting(),
+              UnderConstruction()
             ],
           ),
         ),
