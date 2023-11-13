@@ -21,6 +21,10 @@ class ElearningFeedbackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool lulus = elearningTestPageController.status == 'Lulus';
+    // if (!elearningFeedbackPageController.feedbackSent.value && lulus) {
+    //   elearningFeedbackPageController.fetchFeedbackQuestion();
+    // }
+    final MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Obx(() {
       if (!elearningFeedbackPageController.feedbackSent.value && lulus) {
@@ -29,124 +33,96 @@ class ElearningFeedbackPage extends StatelessWidget {
             type: 'text',
             title: 'Feedback',
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 25,
-                ),
-                Center(
-                  child: SizedBox(
-                    width: 300,
-                    child: Text(
-                      elearningTestPageController.elearningTest.data?[0].judul ?? "",
-                      style: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: semiBold),
-                      textAlign: TextAlign.center,
-                    ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 25,
                   ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                FutureBuilder(
-                    future: elearningFeedbackPageController.fetchFeedbackQuestion(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          child: Center(
-                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
-                              if (dotlottie != null) {
-                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
-                              } else {
-                                return const CircularProgressIndicator();
-                              }
-                            }),
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.65,
-                          width: MediaQuery.of(context).size.width,
-                          child: Center(
-                            child: Image.asset(
-                              'assets/error planet.png', // Replace this with the path to your logo image
-                              height: 600, // Set the height of the logo image
-                            ),
-                          ),
-                        );
-                      } else {
-                        final feedbackQuestion = snapshot.data?.data;
-
-                        return SingleChildScrollView(
-                          child: Container(
-                            constraints: const BoxConstraints(maxHeight: double.infinity),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
-                              itemCount: feedbackQuestion?.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                if (feedbacks.length <= index) {
-                                  feedbacks.add({'feedbackQuestionId': (feedbackQuestion?[index].feedbackQuestionId).toString(), "feedback": '0'});
-                                }
-
-                                return Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        feedbackQuestion![index].question.toString(),
-                                        style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: blackColor, fontWeight: medium),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    FeedbackAnswer(
-                                        feedbacks: feedbacks[index],
-                                        questionType: feedbackQuestion[index].questionType!,
-                                        controller: feedbackTextController),
-                                    const SizedBox(
-                                      height: 16,
-                                    )
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        );
-                      }
-                    }),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 55,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      feedbacks[4]['feedback'] = feedbackTextController.text.toString();
-
-                      elearningFeedbackPageController.sendUserFeedback(feedbacks);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  Center(
+                    child: SizedBox(
+                      width: 300,
                       child: Text(
-                        'submit',
-                        style: TextStyle(fontSize: 16, fontFamily: 'Poppins', fontWeight: semiBold),
+                        elearningTestPageController.elearningTest.data?[0].judul ?? "",
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: semiBold),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
-                )
-              ],
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  SizedBox(
+                    height: Get.height * 0.55,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
+                      itemCount: elearningFeedbackPageController.feedbackQuestion.data?.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (feedbacks.length <= index) {
+                          feedbacks.add({
+                            'feedbackQuestionId': (elearningFeedbackPageController.feedbackQuestion.data?[index].feedbackQuestionId).toString(),
+                            "feedback": '0'
+                          });
+                        }
+
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                elearningFeedbackPageController.feedbackQuestion.data![index].question.toString(),
+                                style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: blackColor, fontWeight: medium),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            FeedbackAnswer(
+                                feedbacks: feedbacks[index],
+                                questionType: elearningFeedbackPageController.feedbackQuestion.data![index].questionType!,
+                                controller: feedbackTextController),
+                            const SizedBox(
+                              height: 16,
+                            )
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        feedbacks[4]['feedback'] = feedbackTextController.text.toString();
+
+                        elearningFeedbackPageController.sendUserFeedback(feedbacks);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(fontSize: 16, fontFamily: 'Poppins', fontWeight: semiBold),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
+          resizeToAvoidBottomInset: true,
         );
       } else {
         return Scaffold(
