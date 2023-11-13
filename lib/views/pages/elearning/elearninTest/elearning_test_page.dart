@@ -275,7 +275,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                               } else {
                                 correctAnswer = 0;
 
-                                if (answers.length < currentQuestion + 1) {
+                                if (answers.length <= currentQuestion) {
                                   answers.add('blank');
                                 }
 
@@ -285,7 +285,11 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                   }
                                 }
 
-                                String score = (correctAnswer / _testData!.length * 100).toStringAsFixed(0);
+                                print(answers);
+                                print(correctAnswer);
+
+                                String score = (correctAnswer / answers.length * 100).toStringAsFixed(0);
+                                print(score);
                                 // String score = '100';
 
                                 ElearningFeedbackPageController elearningFeedbackPageController = Get.find();

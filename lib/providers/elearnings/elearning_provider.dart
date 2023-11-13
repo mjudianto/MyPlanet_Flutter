@@ -11,12 +11,9 @@ import 'package:myplanet/models/elearnings/userRecords/user_test_record_model.da
 class ElearningProvider {
   static Future<ElearningCourse> getUserCourses(String userToken) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getUserCourses'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/getUserCourses'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningCourseFromJson(jsonResponse);
@@ -28,14 +25,11 @@ class ElearningProvider {
     }
   }
 
-  static Future<ElearningCourseDetail> getSingleCourseDetail(String userToken ,String elearningCourseId) async {
+  static Future<ElearningCourseDetail> getElearningCourseDetail(String userToken, String elearningCourseId) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getSingleCourseDetail/$elearningCourseId'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/elearningCourseDetail/$elearningCourseId'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningCourseDetailFromJson(jsonResponse);
@@ -45,16 +39,13 @@ class ElearningProvider {
     } catch (e) {
       throw Exception('Error: $e');
     }
-  } 
+  }
 
-  static Future<ElearningModule> getCourseModules(String userToken ,String elearningCourseId) async {
+  static Future<ElearningModule> getCourseModules(String userToken, String elearningCourseId) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getCourseModules/$elearningCourseId'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/getCourseModules/$elearningCourseId'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningModuleFromJson(jsonResponse);
@@ -66,14 +57,11 @@ class ElearningProvider {
     }
   }
 
-  static Future<ElearningLesson> getModuleLessons(String userToken ,String elearningModuleId) async {
+  static Future<ElearningLesson> getModuleLessons(String userToken, String elearningModuleId) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleLessons/$elearningModuleId'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleLessons/$elearningModuleId'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningLessonFromJson(jsonResponse);
@@ -85,14 +73,11 @@ class ElearningProvider {
     }
   }
 
-  static Future<UserTestRecord> getModuleTests(String userToken ,String elearningModuleId) async {
+  static Future<UserTestRecord> getModuleTests(String userToken, String elearningModuleId) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleTests/$elearningModuleId'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/getModuleTests/$elearningModuleId'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return userTestRecordFromJson(jsonResponse);
@@ -102,16 +87,13 @@ class ElearningProvider {
     } catch (e) {
       throw Exception('Error: $e');
     }
-  } 
+  }
 
   static Future<ElearningTest> getTestDetail(String userToken, String elearningTestId) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/getTestDetail/$elearningTestId'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/getTestDetail/$elearningTestId'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return elearningTestFromJson(jsonResponse);
@@ -125,12 +107,9 @@ class ElearningProvider {
 
   static Future<FeedbackQuestion> getFeedbackQuestions(String userToken) async {
     try {
-      final response = await http.get(
-        Uri.parse('${GlobalVariable.apiUrl}/elearning/feedbackQuestions'),
-        headers: {
-          'Authorization' : 'bearer $userToken',
-        }
-      );
+      final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/elearning/feedbackQuestions'), headers: {
+        'Authorization': 'bearer $userToken',
+      });
       if (response.statusCode == 200) {
         var jsonResponse = response.body;
         return feedbackQuestionFromJson(jsonResponse);
@@ -141,7 +120,4 @@ class ElearningProvider {
       throw Exception('Error: $e');
     }
   }
-
 }
-
-
