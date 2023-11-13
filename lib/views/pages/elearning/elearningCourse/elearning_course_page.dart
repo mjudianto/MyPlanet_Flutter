@@ -673,7 +673,7 @@ class TestBuilder extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: maxtAttemptReached ? secondaryColor : (underPunishment ? secondaryColor : primaryColor),
+                                backgroundColor: maxtAttemptReached ? primaryColor : (underPunishment ? secondaryColor : secondaryColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -683,7 +683,7 @@ class TestBuilder extends StatelessWidget {
                                 child: Text(
                                   maxtAttemptReached && !requestSent
                                       ? 'Send Request'
-                                      : (maxtAttemptReached ? 'back' : (underPunishment ? 'back' : 'start')),
+                                      : (maxtAttemptReached ? 'Back' : (underPunishment ? 'Back' : 'Start')),
                                   style: TextStyle(fontSize: 16, fontFamily: 'Poppins', fontWeight: semiBold),
                                 ),
                               ),
