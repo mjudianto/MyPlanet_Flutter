@@ -8,7 +8,8 @@ import 'package:myplanet/views/pages/elearning/elearninTest/elearning_test_page_
 class ElearningFeedbackPageController extends GetxController {
   RxBool feedbackSent = true.obs;
   RxBool testPassed = false.obs;
-  
+  FeedbackQuestion feedbackQuestion = FeedbackQuestion();
+
   ElearningTestPageController elearningTestPageController = Get.find();
 
   checkExistingUserFeedback(String elearningTestId) async {
@@ -20,14 +21,14 @@ class ElearningFeedbackPageController extends GetxController {
     }
   }
 
-  Future<FeedbackQuestion> fetchFeedbackQuestion() async {
+  fetchFeedbackQuestion() async {
     try {
-      FeedbackQuestion feedbackQuestion = FeedbackQuestion();
+      // FeedbackQuestion feedbackQuestion = FeedbackQuestion();
 
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       feedbackQuestion = await ElearningProvider.getFeedbackQuestions(userToken ?? "");
 
-      return feedbackQuestion;
+      // return feedbackQuestion;
     } catch (e) {
       rethrow;
     }

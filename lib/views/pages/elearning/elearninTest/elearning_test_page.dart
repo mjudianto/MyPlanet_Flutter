@@ -285,16 +285,13 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                   }
                                 }
 
-                                print(answers);
-                                print(correctAnswer);
-
                                 String score = (correctAnswer / answers.length * 100).toStringAsFixed(0);
-                                print(score);
                                 // String score = '100';
 
                                 ElearningFeedbackPageController elearningFeedbackPageController = Get.find();
 
                                 await elearningFeedbackPageController.checkExistingUserFeedback(elearningTestPageController.elearningTestId);
+                                await elearningFeedbackPageController.fetchFeedbackQuestion();
 
                                 elearningTestPageController.score = int.parse(score);
                                 elearningTestPageController.status = int.parse(score) >= elearningTestPageController.passingScore ? 'Lulus' : 'Gagal';
