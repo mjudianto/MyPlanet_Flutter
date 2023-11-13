@@ -101,8 +101,8 @@ class _CertificateState extends State<Certificate> {
                 type: 'text',
                 title: 'Certificate',
               ),
-              // content()
-              UnderConstruction()
+              content()
+              // UnderConstruction()
             ],
           ),
         ),

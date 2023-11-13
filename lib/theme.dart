@@ -13,6 +13,7 @@ const backgroundColor2 = Color(0xff1d1d1d);
 const pastelSecondaryColor = Color(0xffE2E3E5);
 const dangerColor = Color(0xffDC3545);
 const successColor = Color(0xff008A27);
+const certificateColor = Color(0xff14707B);
 
 TextStyle primaryTextStyle = GoogleFonts.poppins(
   color: primaryColor,
@@ -34,6 +35,10 @@ TextStyle successTextStyle = GoogleFonts.poppins(
 );
 TextStyle dangerTextStyle = GoogleFonts.poppins(
   color: dangerColor,
+);
+
+TextStyle certificateTextStyle = GoogleFonts.poppins(
+  color: certificateColor,
 );
 
 FontWeight light = FontWeight.w300;
