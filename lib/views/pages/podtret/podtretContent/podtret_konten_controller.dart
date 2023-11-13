@@ -92,20 +92,19 @@ class PodtretKontenController extends GetxController {
     } else {
       return '$minutes minutes ago';
     }
-
   }
 
   Future<PodtretComment> fetchPodtretComments(String podtretId) async {
     try {
       PodtretComment comments = PodtretComment();
-      
+
       String? userToken = await GlobalVariable.secureStorage.read(key: 'user_token');
       comments = await PodtretsProvider.getPodtretComments(userToken ?? "", podtretId);
 
       totalComment.value = comments.podtretComment?.length ?? 0;
 
       return comments;
-    } on Exception catch(e) { 
+    } on Exception catch (e) {
       throw Exception('error: $e');
     }
   }

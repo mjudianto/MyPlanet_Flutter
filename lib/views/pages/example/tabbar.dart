@@ -56,7 +56,7 @@ class _FirstExampleState extends State<FirstExample> {
                   ),
                 ],
               ),
-              Expanded(
+              const Expanded(
                 child: TabBarView(
                   children: <Widget>[
                     Center(

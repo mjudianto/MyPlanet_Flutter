@@ -59,16 +59,12 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
               : Column(children: [
                   PageAppBar(type: "text", title: _testData![0].judul),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 30.0, bottom: 10, left: 20, right: 20),
+                    padding: const EdgeInsets.only(top: 30.0, bottom: 10, left: 20, right: 20),
                     child: Row(
                       children: [
                         Text(
                           'Question ${currentQuestion + 1} of ${_testData![0].questionNumber == 0 ? _testData!.length : _testData![0].questionNumber}',
-                          style: TextStyle(
-                              fontFamily: 'Poppins',
-                              fontSize: 14,
-                              fontWeight: semiBold),
+                          style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: semiBold),
                         ),
                         const Spacer(),
                         Countdown(
@@ -83,15 +79,11 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                             int seconds = duration.inSeconds.remainder(60);
 
                             // Format the components as HH:MM:SS
-                            String formattedTime =
-                                '${hours}h ${minutes.toString().padLeft(2, '0')}m ${seconds.toString().padLeft(2, '0')}s';
+                            String formattedTime = '${hours}h ${minutes.toString().padLeft(2, '0')}m ${seconds.toString().padLeft(2, '0')}s';
 
                             return Text(
                               formattedTime,
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  fontSize: 14,
-                                  fontWeight: semiBold),
+                              style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: semiBold),
                             );
                           },
                           interval: const Duration(milliseconds: 1000),
@@ -113,8 +105,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                     height: 20,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20, bottom: 20),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 20),
                     child: Column(
                       children: [
                         Text(
@@ -135,20 +126,14 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                             choices!.length,
                             (int index) {
                               return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 8), // Add vertical padding
+                                padding: const EdgeInsets.symmetric(vertical: 8), // Add vertical padding
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       if (answers.length > currentQuestion) {
-                                        answers[currentQuestion] =
-                                            generatedChoices[currentQuestion]![
-                                                    index]
-                                                .toString();
+                                        answers[currentQuestion] = generatedChoices[currentQuestion]![index].toString();
                                       } else {
-                                        answers.add(generatedChoices[
-                                                currentQuestion]![index]
-                                            .toString());
+                                        answers.add(generatedChoices[currentQuestion]![index].toString());
                                       }
                                       _selectedChoice = index;
                                     });
@@ -158,56 +143,36 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                     child: Container(
                                       color: _selectedChoice == index ||
                                               (answers.length > currentQuestion
-                                                  ? answers[currentQuestion] ==
-                                                      generatedChoices[
-                                                                  currentQuestion]![
-                                                              index]
-                                                          .toString()
+                                                  ? answers[currentQuestion] == generatedChoices[currentQuestion]![index].toString()
                                                   : false)
                                           ? primaryColor
                                           : pastelSecondaryColor,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 5),
+                                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                                       child: Row(
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 5.0, top: 5, bottom: 5),
+                                            padding: const EdgeInsets.only(right: 5.0, top: 5, bottom: 5),
                                             child: Container(
                                               width: 45,
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: _selectedChoice ==
-                                                            index ||
-                                                        (answers.length >
-                                                                currentQuestion
-                                                            ? answers[
-                                                                    currentQuestion] ==
-                                                                generatedChoices[
-                                                                            currentQuestion]![
-                                                                        index]
-                                                                    .toString()
+                                                color: _selectedChoice == index ||
+                                                        (answers.length > currentQuestion
+                                                            ? answers[currentQuestion] == generatedChoices[currentQuestion]![index].toString()
                                                             : false)
                                                     ? whiteColor
                                                     : primaryColor,
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  String.fromCharCode(
-                                                      64 + index + 1),
+                                                  String.fromCharCode(64 + index + 1),
                                                   style: TextStyle(
                                                     fontFamily: 'Poppins',
                                                     fontSize: 20,
                                                     fontWeight: bold,
-                                                    color: _selectedChoice ==
-                                                                index ||
-                                                            (answers.length >
-                                                                    currentQuestion
-                                                                ? answers[
-                                                                        currentQuestion] ==
-                                                                    generatedChoices[currentQuestion]![
-                                                                            index]
-                                                                        .toString()
+                                                    color: _selectedChoice == index ||
+                                                            (answers.length > currentQuestion
+                                                                ? answers[currentQuestion] == generatedChoices[currentQuestion]![index].toString()
                                                                 : false)
                                                         ? blackColor
                                                         : whiteColor,
@@ -216,27 +181,17 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                               ),
                                             ),
                                           ),
-                                          const SizedBox(
-                                              width:
-                                                  10), // Add spacing between the circle and the text
+                                          const SizedBox(width: 10), // Add spacing between the circle and the text
                                           Flexible(
                                             child: Text(
-                                              generatedChoices[
-                                                  currentQuestion]![index],
+                                              generatedChoices[currentQuestion]![index],
                                               style: TextStyle(
                                                   fontFamily: 'Poppins',
                                                   fontSize: 14,
                                                   fontWeight: medium,
-                                                  color: _selectedChoice ==
-                                                              index ||
-                                                          (answers.length >
-                                                                  currentQuestion
-                                                              ? answers[
-                                                                      currentQuestion] ==
-                                                                  generatedChoices[
-                                                                              currentQuestion]![
-                                                                          index]
-                                                                      .toString()
+                                                  color: _selectedChoice == index ||
+                                                          (answers.length > currentQuestion
+                                                              ? answers[currentQuestion] == generatedChoices[currentQuestion]![index].toString()
                                                               : false)
                                                       ? whiteColor
                                                       : blackColor),
@@ -258,8 +213,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 20.0, right: 20.0, bottom: 30.0),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 30.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -281,16 +235,14 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                 ),
                                 backgroundColor: secondaryColor),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                               child: Text(
                                 'Previous',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 16,
                                   fontWeight: semiBold,
-                                  color:
-                                      whiteColor, // Customize the color of the text
+                                  color: whiteColor, // Customize the color of the text
                                 ),
                               ),
                             ),
@@ -306,8 +258,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                             onPressed: () async {
                               if (_testData![0].questionNumber == 0
                                   ? currentQuestion + 1 != _testData!.length
-                                  : currentQuestion + 1 !=
-                                      _testData![0].questionNumber) {
+                                  : currentQuestion + 1 != _testData![0].questionNumber) {
                                 setState(() {
                                   if (answers.length < currentQuestion + 1) {
                                     answers.add('blank');
@@ -315,11 +266,8 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
 
                                   currentQuestion++;
                                   _selectedChoice = null;
-                                  if (generatedChoices.length <
-                                      currentQuestion + 1) {
-                                    choices = _testData![currentQuestion]
-                                        .choices
-                                        .split(';');
+                                  if (generatedChoices.length < currentQuestion + 1) {
+                                    choices = _testData![currentQuestion].choices.split(';');
                                     choices!.shuffle();
                                     generatedChoices.add((choices));
                                   }
@@ -327,7 +275,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                               } else {
                                 correctAnswer = 0;
 
-                                if (answers.length < currentQuestion + 1) {
+                                if (answers.length <= currentQuestion) {
                                   answers.add('blank');
                                 }
 
@@ -337,26 +285,19 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                   }
                                 }
 
-                                String score =
-                                    (correctAnswer / _testData!.length * 100)
-                                        .toStringAsFixed(0);
+                                print(answers);
+                                print(correctAnswer);
 
-                                ElearningFeedbackPageController
-                                    elearningFeedbackPageController =
-                                    Get.find();
+                                String score = (correctAnswer / answers.length * 100).toStringAsFixed(0);
+                                print(score);
+                                // String score = '100';
 
-                                await elearningFeedbackPageController
-                                    .checkExistingUserFeedback(
-                                        elearningTestPageController
-                                            .elearningTestId);
+                                ElearningFeedbackPageController elearningFeedbackPageController = Get.find();
 
-                                elearningTestPageController.score =
-                                    int.parse(score);
-                                elearningTestPageController
-                                    .status = int.parse(score) >=
-                                        elearningTestPageController.passingScore
-                                    ? 'Lulus'
-                                    : 'Gagal';
+                                await elearningFeedbackPageController.checkExistingUserFeedback(elearningTestPageController.elearningTestId);
+
+                                elearningTestPageController.score = int.parse(score);
+                                elearningTestPageController.status = int.parse(score) >= elearningTestPageController.passingScore ? 'Lulus' : 'Gagal';
 
                                 elearningTestPageController.submitTestRecord(score);
 
@@ -369,23 +310,16 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                 ),
                                 backgroundColor: primaryColor),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                               child: Text(
                                 _testData![0].questionNumber == 0
-                                    ? (currentQuestion + 1 != _testData!.length
-                                        ? 'Next'
-                                        : 'Submit')
-                                    : (currentQuestion + 1 !=
-                                            _testData![0].questionNumber
-                                        ? 'Next'
-                                        : 'Submit'),
+                                    ? (currentQuestion + 1 != _testData!.length ? 'Next' : 'Submit')
+                                    : (currentQuestion + 1 != _testData![0].questionNumber ? 'Next' : 'Submit'),
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 16,
                                   fontWeight: semiBold,
-                                  color:
-                                      whiteColor, // Customize the color of the text
+                                  color: whiteColor, // Customize the color of the text
                                 ),
                               ),
                             ),

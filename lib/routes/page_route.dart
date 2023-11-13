@@ -47,7 +47,7 @@ class AppPage {
     ),
     GetPage(
       name: RouteName.elearningCoursePage,
-      page: () => const ElearningCoursePage(),
+      page: () => ElearningCoursePage(),
     ),
     GetPage(
       name: RouteName.elearningTestPage,

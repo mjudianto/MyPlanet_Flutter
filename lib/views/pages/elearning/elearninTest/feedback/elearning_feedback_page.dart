@@ -12,8 +12,7 @@ import 'package:myplanet/views/widgets/appBar/appbar.dart';
 class ElearningFeedbackPage extends StatelessWidget {
   ElearningFeedbackPage({super.key});
 
-  final ElearningFeedbackPageController elearningFeedbackPageController =
-      Get.find();
+  final ElearningFeedbackPageController elearningFeedbackPageController = Get.find();
   final ElearningTestPageController elearningTestPageController = Get.find();
   final TextEditingController feedbackTextController = TextEditingController();
 
@@ -41,13 +40,8 @@ class ElearningFeedbackPage extends StatelessWidget {
                   child: SizedBox(
                     width: 300,
                     child: Text(
-                      elearningTestPageController
-                              .elearningTest.data?[0].judul ??
-                          "",
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
-                          fontWeight: semiBold),
+                      elearningTestPageController.elearningTest.data?[0].judul ?? "",
+                      style: TextStyle(fontFamily: 'Poppins', fontSize: 16, fontWeight: semiBold),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -56,22 +50,15 @@ class ElearningFeedbackPage extends StatelessWidget {
                   height: 40,
                 ),
                 FutureBuilder(
-                    future:
-                        elearningFeedbackPageController.fetchFeedbackQuestion(),
+                    future: elearningFeedbackPageController.fetchFeedbackQuestion(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return SizedBox(
                           height: MediaQuery.of(context).size.height * 0.5,
                           child: Center(
-                            child: DotLottieLoader.fromAsset(
-                              "assets/loading.lottie",
-                              frameBuilder:(BuildContext ctx, DotLottie? dotlottie) {
+                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
-                                return Lottie.memory(
-                                    dotlottie.animations.values.single,
-                                    width: 250,
-                                    height: 250,
-                                    repeat: true);
+                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                               } else {
                                 return const CircularProgressIndicator();
                               }
@@ -94,22 +81,14 @@ class ElearningFeedbackPage extends StatelessWidget {
 
                         return SingleChildScrollView(
                           child: Container(
-                            constraints: const BoxConstraints(
-                                maxHeight: double.infinity),
+                            constraints: const BoxConstraints(maxHeight: double.infinity),
                             child: ListView.builder(
                               shrinkWrap: true,
-                              physics:
-                                  const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
+                              physics: const NeverScrollableScrollPhysics(), // Set physics to make it unscrollable
                               itemCount: feedbackQuestion?.length,
                               itemBuilder: (BuildContext context, int index) {
                                 if (feedbacks.length <= index) {
-                                  feedbacks.add({
-                                    'feedbackQuestionId':
-                                        (feedbackQuestion?[index]
-                                                .feedbackQuestionId)
-                                            .toString(),
-                                    "feedback": '0'
-                                  });
+                                  feedbacks.add({'feedbackQuestionId': (feedbackQuestion?[index].feedbackQuestionId).toString(), "feedback": '0'});
                                 }
 
                                 return Column(
@@ -119,14 +98,8 @@ class ElearningFeedbackPage extends StatelessWidget {
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        feedbackQuestion![index]
-                                            .question
-                                            .toString(),
-                                        style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            fontSize: 12,
-                                            color: blackColor,
-                                            fontWeight: medium),
+                                        feedbackQuestion![index].question.toString(),
+                                        style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: blackColor, fontWeight: medium),
                                       ),
                                     ),
                                     const SizedBox(
@@ -134,8 +107,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                                     ),
                                     FeedbackAnswer(
                                         feedbacks: feedbacks[index],
-                                        questionType: feedbackQuestion[index]
-                                            .questionType!,
+                                        questionType: feedbackQuestion[index].questionType!,
                                         controller: feedbackTextController),
                                     const SizedBox(
                                       height: 16,
@@ -153,11 +125,9 @@ class ElearningFeedbackPage extends StatelessWidget {
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () async {
-                      feedbacks[4]['feedback'] =
-                          feedbackTextController.text.toString();
+                      feedbacks[4]['feedback'] = feedbackTextController.text.toString();
 
-                      elearningFeedbackPageController
-                          .sendUserFeedback(feedbacks);
+                      elearningFeedbackPageController.sendUserFeedback(feedbacks);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
@@ -166,14 +136,10 @@ class ElearningFeedbackPage extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: Text(
                         'submit',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: semiBold),
+                        style: TextStyle(fontSize: 16, fontFamily: 'Poppins', fontWeight: semiBold),
                       ),
                     ),
                   ),
@@ -197,9 +163,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                   child: Container(
                     width: Get.width * 0.8,
                     height: Get.height * 0.5,
-                    decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(30)),
+                    decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(30)),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -207,51 +171,31 @@ class ElearningFeedbackPage extends StatelessWidget {
                           const SizedBox(
                             height: 24,
                           ),
-                          DotLottieLoader.fromAsset(
-                              lulus
-                                  ? "assets/icons/greenChecklist.lottie"
-                                  : "assets/icons/redX.lottie",
-                              frameBuilder:
-                                  (BuildContext ctx, DotLottie? dotlottie) {
+                          DotLottieLoader.fromAsset(lulus ? "assets/icons/greenChecklist.lottie" : "assets/icons/redX.lottie",
+                              frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                             if (dotlottie != null) {
-                              return Lottie.memory(
-                                  dotlottie.animations.values.single,
-                                  width: 120,
-                                  height: 120,
-                                  repeat: false);
+                              return Lottie.memory(dotlottie.animations.values.single, width: 120, height: 120, repeat: false);
                             } else {
                               return Container();
                             }
                           }),
                           Text(
                             '${!lulus ? 'Failed' : 'Congrats'}!',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 24,
-                                fontWeight: bold,
-                                color: blackColor),
+                            style: TextStyle(fontFamily: 'Poppins', fontSize: 24, fontWeight: bold, color: blackColor),
                           ),
                           const SizedBox(
                             height: 8,
                           ),
                           Text(
                             '${!lulus ? 'Post test gagal, mohon coba lagi' : 'Post test completed successfully'}!',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 14,
-                                fontWeight: bold,
-                                color: blackColor),
+                            style: TextStyle(fontFamily: 'Poppins', fontSize: 14, fontWeight: bold, color: blackColor),
                           ),
                           const SizedBox(
                             height: 16,
                           ),
                           Text(
                             'YOUR SCORE',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 12,
-                                fontWeight: medium,
-                                color: secondaryColor),
+                            style: TextStyle(fontFamily: 'Poppins', fontSize: 12, fontWeight: medium, color: secondaryColor),
                           ),
                           const SizedBox(
                             height: 12,
@@ -270,9 +214,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                           ),
                           RichText(
                             text: TextSpan(
-                                text: lulus
-                                    ? 'Terima Kasih telah menyelesaikan '
-                                    : 'Mohon maaf anda gagal dalam menyelesaikan ',
+                                text: lulus ? 'Terima Kasih telah menyelesaikan ' : 'Mohon maaf anda gagal dalam menyelesaikan ',
                                 style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 12,
@@ -281,8 +223,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: elearningTestPageController
-                                        .elearningTest.data![0].judul,
+                                    text: elearningTestPageController.elearningTest.data![0].judul,
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 12,
@@ -291,9 +232,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                                     ),
                                   ),
                                   TextSpan(
-                                    text: lulus
-                                        ? ' dengan baik.'
-                                        : ', mohon coba lagi',
+                                    text: lulus ? ' dengan baik.' : ', mohon coba lagi',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontSize: 12,
@@ -318,7 +257,7 @@ class ElearningFeedbackPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () async {
                       // Get.offAllNamed(RouteName.elearningCoursePage);
-                      Get.offAndToNamed(RouteName.elearningCoursePage);
+                      Get.offNamed(RouteName.elearningCoursePage);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: secondaryColor,
@@ -327,14 +266,10 @@ class ElearningFeedbackPage extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                       child: Text(
                         'Back',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: semiBold),
+                        style: TextStyle(fontSize: 16, fontFamily: 'Poppins', fontWeight: semiBold),
                       ),
                     ),
                   ),
@@ -404,11 +339,7 @@ class FeedbackAnswer extends StatelessWidget {
               filled: true, // Fill the container with the background color
               fillColor: pastelSecondaryColor, // Set your background color here
             ),
-            style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 12,
-                color: blackColor,
-                fontWeight: medium),
+            style: TextStyle(fontFamily: 'Poppins', fontSize: 12, color: blackColor, fontWeight: medium),
           ),
         ),
       );
