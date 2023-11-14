@@ -1,16 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:myplanet/helpers/api_certificate.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/home_binding.dart';
 import 'package:myplanet/routes/page_route.dart';
 
 void main() async {
-  HttpOverrides.global = MyHttpOverrides();
-
   WidgetsFlutterBinding.ensureInitialized();
+
   final isUserLoggedIn = await GlobalVariable.userAuth();
   // final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
   String initialLocation = '/';

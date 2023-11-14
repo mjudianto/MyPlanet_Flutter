@@ -24,7 +24,6 @@ class ElearningFeedbackPage extends StatelessWidget {
     // if (!elearningFeedbackPageController.feedbackSent.value && lulus) {
     //   elearningFeedbackPageController.fetchFeedbackQuestion();
     // }
-    final MediaQueryData mediaQueryData = MediaQuery.of(context);
 
     return Obx(() {
       if (!elearningFeedbackPageController.feedbackSent.value && lulus) {
