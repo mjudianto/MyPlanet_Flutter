@@ -40,7 +40,7 @@ class DashboardPage extends StatelessWidget {
               items: [
                 _bottomNavigationBarItem(imagePath: 'assets/icons/ic_home.png', label: 'Home'),
                 _bottomNavigationBarItem(imagePath: 'assets/icons/elearning_icon.png', label: 'E-learning'),
-                _bottomNavigationBarItem(imagePath: 'assets/icons/ic_podtret_appbar.png', label: 'Podtret'),
+                _bottomNavigationBarItem(imagePath: 'assets/icons/ic_podtret_2.png', label: 'Podtret'),
                 _bottomNavigationBarItem(imagePath: 'assets/icons/community_icon.png', label: 'Community'),
                 _bottomNavigationBarItem(imagePath: '${GlobalVariable.myplanetUrl}/${GlobalVariable.userData['user']['empnik']}', label: 'Profile'),
               ],
