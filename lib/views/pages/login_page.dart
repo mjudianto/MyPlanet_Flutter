@@ -9,7 +9,6 @@ import 'package:myplanet/views/widgets/appBar/login_appbar.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -174,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 bottom: MediaQuery.of(context).viewInsets.bottom,
                               ),
                               child: Container(
-                                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                                 color: whiteColor,
                                 child: Center(
                                   child: ListView(

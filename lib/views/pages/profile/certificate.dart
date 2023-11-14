@@ -3,7 +3,6 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/profile/certificate_detail.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:myplanet/views/widgets/under_construction.dart';
 
 class Certificate extends StatefulWidget {
   const Certificate({super.key});
@@ -31,7 +30,7 @@ class _CertificateState extends State<Certificate> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CertificateDetail(), // Ganti dengan nama yang sesuai
+                    builder: (context) => CertificateDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },

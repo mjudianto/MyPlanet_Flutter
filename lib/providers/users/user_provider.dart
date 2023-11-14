@@ -5,7 +5,9 @@ import 'package:myplanet/models/users/user_model.dart';
 class UserProvider {
   static Future<User> userAuth(String userNik, String password) async {
     try {
-      final response = await http.post(
+      final client = await GlobalVariable.getSSLPinningClient();
+
+      final response = await client.post(
         Uri.parse('${GlobalVariable.apiUrl}/users/userLogin'),
         body: {'userNik': userNik, 'password': password},
       );
