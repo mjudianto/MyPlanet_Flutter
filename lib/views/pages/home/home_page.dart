@@ -8,6 +8,7 @@ import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 import 'package:myplanet/views/widgets/appBar/homepage_appbar_widget.dart';
 import 'package:myplanet/views/widgets/card/card_horizontal_widget.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
@@ -281,6 +282,13 @@ class HomePage extends StatelessWidget {
                               thumbnailWidht: 120,
                               titleWidth: 200,
                               subTitleWidth: 185,
+                              onTap: () {
+                                PodtretKontenController podtretKontenController = Get.find();
+
+                                podtretKontenController.podtret = podtret;
+
+                                Get.toNamed(RouteName.podtretContent);
+                              },
                             );
                           })),
                         );

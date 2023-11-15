@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:myplanet/helpers/global_variable.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
 import 'package:myplanet/views/widgets/carousel/carouselPodtret/carousel_podtret_controller.dart';
 
 class ImageSliderWithIndicator extends StatelessWidget {
-  final List<String> imageAssetNames; // Daftar nama file gambar
+  final List<dynamic> podtretList; // Daftar nama file gambar
   final ImageSliderController controller = Get.find();
 
-  ImageSliderWithIndicator(this.imageAssetNames, {Key? key}) : super(key: key);
+  ImageSliderWithIndicator(this.podtretList, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +33,23 @@ class ImageSliderWithIndicator extends StatelessWidget {
               controller.onPageChanged(index); // Update the currentIndex here
             },
           ),
-          items: imageAssetNames
+          items: podtretList
               .asMap()
               .entries
               .map(
                 (entry) => GestureDetector(
                   onTap: () {
-                    // Tambahkan tindakan yang ingin Anda lakukan saat item diklik di sini
-                    // print('Item ${entry.key} diklik');
-                    // Misalnya, navigasi ke halaman tertentu
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => YourPage()));
+                    PodtretKontenController podtretKontenController = Get.find();
+
+                    podtretKontenController.podtret = entry.value;
+
+                    Get.toNamed(RouteName.podtretContent);
                   },
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                     child: FadeInImage(
                       placeholder: const AssetImage('assets/loading.jpeg'),
-                      image: NetworkImage(entry.value),
+                      image: NetworkImage('${GlobalVariable.myplanetUrl}/${entry.value.thumbnail}'),
                       fit: BoxFit.cover,
                       width: 1000.0,
                     ),
@@ -67,7 +71,7 @@ class ImageSliderWithIndicator extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: imageAssetNames.asMap().entries.map((entry) {
+      children: podtretList.asMap().entries.map((entry) {
         return GestureDetector(
           onTap: () => controller.carouselController.animateToPage(entry.key),
           child: Container(
@@ -75,14 +79,9 @@ class ImageSliderWithIndicator extends StatelessWidget {
             height: 8.0,
             margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 3.0),
             decoration: BoxDecoration(
-              shape:
-                  current == entry.key ? BoxShape.rectangle : BoxShape.circle,
-              borderRadius:
-                  current == entry.key ? BorderRadius.circular(5.0) : null,
-              color: (Theme.of(context).brightness == Brightness.dark
-                      ? secondaryColor
-                      : primaryColor)
-                  .withOpacity(
+              shape: current == entry.key ? BoxShape.rectangle : BoxShape.circle,
+              borderRadius: current == entry.key ? BorderRadius.circular(5.0) : null,
+              color: (Theme.of(context).brightness == Brightness.dark ? secondaryColor : primaryColor).withOpacity(
                 current == entry.key ? 0.9 : 0.4,
               ),
             ),

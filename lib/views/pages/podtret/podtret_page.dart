@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
-import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
@@ -35,11 +34,9 @@ class _PodtretPageState extends State<PodtretPage> {
 
     Widget rekomendasiPodtretTitle() {
       return Container(
-        margin: const EdgeInsets.only(
-            top: 15, left: defaultMargin, right: defaultMargin),
+        margin: const EdgeInsets.only(top: 15, left: defaultMargin, right: defaultMargin),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // Untuk menjaga ikon di pojok kanan
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Untuk menjaga ikon di pojok kanan
           children: [
             Text(
               'Rekomendasi',
@@ -82,15 +79,9 @@ class _PodtretPageState extends State<PodtretPage> {
                           height: 100,
                           width: MediaQuery.of(context).size.width,
                           child: Center(
-                            child: DotLottieLoader.fromAsset(
-                                "assets/loading.lottie", frameBuilder:
-                                    (BuildContext ctx, DotLottie? dotlottie) {
+                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
-                                return Lottie.memory(
-                                    dotlottie.animations.values.single,
-                                    width: 250,
-                                    height: 250,
-                                    repeat: true);
+                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                               } else {
                                 return const CircularProgressIndicator();
                               }
@@ -115,26 +106,20 @@ class _PodtretPageState extends State<PodtretPage> {
                           var podtrets = snapshot.data!;
 
                           final podtretToShow = podtrets.data?.toList() ?? [];
-                          podtretToShow
-                              .sort((a, b) => a.views!.compareTo(b.views!));
+                          podtretToShow.sort((a, b) => a.views!.compareTo(b.views!));
 
                           final top5LowestView = podtretToShow.take(5).toList();
 
                           return SizedBox(
                             width: Get.width,
                             child: ListView.builder(
-                              padding: const EdgeInsets.only(
-                                  left: defaultMargin, right: 5),
+                              padding: const EdgeInsets.only(left: defaultMargin, right: 5),
                               scrollDirection: Axis.horizontal,
                               itemCount: top5LowestView.length,
                               itemBuilder: (context, index) {
                                 return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 4.0,
-                                      vertical:
-                                          4), // Adjust the right padding as needed
-                                  child: CardRecomendation(
-                                      item: top5LowestView[index]),
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4), // Adjust the right padding as needed
+                                  child: CardRecomendation(item: top5LowestView[index]),
                                 );
                               },
                             ),
@@ -156,11 +141,9 @@ class _PodtretPageState extends State<PodtretPage> {
 
     Widget newEpsPodtretTitle() {
       return Container(
-        margin: const EdgeInsets.only(
-            top: 15, left: defaultMargin, right: defaultMargin),
+        margin: const EdgeInsets.only(top: 15, left: defaultMargin, right: defaultMargin),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // Untuk menjaga ikon di pojok kanan
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Untuk menjaga ikon di pojok kanan
           children: [
             Text(
               'Episode Baru',
@@ -203,15 +186,9 @@ class _PodtretPageState extends State<PodtretPage> {
                           height: 100,
                           width: MediaQuery.of(context).size.width,
                           child: Center(
-                            child: DotLottieLoader.fromAsset(
-                                "assets/loading.lottie", frameBuilder:
-                                    (BuildContext ctx, DotLottie? dotlottie) {
+                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
-                                return Lottie.memory(
-                                    dotlottie.animations.values.single,
-                                    width: 250,
-                                    height: 250,
-                                    repeat: true);
+                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                               } else {
                                 return const CircularProgressIndicator();
                               }
@@ -235,15 +212,13 @@ class _PodtretPageState extends State<PodtretPage> {
                         if (snapshot.data != null) {
                           var podtrets = snapshot.data!;
 
-                          final podtretToShow =
-                              podtrets.data?.take(10).toList() ?? [];
+                          final podtretToShow = podtrets.data?.take(10).toList() ?? [];
 
                           return SizedBox(
                             width: Get.width,
                             height: 130,
                             child: ListView.builder(
-                              padding: const EdgeInsets.only(
-                                  left: defaultMargin, right: 5),
+                              padding: const EdgeInsets.only(left: defaultMargin, right: 5),
                               scrollDirection: Axis.horizontal,
                               itemCount: podtretToShow.length,
                               itemBuilder: (context, index) {
@@ -268,11 +243,9 @@ class _PodtretPageState extends State<PodtretPage> {
 
     Widget kumisPodtretTitle() {
       return Container(
-        margin: const EdgeInsets.only(
-            top: 15, left: defaultMargin, right: defaultMargin),
+        margin: const EdgeInsets.only(top: 15, left: defaultMargin, right: defaultMargin),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // Untuk menjaga ikon di pojok kanan
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Untuk menjaga ikon di pojok kanan
           children: [
             Text(
               'Top KUMIS',
@@ -315,15 +288,9 @@ class _PodtretPageState extends State<PodtretPage> {
                           height: 100,
                           width: MediaQuery.of(context).size.width,
                           child: Center(
-                            child: DotLottieLoader.fromAsset(
-                                "assets/loading.lottie", frameBuilder:
-                                    (BuildContext ctx, DotLottie? dotlottie) {
+                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
-                                return Lottie.memory(
-                                    dotlottie.animations.values.single,
-                                    width: 250,
-                                    height: 250,
-                                    repeat: true);
+                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                               } else {
                                 return const CircularProgressIndicator();
                               }
@@ -351,19 +318,15 @@ class _PodtretPageState extends State<PodtretPage> {
                           //     podtrets.data?.take(10).toList() ?? [];
 
                           final podtretToShow = podtrets.data?.toList() ?? [];
-                          podtretToShow
-                              .sort((a, b) => b.views!.compareTo(a.views!));
+                          podtretToShow.sort((a, b) => b.views!.compareTo(a.views!));
 
-                          final topKumis = podtretToShow
-                              .where((item) => item.nama == 'KUMIS')
-                              .toList();
+                          final topKumis = podtretToShow.where((item) => item.nama == 'KUMIS').toList();
 
                           return SizedBox(
                             width: Get.width,
                             height: 130,
                             child: ListView.builder(
-                              padding: const EdgeInsets.only(
-                                  left: defaultMargin, right: 5),
+                              padding: const EdgeInsets.only(left: defaultMargin, right: 5),
                               scrollDirection: Axis.horizontal,
                               itemCount: topKumis.length,
                               itemBuilder: (context, index) {
@@ -388,11 +351,9 @@ class _PodtretPageState extends State<PodtretPage> {
 
     Widget topEpsPodtretTitle() {
       return Container(
-        margin: const EdgeInsets.only(
-            top: 22, left: defaultMargin, right: defaultMargin),
+        margin: const EdgeInsets.only(top: 22, left: defaultMargin, right: defaultMargin),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // Untuk menjaga ikon di pojok kanan
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // Untuk menjaga ikon di pojok kanan
           children: [
             Text(
               'Top Episode',
@@ -432,15 +393,9 @@ class _PodtretPageState extends State<PodtretPage> {
                           height: 100,
                           width: MediaQuery.of(context).size.width,
                           child: Center(
-                            child: DotLottieLoader.fromAsset(
-                                "assets/loading.lottie", frameBuilder:
-                                    (BuildContext ctx, DotLottie? dotlottie) {
+                            child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                               if (dotlottie != null) {
-                                return Lottie.memory(
-                                    dotlottie.animations.values.single,
-                                    width: 250,
-                                    height: 250,
-                                    repeat: true);
+                                return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                               } else {
                                 return const CircularProgressIndicator();
                               }
@@ -474,8 +429,7 @@ class _PodtretPageState extends State<PodtretPage> {
                         var podtrets = snapshot.data!;
 
                         final podtretToShow = podtrets.data?.toList() ?? [];
-                        podtretToShow
-                            .sort((a, b) => b.views!.compareTo(a.views!));
+                        podtretToShow.sort((a, b) => b.views!.compareTo(a.views!));
 
                         final top10Podtret = podtretToShow.take(10).toList();
 
@@ -483,8 +437,7 @@ class _PodtretPageState extends State<PodtretPage> {
                           width: Get.width,
                           height: 155,
                           child: ListView.builder(
-                            padding: const EdgeInsets.only(
-                                left: defaultMargin, right: 5),
+                            padding: const EdgeInsets.only(left: defaultMargin, right: 5),
                             scrollDirection: Axis.horizontal,
                             itemCount: top10Podtret.length ~/ 2,
                             itemBuilder: (context, index) {
@@ -532,22 +485,15 @@ class _PodtretPageState extends State<PodtretPage> {
                     child: FutureBuilder(
                       future: homePageController.newPodtrets,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
                           // Display a loading indicator while waiting for the future to complete
                           return SizedBox(
                             height: 100,
                             width: MediaQuery.of(context).size.width,
                             child: Center(
-                              child: DotLottieLoader.fromAsset(
-                                  "assets/loading.lottie", frameBuilder:
-                                      (BuildContext ctx, DotLottie? dotlottie) {
+                              child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                                 if (dotlottie != null) {
-                                  return Lottie.memory(
-                                      dotlottie.animations.values.single,
-                                      width: 250,
-                                      height: 250,
-                                      repeat: true);
+                                  return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                                 } else {
                                   return const CircularProgressIndicator();
                                 }
@@ -571,14 +517,10 @@ class _PodtretPageState extends State<PodtretPage> {
                           if (snapshot.data != null) {
                             var podtrets = snapshot.data!;
 
-                            final podtretToShow =
-                                podtrets.data?.take(5).toList() ?? [];
-                            final thumbnailList = podtretToShow
-                                .map((podtret) =>
-                                    '${GlobalVariable.myplanetUrl}/${podtret.thumbnail}')
-                                .toList();
+                            final podtretToShow = podtrets.data?.take(5).toList() ?? [];
+                            // final thumbnailList = podtretToShow.map((podtret) => '${GlobalVariable.myplanetUrl}/${podtret.thumbnail}').toList();
 
-                            return ImageSliderWithIndicator(thumbnailList);
+                            return ImageSliderWithIndicator(podtretToShow);
                           } else {
                             // Handle the case when there is no data
                             return const Text('No data available.');
@@ -598,16 +540,10 @@ class _PodtretPageState extends State<PodtretPage> {
                 ],
               ),
             ),
-            PodtretCategory(
-                homePageController: homePageController,
-                categoryName: 'Ngobrol Santai'),
-            PodtretCategory(
-                homePageController: homePageController,
-                categoryName: 'Sapa Mantan'),
-            PodtretCategory(
-                homePageController: homePageController, categoryName: 'KUMIS'),
-            PodtretCategory(
-                homePageController: homePageController, categoryName: 'TKMTS'),
+            PodtretCategory(homePageController: homePageController, categoryName: 'Ngobrol Santai'),
+            PodtretCategory(homePageController: homePageController, categoryName: 'Sapa Mantan'),
+            PodtretCategory(homePageController: homePageController, categoryName: 'KUMIS'),
+            PodtretCategory(homePageController: homePageController, categoryName: 'TKMTS'),
           ],
         ),
       );
@@ -661,15 +597,9 @@ class PodtretCategory extends StatelessWidget {
                     height: 100,
                     width: MediaQuery.of(context).size.width,
                     child: Center(
-                      child: DotLottieLoader.fromAsset("assets/loading.lottie",
-                          frameBuilder:
-                              (BuildContext ctx, DotLottie? dotlottie) {
+                      child: DotLottieLoader.fromAsset("assets/loading.lottie", frameBuilder: (BuildContext ctx, DotLottie? dotlottie) {
                         if (dotlottie != null) {
-                          return Lottie.memory(
-                              dotlottie.animations.values.single,
-                              width: 250,
-                              height: 250,
-                              repeat: true);
+                          return Lottie.memory(dotlottie.animations.values.single, width: 250, height: 250, repeat: true);
                         } else {
                           return const CircularProgressIndicator();
                         }
@@ -692,9 +622,7 @@ class PodtretCategory extends StatelessWidget {
                   var podtrets = snapshot.data!;
 
                   final podtretToShow = podtrets.data?.toList() ?? [];
-                  final filteredPodtret = podtretToShow
-                      .where((item) => item.nama == categoryName)
-                      .toList();
+                  final filteredPodtret = podtretToShow.where((item) => item.nama == categoryName).toList();
 
                   return SizedBox(
                     height: Get.height - 350,
@@ -739,9 +667,7 @@ class PodtretCategory extends StatelessWidget {
                   var podtrets = snapshot.data!;
 
                   final podtretToShow = podtrets.data?.toList() ?? [];
-                  final filteredPodtret = podtretToShow
-                      .where((item) => item.nama == categoryName)
-                      .toList();
+                  final filteredPodtret = podtretToShow.where((item) => item.nama == categoryName).toList();
 
                   return SizedBox(
                     height: Get.height - 350,

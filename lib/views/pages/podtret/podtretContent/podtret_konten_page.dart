@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/podtrets/podtret_comment_models.dart';
+import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/pages/podtret/podtretContent/podtret_konten_controller.dart';
@@ -961,10 +962,6 @@ class PodtretContent extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              // anotherEpisode(),
-              // anotherEpisode(),
-              // anotherEpisode(),
-              // anotherEpisode(),
               FutureBuilder(
                 future: homePageController.newPodtrets,
                 builder: (context, snapshot) {
@@ -999,7 +996,14 @@ class PodtretContent extends StatelessWidget {
                     // If the Future completed successfully, display the data
                     if (snapshot.data != null) {
                       var podtrets = snapshot.data!;
-                      final podtretToShow = podtrets.data?.take(8).toList() ?? [];
+                      // final podtretToShow = podtrets.data?.take(8).toList() ?? [];
+                      final podtretToShow = podtrets.data
+                              ?.where((element) {
+                                return element.podtretId != podtretKontenController.podtret.podtretId;
+                              })
+                              .take(8)
+                              .toList() ??
+                          [];
                       return Padding(
                         padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
                         child: Column(
@@ -1009,17 +1013,23 @@ class PodtretContent extends StatelessWidget {
                           String publishDate = podtretKontenController.publishDate();
 
                           return CardHorizontalWidget(
-                            thumbnail: podtret.thumbnail,
-                            category: podtret.nama,
-                            title: podtret.judul,
-                            subTitle: '${podtret.views}x watched • $publishDate',
-                            width: 370,
-                            height: 90,
-                            thumbnailHeight: 65,
-                            thumbnailWidht: 120,
-                            titleWidth: 185,
-                            subTitleWidth: 185,
-                          );
+                              thumbnail: podtret.thumbnail,
+                              category: podtret.nama,
+                              title: podtret.judul,
+                              subTitle: '${podtret.views}x watched • $publishDate',
+                              width: 370,
+                              height: 90,
+                              thumbnailHeight: 65,
+                              thumbnailWidht: 120,
+                              titleWidth: 185,
+                              subTitleWidth: 185,
+                              onTap: () {
+                                if (podtret.podtretId != podtretKontenController.podtret.podtretId) {
+                                  podtretKontenController.podtret = podtret;
+
+                                  Get.offAndToNamed(RouteName.podtretContent);
+                                }
+                              });
                         })),
                       );
                     } else {
