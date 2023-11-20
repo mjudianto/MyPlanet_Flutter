@@ -121,6 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                                   // ignore: use_build_context_synchronously
                                   Get.offNamed(RouteName.dashboardPage);
                                 } catch (e) {
+                                  print(e);
                                   _loginButtonClicked.value = false;
 
                                   return showTopSnackBar(
