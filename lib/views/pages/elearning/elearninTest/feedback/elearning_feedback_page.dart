@@ -101,6 +101,8 @@ class ElearningFeedbackPage extends StatelessWidget {
                         feedbacks[4]['feedback'] = feedbackTextController.text.toString();
 
                         elearningFeedbackPageController.sendUserFeedback(feedbacks);
+
+                        elearningFeedbackPageController.feedbackSent.value = true;
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor,
