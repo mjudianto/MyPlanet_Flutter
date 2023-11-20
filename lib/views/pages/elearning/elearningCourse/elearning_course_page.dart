@@ -673,7 +673,7 @@ class TestBuilder extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: maxtAttemptReached ? primaryColor : (underPunishment ? secondaryColor : secondaryColor),
+                                backgroundColor: maxtAttemptReached ? primaryColor : (underPunishment ? secondaryColor : primaryColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),

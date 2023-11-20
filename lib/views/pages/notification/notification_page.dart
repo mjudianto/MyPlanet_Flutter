@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myplanet/views/widgets/under_construction.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -20,8 +21,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, top: 20),
+        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: 20),
         child: Column(
           children: [
             InkWell(
@@ -29,8 +29,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 // print("Notif Check");
               },
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment
-                    .start, // Atur posisi child ke start (kiri)
+                crossAxisAlignment: CrossAxisAlignment.start, // Atur posisi child ke start (kiri)
                 children: [
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,17 +93,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                     decoration: const BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                            50), // Atur border radius sudut kiri atas
-                                        topRight: Radius.circular(
-                                            50), // Atur border radius sudut kanan atas
+                                        topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                                        topRight: Radius.circular(50), // Atur border radius sudut kanan atas
                                       ),
                                     ),
                                     // color: whiteColor,
                                     child: Center(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           Text(
@@ -117,8 +113,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                           const SizedBox(
                                             height: 24,
                                           ),
-                                          const Text(
-                                              'Apakah anda yakin ingin menghapus notifikasi ini?'),
+                                          const Text('Apakah anda yakin ingin menghapus notifikasi ini?'),
                                           const SizedBox(
                                             height: 24,
                                           ),
@@ -126,8 +121,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
@@ -136,31 +130,22 @@ class _NotificationPageState extends State<NotificationPage> {
                                                       // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          dangerColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: dangerColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Hapus',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -177,40 +162,29 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
                                                   child: TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
+                                                    onPressed: () => Navigator.pop(context),
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          secondaryColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: secondaryColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Kembali',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -255,8 +229,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 // print('Klik pada elemen Column');
               },
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment
-                    .start, // Atur posisi child ke start (kiri)
+                crossAxisAlignment: CrossAxisAlignment.start, // Atur posisi child ke start (kiri)
                 children: [
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -320,17 +293,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                     decoration: const BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                            50), // Atur border radius sudut kiri atas
-                                        topRight: Radius.circular(
-                                            50), // Atur border radius sudut kanan atas
+                                        topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                                        topRight: Radius.circular(50), // Atur border radius sudut kanan atas
                                       ),
                                     ),
                                     // color: whiteColor,
                                     child: Center(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           Text(
@@ -343,8 +313,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                           const SizedBox(
                                             height: 24,
                                           ),
-                                          const Text(
-                                              'Apakah anda yakin ingin menghapus notifikasi ini?'),
+                                          const Text('Apakah anda yakin ingin menghapus notifikasi ini?'),
                                           const SizedBox(
                                             height: 24,
                                           ),
@@ -352,8 +321,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
@@ -362,31 +330,22 @@ class _NotificationPageState extends State<NotificationPage> {
                                                       // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          dangerColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: dangerColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Hapus',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -403,40 +362,29 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
                                                   child: TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
+                                                    onPressed: () => Navigator.pop(context),
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          secondaryColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: secondaryColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Kembali',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -494,7 +442,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 type: 'text',
                 title: 'Notification',
               ),
-              content()
+              // content()
+              const UnderConstruction(),
             ],
           ),
         ),
