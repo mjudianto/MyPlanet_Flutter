@@ -27,6 +27,8 @@ class PodtretKontenController extends GetxController {
       podtretRecorded = false;
       videoPlayerController?.addListener(onVideoPositionChanged);
 
+      videoPlayerController?.play();
+
       isVideoInitialized.value = true;
 
       update();
