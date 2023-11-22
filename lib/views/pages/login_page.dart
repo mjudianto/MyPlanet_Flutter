@@ -127,8 +127,8 @@ class _LoginPageState extends State<LoginPage> {
                                   return showTopSnackBar(
                                     // ignore: use_build_context_synchronously
                                     Overlay.of(context),
-                                    const CustomSnackBar.error(
-                                      message: "Kata sandi salah. Mohon periksa ulang kata sandi yang anda masukkan",
+                                    CustomSnackBar.error(
+                                      message: e.toString(),
                                     ),
                                   );
                                 }
