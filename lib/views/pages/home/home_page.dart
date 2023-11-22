@@ -1,7 +1,6 @@
 import 'package:dotlottie_loader/dotlottie_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
