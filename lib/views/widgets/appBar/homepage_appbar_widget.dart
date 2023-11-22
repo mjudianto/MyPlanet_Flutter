@@ -11,13 +11,14 @@ import 'package:searchfield/searchfield.dart';
 
 // ignore: must_be_immutable
 class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
-  HomePageAppBar({Key? key,}) : super(key: key);
+  HomePageAppBar({
+    Key? key,
+  }) : super(key: key);
 
   dynamic data;
 
   @override
-  Size get preferredSize =>
-      const Size.fromHeight(155); // Adjust the height as needed
+  Size get preferredSize => const Size.fromHeight(155); // Adjust the height as needed
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,8 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              'assets/appBarBackground.png'), // Replace this with the path to your background image
-          fit: BoxFit
-              .cover, // Adjust the image fit to cover the entire container
+          image: AssetImage('assets/appBarBackground.png'), // Replace this with the path to your background image
+          fit: BoxFit.cover, // Adjust the image fit to cover the entire container
         ),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(58), // Radius to make the corners round
@@ -37,8 +36,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       child: AppBar(
         title: SizedBox(
-          height: preferredSize
-              .height, // Set the height of the SizedBox to the preferredSize height
+          height: preferredSize.height, // Set the height of the SizedBox to the preferredSize height
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -58,8 +56,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const NewsPage(), // Ganti dengan nama yang sesuai
+                            builder: (context) => const NewsPage(), // Ganti dengan nama yang sesuai
                           ),
                         );
                       },
@@ -70,8 +67,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const NotificationPage(), // Ganti dengan nama yang sesuai
+                            builder: (context) => const NotificationPage(), // Ganti dengan nama yang sesuai
                           ),
                         );
                       },
@@ -84,15 +80,17 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.only(top: 17.0, left: 10, right: 10),
                 child: Row(
                   children: [
-                    Expanded(child: SearchBar(data: data,)),
+                    Expanded(
+                        child: SearchBar(
+                      data: data,
+                    )),
                   ],
                 ),
               ),
             ],
           ),
         ),
-        toolbarHeight: preferredSize
-            .height, // Set the toolbar height to the preferredSize height
+        toolbarHeight: preferredSize.height, // Set the toolbar height to the preferredSize height
         elevation: 0, // Remove shadow from the AppBar
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -103,10 +101,7 @@ class HomePageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 // ignore: must_be_immutable
 class SearchBar extends StatelessWidget {
-  SearchBar({
-    super.key,
-    this.data
-  });
+  SearchBar({super.key, this.data});
 
   List<dynamic>? data;
 
@@ -122,12 +117,11 @@ class SearchBar extends StatelessWidget {
       child: Center(
         child: SearchField(
           hint: "Cari E-learning atau PODTRET",
+          autoCorrect: false,
+          searchStyle: const TextStyle(overflow: TextOverflow.clip, color: primaryColor),
           searchInputDecoration: InputDecoration(
-            enabledBorder:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: primaryColor, width: 2),
-                borderRadius: BorderRadius.circular(100)),
+            enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(100)),
+            focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: primaryColor, width: 2), borderRadius: BorderRadius.circular(100)),
             hintStyle: const TextStyle(
               fontSize: 13,
               color: secondaryColor,
@@ -139,11 +133,9 @@ class SearchBar extends StatelessWidget {
           ),
           itemHeight: 50,
           maxSuggestionsInViewPort: 6,
-          suggestionsDecoration: SuggestionDecoration(
-              padding: const EdgeInsets.all(4),
-              borderRadius: const BorderRadius.all(Radius.circular(10))),
+          suggestionsDecoration: SuggestionDecoration(padding: const EdgeInsets.all(4), borderRadius: const BorderRadius.all(Radius.circular(10))),
           onSuggestionTap: (value) {
-            if(value.searchKey.toString().toLowerCase().startsWith('eps'.toLowerCase())) {
+            if (value.searchKey.toString().toLowerCase().startsWith('eps'.toLowerCase())) {
               PodtretKontenController podtretKontenController = Get.find();
               podtretKontenController.podtret = value.item;
 
@@ -156,18 +148,15 @@ class SearchBar extends StatelessWidget {
             }
           },
           suggestions: data!
-              .map((e) => SearchFieldListItem(
-                    e.judul,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Text(
-                        e.judul,
-                        style: blackTextStyle.copyWith(
-                            fontSize: 13, fontWeight: medium),
-                      ),
+              .map((e) => SearchFieldListItem(e.judul,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Text(
+                      e.judul,
+                      style: blackTextStyle.copyWith(fontSize: 13, fontWeight: medium),
                     ),
-                    item: e.judul.toString().toLowerCase().startsWith('eps'.toLowerCase()) ? e : e.elearningCourseId
-                  ))
+                  ),
+                  item: e.judul.toString().toLowerCase().startsWith('eps'.toLowerCase()) ? e : e.elearningCourseId))
               .toList(),
         ),
       ),
