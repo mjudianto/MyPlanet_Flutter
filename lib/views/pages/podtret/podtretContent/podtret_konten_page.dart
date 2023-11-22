@@ -803,10 +803,28 @@ class PodtretContent extends StatelessWidget {
                             ? CustomVideoPlayer(
                                 customVideoPlayerController: customVideoPlayerController,
                               )
-                            : Container(
-                                decoration: const BoxDecoration(
-                                  color: Colors.black,
+                            // : Container(
+                            //     decoration: const BoxDecoration(
+                            //       color: Colors.black,
+                            //     ),
+                            //   );
+                            : CachedNetworkImage(
+                                placeholder: (context, url) => Image.asset(
+                                  'assets/loading.jpeg', // Placeholder image
+                                  // width: 282,
+                                  // height: 157,
+                                  fit: BoxFit.cover,
                                 ),
+                                errorWidget: (context, url, error) => Image.asset(
+                                  'assets/podtret_placeholder.jpeg', // Default image for errors
+                                  // width: 282,
+                                  // height: 157,
+                                  fit: BoxFit.cover,
+                                ),
+                                imageUrl: '${GlobalVariable.myplanetUrl}/${podtretKontenController.podtret.thumbnail}',
+                                // width: 282,
+                                // height: 157,
+                                fit: BoxFit.cover,
                               );
                       }),
                     ),
@@ -835,7 +853,7 @@ class PodtretContent extends StatelessWidget {
                     Obx(() {
                       return Visibility(
                         visible: !podtretKontenController.isVideoInitialized.value,
-                        child: const Center(child: CircularProgressIndicator()),
+                        child: const Center(child: CircularProgressIndicator(color: primaryColor)),
                       );
                     }),
                   ],
