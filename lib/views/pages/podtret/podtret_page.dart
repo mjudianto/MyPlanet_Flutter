@@ -625,52 +625,7 @@ class PodtretCategory extends StatelessWidget {
                   final filteredPodtret = podtretToShow.where((item) => item.nama == categoryName).toList();
 
                   return SizedBox(
-                    height: Get.height - 350,
-                    child: ListView.builder(
-                      padding: EdgeInsets.zero,
-                      scrollDirection: Axis.vertical,
-                      itemCount: filteredPodtret.length,
-                      itemBuilder: (context, index) {
-                        return CardTopEps(
-                          item: filteredPodtret[index],
-                        );
-                      },
-                    ),
-                  );
-                }
-              }),
-          FutureBuilder(
-              future: homePageController.newPodtrets,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Display a loading indicator while waiting for the future to complete
-                  return SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  // Handle any errors that occurred during the Future execution
-                  return SizedBox(
-                    height: 100,
-                    width: MediaQuery.of(context).size.width,
-                    child: const Center(
-                      child: Text(
-                        'Error: Error: Data Load Failed',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  );
-                } else {
-                  var podtrets = snapshot.data!;
-
-                  final podtretToShow = podtrets.data?.toList() ?? [];
-                  final filteredPodtret = podtretToShow.where((item) => item.nama == categoryName).toList();
-
-                  return SizedBox(
-                    height: Get.height - 350,
+                    height: Get.height - 330,
                     child: ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
