@@ -7,6 +7,7 @@ import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/dashboard/dashboard_page.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
@@ -20,6 +21,13 @@ class ElearningPage extends StatefulWidget {
 
 class _ElearningPageState extends State<ElearningPage> {
   Future<ElearningCourse>? _userCoursesFuture;
+
+  Future<void> refreshPage() async {
+    Get.off(
+      DashboardPage(),
+      transition: Transition.noTransition,
+    );
+  }
 
   @override
   void initState() {
@@ -143,59 +151,64 @@ class _ElearningPageState extends State<ElearningPage> {
 
             filteredAndSortedCourses.sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
 
-            return SizedBox(
-              height: 0.70 * MediaQuery.of(context).size.height,
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: (filteredAndSortedCourses.length / 2).ceil(),
-                    itemBuilder: (context, index) {
-                      int leftIndex = index * 2;
-                      int rightIndex = leftIndex + 1;
-                      bool hasRightCard = rightIndex < filteredAndSortedCourses.length;
+            return RefreshIndicator(
+              onRefresh: refreshPage,
+              child: SizedBox(
+                height: 0.70 * MediaQuery.of(context).size.height,
+                child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
+                    child: ListView.builder(
+                      padding: EdgeInsets.zero,
+                      itemCount: (filteredAndSortedCourses.length / 2).ceil(),
+                      itemBuilder: (context, index) {
+                        int leftIndex = index * 2;
+                        int rightIndex = leftIndex + 1;
+                        bool hasRightCard = rightIndex < filteredAndSortedCourses.length;
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (leftIndex < filteredAndSortedCourses.length)
-                            CardVerticalWidget(
-                              thumbnail: filteredAndSortedCourses[leftIndex].thumbnail,
-                              // width: 149,
-                              title: filteredAndSortedCourses[leftIndex].judul,
-                              subTitle:
-                                  '${(filteredAndSortedCourses[leftIndex].totalLesson ?? 0) + (filteredAndSortedCourses[leftIndex].totalTest ?? 0)} lessons • ',
-                              subTitle2: filteredAndSortedCourses[leftIndex].createdBy,
-                              rating: filteredAndSortedCourses[leftIndex].averageRating,
-                              ratingCount: filteredAndSortedCourses[leftIndex].responseCount,
-                              onTap: () {
-                                ElearningCoursePageController elearningCoursePageController = Get.find();
-                                elearningCoursePageController.setElearningCourseId(filteredAndSortedCourses[leftIndex].elearningCourseId.toString());
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (leftIndex < filteredAndSortedCourses.length)
+                              CardVerticalWidget(
+                                thumbnail: filteredAndSortedCourses[leftIndex].thumbnail,
+                                // width: 149,
+                                title: filteredAndSortedCourses[leftIndex].judul,
+                                subTitle:
+                                    '${(filteredAndSortedCourses[leftIndex].totalLesson ?? 0) + (filteredAndSortedCourses[leftIndex].totalTest ?? 0)} lessons • ',
+                                subTitle2: filteredAndSortedCourses[leftIndex].createdBy,
+                                rating: filteredAndSortedCourses[leftIndex].averageRating,
+                                ratingCount: filteredAndSortedCourses[leftIndex].responseCount,
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController
+                                      .setElearningCourseId(filteredAndSortedCourses[leftIndex].elearningCourseId.toString());
 
-                                Get.toNamed(RouteName.elearningCoursePage);
-                              },
-                            ),
-                          if (hasRightCard)
-                            CardVerticalWidget(
-                              thumbnail: filteredAndSortedCourses[rightIndex].thumbnail,
-                              width: 149,
-                              title: filteredAndSortedCourses[rightIndex].judul,
-                              subTitle:
-                                  '${(filteredAndSortedCourses[rightIndex].totalLesson ?? 0) + (filteredAndSortedCourses[rightIndex].totalTest ?? 0)} lessons • ',
-                              subTitle2: filteredAndSortedCourses[rightIndex].createdBy,
-                              rating: filteredAndSortedCourses[rightIndex].averageRating,
-                              ratingCount: filteredAndSortedCourses[rightIndex].responseCount,
-                              onTap: () {
-                                ElearningCoursePageController elearningCoursePageController = Get.find();
-                                elearningCoursePageController.setElearningCourseId(filteredAndSortedCourses[rightIndex].elearningCourseId.toString());
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                },
+                              ),
+                            if (hasRightCard)
+                              CardVerticalWidget(
+                                thumbnail: filteredAndSortedCourses[rightIndex].thumbnail,
+                                width: 149,
+                                title: filteredAndSortedCourses[rightIndex].judul,
+                                subTitle:
+                                    '${(filteredAndSortedCourses[rightIndex].totalLesson ?? 0) + (filteredAndSortedCourses[rightIndex].totalTest ?? 0)} lessons • ',
+                                subTitle2: filteredAndSortedCourses[rightIndex].createdBy,
+                                rating: filteredAndSortedCourses[rightIndex].averageRating,
+                                ratingCount: filteredAndSortedCourses[rightIndex].responseCount,
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController
+                                      .setElearningCourseId(filteredAndSortedCourses[rightIndex].elearningCourseId.toString());
 
-                                Get.toNamed(RouteName.elearningCoursePage);
-                              },
-                            ),
-                        ],
-                      );
-                    },
-                  )),
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                },
+                              ),
+                          ],
+                        );
+                      },
+                    )),
+              ),
             );
           } else {
             return const Text('No data available.');

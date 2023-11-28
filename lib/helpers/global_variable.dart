@@ -63,10 +63,27 @@ class GlobalVariable {
   }
 
   static Future<SecurityContext> get globalContext async {
-    final sslCert = await rootBundle.load('assets/certificate.pem');
-    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
-    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
-    return securityContext;
+    try {
+      final sslCert = await rootBundle.load('assets/certificate.pem');
+      SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+      securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
+
+      // Attempt to establish a connection or validate the certificate
+      // For instance, try to connect to a secure endpoint
+      // Replace 'https://example.com' with an actual secure endpoint
+      HttpClient client = HttpClient(context: securityContext);
+      HttpClientRequest request = await client.getUrl(Uri.parse('https://myplanet-apiapps.enseval.com/'));
+      HttpClientResponse response = await request.close();
+
+      // If the connection succeeds without throwing an error, return the validated context
+      return securityContext;
+    } catch (e) {
+      // Use the fallback certificate if the first one is not valid or an error occurs
+      final sslCertFallback = await rootBundle.load('assets/enseval_intranet_certificate.pem');
+      SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
+      securityContext.setTrustedCertificatesBytes(sslCertFallback.buffer.asInt8List());
+      return securityContext;
+    }
   }
 
   static Future<http.Client> getSSLPinningClient() async {
