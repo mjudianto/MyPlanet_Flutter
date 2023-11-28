@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:myplanet/controllers/podtrets/podtret_controller.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/dashboard/dashboard_page.dart';
 import 'package:myplanet/views/pages/home/home_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar_podtret.dart';
 import 'package:myplanet/views/widgets/card/card_recomendation_podtret.dart';
@@ -25,6 +26,13 @@ class _PodtretPageState extends State<PodtretPage> {
   @override
   void initState() {
     super.initState();
+  }
+
+  Future<void> refreshPage() async {
+    Get.off(
+      DashboardPage(),
+      transition: Transition.noTransition,
+    );
   }
 
   @override
@@ -552,16 +560,19 @@ class _PodtretPageState extends State<PodtretPage> {
     return Scaffold(
       // appBar: PageAppBar(),
       backgroundColor: backgroundColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AppBarPodtret(
-              type: 'search',
-            ),
-            categories(),
-          ],
+      body: RefreshIndicator(
+        onRefresh: refreshPage,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppBarPodtret(
+                type: 'search',
+              ),
+              categories(),
+            ],
+          ),
         ),
       ),
     );

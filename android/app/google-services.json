@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "384327296976",
+    "project_id": "myplanet-enseval-notification",
+    "storage_bucket": "myplanet-enseval-notification.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384327296976:android:eab907d77d12c7b18b3bd5",
+        "android_client_info": {
+          "package_name": "com.myplanet.enseval"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5XKAo1Bfk1FcefRyiQ7NImoVlssEaqSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
