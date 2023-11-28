@@ -7,6 +7,7 @@ import 'package:myplanet/controllers/elearnings/elearning_controller.dart';
 import 'package:myplanet/models/elearnings/elearning_course_model.dart';
 import 'package:myplanet/routes/route_name.dart';
 import 'package:myplanet/theme.dart';
+import 'package:myplanet/views/pages/dashboard/dashboard_page.dart';
 import 'package:myplanet/views/pages/elearning/elearningCourse/elearning_course_page_controller.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
@@ -20,6 +21,13 @@ class ElearningPage extends StatefulWidget {
 
 class _ElearningPageState extends State<ElearningPage> {
   Future<ElearningCourse>? _userCoursesFuture;
+
+  Future<void> refreshPage() async {
+    Get.off(
+      DashboardPage(),
+      transition: Transition.noTransition,
+    );
+  }
 
   @override
   void initState() {
