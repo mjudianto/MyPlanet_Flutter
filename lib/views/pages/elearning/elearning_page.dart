@@ -154,56 +154,60 @@ class _ElearningPageState extends State<ElearningPage> {
             return SizedBox(
               height: 0.70 * MediaQuery.of(context).size.height,
               child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: defaultMargin),
-                  child: ListView.builder(
-                    padding: EdgeInsets.zero,
-                    itemCount: (filteredAndSortedCourses.length / 2).ceil(),
-                    itemBuilder: (context, index) {
-                      int leftIndex = index * 2;
-                      int rightIndex = leftIndex + 1;
-                      bool hasRightCard = rightIndex < filteredAndSortedCourses.length;
+                padding: const EdgeInsets.all(12.0),
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: (filteredAndSortedCourses.length / 2).ceil(),
+                  itemBuilder: (context, index) {
+                    final course1 = filteredAndSortedCourses[index * 2];
+                    final course2 = (index * 2 + 1 < filteredAndSortedCourses.length) ? filteredAndSortedCourses[index * 2 + 1] : null;
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    return SizedBox(
+                      height: 220,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          if (leftIndex < filteredAndSortedCourses.length)
-                            CardVerticalWidget(
-                              thumbnail: filteredAndSortedCourses[leftIndex].thumbnail,
-                              // width: 149,
-                              title: filteredAndSortedCourses[leftIndex].judul,
-                              subTitle:
-                                  '${(filteredAndSortedCourses[leftIndex].totalLesson ?? 0) + (filteredAndSortedCourses[leftIndex].totalTest ?? 0)} lessons • ',
-                              subTitle2: filteredAndSortedCourses[leftIndex].createdBy,
-                              rating: filteredAndSortedCourses[leftIndex].averageRating,
-                              ratingCount: filteredAndSortedCourses[leftIndex].responseCount,
+                          Expanded(
+                            child: CardVerticalWidget(
+                              thumbnail: course1.thumbnail,
+                              title: course1.judul,
+                              subTitle: '${(course1.totalLesson ?? 0) + (course1.totalTest ?? 0)} lessons • ',
+                              subTitle2: course1.createdBy,
+                              rating: course1.averageRating,
+                              ratingCount: course1.responseCount,
                               onTap: () {
                                 ElearningCoursePageController elearningCoursePageController = Get.find();
-                                elearningCoursePageController.setElearningCourseId(filteredAndSortedCourses[leftIndex].elearningCourseId.toString());
+                                elearningCoursePageController.setElearningCourseId(course1.elearningCourseId.toString());
 
                                 Get.toNamed(RouteName.elearningCoursePage);
                               },
                             ),
-                          if (hasRightCard)
-                            CardVerticalWidget(
-                              thumbnail: filteredAndSortedCourses[rightIndex].thumbnail,
-                              width: 149,
-                              title: filteredAndSortedCourses[rightIndex].judul,
-                              subTitle:
-                                  '${(filteredAndSortedCourses[rightIndex].totalLesson ?? 0) + (filteredAndSortedCourses[rightIndex].totalTest ?? 0)} lessons • ',
-                              subTitle2: filteredAndSortedCourses[rightIndex].createdBy,
-                              rating: filteredAndSortedCourses[rightIndex].averageRating,
-                              ratingCount: filteredAndSortedCourses[rightIndex].responseCount,
-                              onTap: () {
-                                ElearningCoursePageController elearningCoursePageController = Get.find();
-                                elearningCoursePageController.setElearningCourseId(filteredAndSortedCourses[rightIndex].elearningCourseId.toString());
+                          ),
+                          if (course2 != null) const SizedBox(width: 8),
+                          if (course2 != null)
+                            Expanded(
+                              child: CardVerticalWidget(
+                                thumbnail: course2.thumbnail,
+                                title: course2.judul,
+                                subTitle: '${(course2.totalLesson ?? 0) + (course2.totalTest ?? 0)} lessons • ',
+                                subTitle2: course2.createdBy,
+                                rating: course2.averageRating,
+                                ratingCount: course2.responseCount,
+                                onTap: () {
+                                  ElearningCoursePageController elearningCoursePageController = Get.find();
+                                  elearningCoursePageController.setElearningCourseId(course2.elearningCourseId.toString());
 
-                                Get.toNamed(RouteName.elearningCoursePage);
-                              },
+                                  Get.toNamed(RouteName.elearningCoursePage);
+                                },
+                              ),
                             ),
                         ],
-                      );
-                    },
-                  )),
+                      ),
+                    );
+                  },
+                ),
+              ),
             );
           } else {
             return const Text('No data available.');
