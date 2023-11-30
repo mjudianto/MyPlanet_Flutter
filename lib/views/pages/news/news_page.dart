@@ -3,6 +3,7 @@ import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/pages/news/news_detail.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myplanet/views/widgets/under_construction.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
@@ -21,8 +22,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(
-            left: defaultMargin, right: defaultMargin, top: 20),
+        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: 20),
         child: Column(
           children: [
             InkWell(
@@ -30,8 +30,7 @@ class _NewsPageState extends State<NewsPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const NewsDetail(), // Ganti dengan nama yang sesuai
+                    builder: (context) => const NewsDetail(), // Ganti dengan nama yang sesuai
                   ),
                 );
               },
@@ -58,16 +57,14 @@ class _NewsPageState extends State<NewsPage> {
                             ),
                             Text(
                               "Sudahkah anda berterima kasih?",
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: bold),
+                              style: blackTextStyle.copyWith(fontSize: 12, fontWeight: bold),
                             ),
                             const SizedBox(
                               height: 8,
                             ),
                             Text(
                               'Learning and People Development',
-                              style: secondaryTextStyle.copyWith(
-                                  fontSize: 12, fontWeight: regular),
+                              style: secondaryTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                             )
                           ],
                         ),
@@ -98,17 +95,14 @@ class _NewsPageState extends State<NewsPage> {
                                     decoration: const BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(
-                                            50), // Atur border radius sudut kiri atas
-                                        topRight: Radius.circular(
-                                            50), // Atur border radius sudut kanan atas
+                                        topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                                        topRight: Radius.circular(50), // Atur border radius sudut kanan atas
                                       ),
                                     ),
                                     // color: whiteColor,
                                     child: Center(
                                       child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           Text(
@@ -121,8 +115,7 @@ class _NewsPageState extends State<NewsPage> {
                                           const SizedBox(
                                             height: 24,
                                           ),
-                                          const Text(
-                                              'Apakah anda yakin ingin menghapus notifikasi ini?'),
+                                          const Text('Apakah anda yakin ingin menghapus notifikasi ini?'),
                                           const SizedBox(
                                             height: 24,
                                           ),
@@ -130,8 +123,7 @@ class _NewsPageState extends State<NewsPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
@@ -140,31 +132,22 @@ class _NewsPageState extends State<NewsPage> {
                                                       // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          dangerColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: dangerColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Hapus',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -181,40 +164,29 @@ class _NewsPageState extends State<NewsPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets
-                                                      .symmetric(
+                                                  margin: const EdgeInsets.symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
                                                   child: TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(context),
+                                                    onPressed: () => Navigator.pop(context),
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor:
-                                                          secondaryColor,
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
+                                                      backgroundColor: secondaryColor,
+                                                      padding: const EdgeInsets.symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100),
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                      mainAxisAlignment: MainAxisAlignment.center,
                                                       children: [
                                                         Text(
                                                           'Kembali',
-                                                          style: whiteTextStyle
-                                                              .copyWith(
+                                                          style: whiteTextStyle.copyWith(
                                                             fontSize: 16,
-                                                            fontWeight:
-                                                                semiBold,
+                                                            fontWeight: semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -272,7 +244,8 @@ class _NewsPageState extends State<NewsPage> {
                 type: 'text',
                 title: 'News',
               ),
-              content()
+              // content()
+              const UnderConstruction()
             ],
           ),
         ),

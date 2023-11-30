@@ -53,6 +53,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
           body: _testData == null
               ? const Center(child: CircularProgressIndicator())
@@ -195,7 +196,7 @@ class _ElearningTestPageState extends State<ElearningTestPage> {
                                                               : false)
                                                       ? whiteColor
                                                       : blackColor),
-                                              maxLines: 2,
+                                              maxLines: 4,
                                               softWrap: true,
                                             ),
                                           ),
