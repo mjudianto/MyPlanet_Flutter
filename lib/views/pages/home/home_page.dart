@@ -130,31 +130,32 @@ class HomePage extends StatelessWidget {
                               .sort((course1, course2) => (course2.elearningCourseId ?? 0).compareTo(course1.elearningCourseId ?? 0));
                           final coursesToShow = elearningCourses.data?.take(5).toList() ?? [];
 
-                          return SizedBox(
-                            height: 220,
-                            width: MediaQuery.of(context).size.width,
-                            child: ListView.separated(
-                              padding: const EdgeInsets.only(left: 15, right: 15),
+                          return Container(
+                            margin: const EdgeInsets.only(
+                              left: defaultMargin,
+                            ),
+                            child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              itemCount: coursesToShow.length,
-                              separatorBuilder: (context, index) => const SizedBox(width: 8.0), // Separator width equals padding
-                              itemBuilder: (context, index) {
-                                final course = coursesToShow[index];
-                                return CardVerticalWidget(
-                                  thumbnail: course.thumbnail,
-                                  title: course.judul,
-                                  subTitle: '${(course.totalLesson ?? 0) + (course.totalTest ?? 0)} lessons • ',
-                                  subTitle2: course.createdBy,
-                                  rating: course.averageRating,
-                                  ratingCount: course.responseCount,
-                                  onTap: () {
-                                    ElearningCoursePageController elearningCoursePageController = Get.find();
-                                    elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
-
-                                    Get.toNamed(RouteName.elearningCoursePage);
-                                  },
-                                );
-                              },
+                              child: Row(
+                                children: coursesToShow.map((course) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: CardVerticalWidget(
+                                      thumbnail: course.thumbnail,
+                                      title: course.judul,
+                                      subTitle: '${(course.totalLesson ?? 0) + (course.totalTest ?? 0)} lessons • ',
+                                      subTitle2: course.createdBy,
+                                      rating: course.averageRating,
+                                      ratingCount: course.responseCount,
+                                      onTap: () {
+                                        ElearningCoursePageController elearningCoursePageController = Get.find();
+                                        elearningCoursePageController.setElearningCourseId(course.elearningCourseId.toString());
+                                        Get.toNamed(RouteName.elearningCoursePage);
+                                      },
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
                             ),
                           );
                         } else {
