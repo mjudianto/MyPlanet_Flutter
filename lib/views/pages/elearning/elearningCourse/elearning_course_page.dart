@@ -429,14 +429,15 @@ class TestBuilder extends StatelessWidget {
         padding: EdgeInsets.zero,
         itemCount: module.tests!.length,
         itemBuilder: (BuildContext context, int index) {
-          final test = module.tests?[index];
-          bool maxtAttemptReached = test?.attempt == test?.maxAttempt;
-          bool requestSent = maxtAttemptReached && (test?.adminReply == 0);
+          final test = module.tests![index];
+          print(test.maxAttempt);
+          bool maxtAttemptReached = test.attempt == test.maxAttempt && test.maxAttempt != null;
+          bool requestSent = maxtAttemptReached && (test.adminReply == 0) && test.maxAttempt != null;
           bool underPunishment = false;
           int secondsDifference = 0;
 
-          if (test?.punishment != null && !(DateTime.now().isAfter(DateTime.parse(test?.punishment)))) {
-            DateTime endTime = DateTime.parse(test?.punishment); // Start time
+          if (test.punishment != null && !(DateTime.now().isAfter(DateTime.parse(test.punishment)))) {
+            DateTime endTime = DateTime.parse(test.punishment); // Start time
             DateTime currentDateTime = DateTime.now();
 
             // Calculate the duration between the two times
@@ -673,7 +674,7 @@ class TestBuilder extends StatelessWidget {
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: maxtAttemptReached ? primaryColor : (underPunishment ? secondaryColor : secondaryColor),
+                                backgroundColor: maxtAttemptReached ? primaryColor : (underPunishment ? secondaryColor : primaryColor),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                 ),
@@ -729,7 +730,7 @@ class TestBuilder extends StatelessWidget {
                             SizedBox(
                               width: 180,
                               child: Text(
-                                test!.judul ?? "",
+                                test.judul ?? "",
                                 style: TextStyle(
                                   fontSize: 12,
                                   color: blackColor,
