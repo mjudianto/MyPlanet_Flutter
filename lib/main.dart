@@ -18,6 +18,7 @@ void main() async {
   final isUserLoggedIn = await GlobalVariable.userAuth();
   // final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
   String initialLocation = '/';
+  GlobalVariable.posterShown = false;
   if (isUserLoggedIn) {
     initialLocation = '/dashboard';
   } else {

@@ -15,6 +15,7 @@ import 'package:myplanet/views/widgets/card/card_horizontal_widget.dart';
 import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
 import 'package:myplanet/theme.dart';
 import 'package:intl/intl.dart';
+import 'package:popup_banner/popup_banner.dart';
 
 class HomePage extends StatelessWidget {
   final HomePageController homePageController = Get.find();
@@ -30,12 +31,32 @@ class HomePage extends StatelessWidget {
     // print('yey');
   }
 
+  List<String> images = [
+    "https://tinyurl.com/popup-banner-image",
+    "https://tinyurl.com/popup-banner-image2",
+    "https://tinyurl.com/popup-banner-image3",
+    "https://tinyurl.com/popup-banner-image4"
+  ];
+
+  List<String> imagesLocal = [
+    "assets/myplanet_ison.png",
+    "assets/thankyou.png",
+    "assets/myplanet_ison.png",
+  ];
+
+  void showFromLocal(BuildContext context) {
+    PopupBanner(
+      context: context,
+      images: imagesLocal,
+      fromNetwork: false,
+      onClick: (index) {},
+    ).show();
+  }
+
   @override
   Widget build(BuildContext context) {
     homePageController.userCoursesFuture = ElearningController.fetchUserCourses();
     homePageController.newPodtrets = PodtretController.fetchNewPodtrets();
-
-    // final GlobalKey<LiquidPullToRefreshState> refreshIndicatorKey = GlobalKey<LiquidPullToRefreshState>();
 
     return Scaffold(
       body: RefreshIndicator(
@@ -83,6 +104,13 @@ class HomePage extends StatelessWidget {
                 ),
               );
             }
+
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (!GlobalVariable.posterShown) {
+                showFromLocal(context);
+                GlobalVariable.posterShown = true;
+              }
+            });
 
             GlobalVariable.setElearningSearchBarData(snapshot.data!.data);
 

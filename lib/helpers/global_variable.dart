@@ -9,11 +9,11 @@ import 'package:http/http.dart' as http;
 
 class GlobalVariable {
   static String currentUrl = '';
-  // static String apiUrl = 'https://myplanet.enseval.com:3000';
   static String apiUrl = 'https://myplanet-apiapps.enseval.com/';
   static const FlutterSecureStorage secureStorage = FlutterSecureStorage();
   static Map<String, dynamic> userData = {};
   static String myplanetUrl = 'https://myplanet.enseval.com';
+  static bool posterShown = false;
 
   static dynamic elearningSearchData;
   static dynamic podtretSearchData;
