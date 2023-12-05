@@ -1,11 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/io_client.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:http/http.dart' as http;
+import 'package:myplanet/models/campaign_model.dart';
 
 class GlobalVariable {
   static String currentUrl = '';
@@ -14,6 +13,7 @@ class GlobalVariable {
   static Map<String, dynamic> userData = {};
   static String myplanetUrl = 'https://myplanet.enseval.com';
   static bool posterShown = false;
+  static Campaign campaigns = Campaign();
 
   static dynamic elearningSearchData;
   static dynamic podtretSearchData;
@@ -32,18 +32,6 @@ class GlobalVariable {
 
     // bool isLoggedIn = storedToken != null;
     return !tokenExpired;
-  }
-
-  static Future<bool> checkInternetConnection() async {
-    bool result = await InternetConnectionChecker().hasConnection;
-
-    final response = await http.get(Uri.parse('${GlobalVariable.apiUrl}/testConnection'));
-
-    if (result == true && response.statusCode == 200) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   static setElearningSearchBarData(dynamic data) {

@@ -1,6 +1,7 @@
 // import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:myplanet/controllers/campaign_controllet.dart';
 // import 'package:myplanet/api/firebase_api.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/home_binding.dart';
@@ -16,14 +17,14 @@ void main() async {
   // );
 
   final isUserLoggedIn = await GlobalVariable.userAuth();
-  // final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
-  String initialLocation = '/';
+  GlobalVariable.campaigns = await CampaignController.fetchActiveCampaign();
+
+  print(GlobalVariable.campaigns.data![0].kontenPodtrait);
+
   GlobalVariable.posterShown = false;
-  if (isUserLoggedIn) {
-    initialLocation = '/dashboard';
-  } else {
-    initialLocation = '/login';
-  }
+
+  final initialLocation = isUserLoggedIn ? '/dashboard' : '/login';
+
   HomeBinding().dependencies();
 
   runApp(MyPlanet(initialLocation: initialLocation));

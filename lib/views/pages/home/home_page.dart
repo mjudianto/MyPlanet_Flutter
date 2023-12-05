@@ -17,6 +17,7 @@ import 'package:myplanet/theme.dart';
 import 'package:intl/intl.dart';
 import 'package:popup_banner/popup_banner.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatelessWidget {
   final HomePageController homePageController = Get.find();
   final GlobalVariable globalVariable = GlobalVariable();
@@ -31,24 +32,17 @@ class HomePage extends StatelessWidget {
     // print('yey');
   }
 
-  List<String> images = [
-    "https://tinyurl.com/popup-banner-image",
-    "https://tinyurl.com/popup-banner-image2",
-    "https://tinyurl.com/popup-banner-image3",
-    "https://tinyurl.com/popup-banner-image4"
-  ];
-
-  List<String> imagesLocal = [
-    "assets/myplanet_ison.png",
-    "assets/thankyou.png",
-    "assets/myplanet_ison.png",
-  ];
+  List<String> imagesLocal = [];
 
   void showFromLocal(BuildContext context) {
+    for (var campaign in GlobalVariable.campaigns.data!) {
+      imagesLocal.add("${GlobalVariable.myplanetUrl}/${campaign.kontenPodtrait.toString()}");
+    }
+
     PopupBanner(
       context: context,
       images: imagesLocal,
-      fromNetwork: false,
+      fromNetwork: true,
       onClick: (index) {},
     ).show();
   }
