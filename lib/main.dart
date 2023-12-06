@@ -17,9 +17,10 @@ void main() async {
   // );
 
   final isUserLoggedIn = await GlobalVariable.userAuth();
-  GlobalVariable.campaigns = await CampaignController.fetchActiveCampaign();
 
-  print(GlobalVariable.campaigns.data![0].kontenPodtrait);
+  if (isUserLoggedIn) {
+    GlobalVariable.campaigns = await CampaignController.fetchActiveCampaign();
+  }
 
   GlobalVariable.posterShown = false;
 

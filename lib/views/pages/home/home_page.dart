@@ -16,6 +16,7 @@ import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
 import 'package:myplanet/theme.dart';
 import 'package:intl/intl.dart';
 import 'package:popup_banner/popup_banner.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -43,7 +44,14 @@ class HomePage extends StatelessWidget {
       context: context,
       images: imagesLocal,
       fromNetwork: true,
-      onClick: (index) {},
+      onClick: (index) async {
+        const url = 'https://myplanet.enseval.com/downloadapk';
+        if (await canLaunchUrl(Uri.parse(url)) && index == 0) {
+          await launchUrl(Uri.parse(url));
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
     ).show();
   }
 

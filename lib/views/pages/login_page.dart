@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:myplanet/controllers/campaign_controllet.dart';
 import 'package:myplanet/controllers/users/user_controller.dart';
 import 'package:myplanet/helpers/global_variable.dart';
 import 'package:myplanet/models/users/user_model.dart';
@@ -117,6 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                                   await GlobalVariable.secureStorage.write(key: 'user_token', value: userToken.data);
 
                                   GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
+
+                                  GlobalVariable.campaigns = await CampaignController.fetchActiveCampaign();
 
                                   // ignore: use_build_context_synchronously
                                   Get.offNamed(RouteName.dashboardPage);
