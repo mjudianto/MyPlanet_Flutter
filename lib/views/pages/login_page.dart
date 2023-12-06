@@ -120,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                                   GlobalVariable.userData = JwtDecoder.decode(userToken.data!);
 
                                   GlobalVariable.campaigns = await CampaignController.fetchActiveCampaign();
+                                  GlobalVariable.posterShown = false;
 
                                   // ignore: use_build_context_synchronously
                                   Get.offNamed(RouteName.dashboardPage);
