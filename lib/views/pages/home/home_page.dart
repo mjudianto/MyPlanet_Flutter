@@ -46,10 +46,18 @@ class HomePage extends StatelessWidget {
       fromNetwork: true,
       onClick: (index) async {
         const url = 'https://myplanet.enseval.com/downloadapk';
-        if (await canLaunchUrl(Uri.parse(url)) && index == 0) {
-          await launchUrl(Uri.parse(url));
-        } else {
-          throw 'Could not launch $url';
+        try {
+          if (index == 0) {
+            await launchUrl(Uri.parse(url));
+          }
+          // if (await canLaunchUrl(Uri.parse(url)) && index == 0) {
+          //   await launchUrl(Uri.parse(url));
+          // } else {
+          //   throw 'Could not launch $url';
+          // }
+        } catch (e) {
+          print('Error launching URL: $e');
+          // Handle the error accordingly
         }
       },
     ).show();
