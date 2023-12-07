@@ -483,174 +483,374 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            ElevatedButton(
-              onPressed: () {
-                showModalBottomSheet<void>(
-                  context: context,
-                  backgroundColor: Colors.transparent,
-                  builder: (BuildContext context) {
-                    return Container(
-                      height: 270,
-                      decoration: const BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
-                          topRight: Radius.circular(50), // Atur border radius sudut kanan atas
-                        ),
-                      ),
-                      // color: whiteColor,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white, // Ganti dengan warna background yang diinginkan
+                borderRadius: BorderRadius.circular(20),
+              ),
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      print("Privacy and Policy");
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/ic_history.svg',
+                              width: 24,
+                            ),
+                            const SizedBox(width: 14),
                             Text(
-                              'Keluar',
-                              style: blackTextStyle.copyWith(
-                                fontSize: 18,
-                                fontWeight: semiBold,
-                              ),
+                              'Privacy Policy',
+                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            const Text('Apakah anda yakin ingin keluar?'),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                            SizedBox(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      horizontal: defaultMargin,
-                                    ),
-                                    height: 54,
-                                    child: TextButton(
-                                      onPressed: () async {
-                                        await GlobalVariable.secureStorage.delete(key: 'user_token');
-                                        DashboardController dashboardController = Get.find();
-                                        dashboardController.tabIndex = 0;
-
-                                        Get.offAllNamed('/login');
-                                      },
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: dangerColor,
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(100),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Keluar',
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: semiBold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            SizedBox(
-                              child: Column(
-                                children: [
-                                  Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      horizontal: defaultMargin,
-                                    ),
-                                    height: 54,
-                                    child: TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: secondaryColor,
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(100),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Kembali',
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: semiBold,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                shadowColor: Colors.transparent,
-                backgroundColor: Colors.transparent, // Atur warna background menjadi transparan
-              ),
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: Container(
-                  padding: const EdgeInsets.all(16), // Atur padding sesuai kebutuhan
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20), // Atur border radius sesuai kebutuhan
-                    color: whiteColor, // Atur warna background sesuai kebutuhan
+                        const Icon(
+                          Icons.chevron_right,
+                          color: blackColor,
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/ic_logout.svg',
-                            width: 24,
-                          ),
-                          const SizedBox(width: 14),
-                          const Text(
-                            'Logout',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black, // Ganti dengan warna teks yang diinginkan
+                  const Divider(),
+                  ElevatedButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 270,
+                            decoration: const BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+                                topRight: Radius.circular(50), // Atur border radius sudut kanan atas
+                              ),
                             ),
-                          ),
-                        ],
+                            // color: whiteColor,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Text(
+                                    'Keluar',
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: semiBold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  const Text('Apakah anda yakin ingin keluar?'),
+                                  const SizedBox(
+                                    height: 24,
+                                  ),
+                                  SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: defaultMargin,
+                                          ),
+                                          height: 54,
+                                          child: TextButton(
+                                            onPressed: () async {
+                                              await GlobalVariable.secureStorage.delete(key: 'user_token');
+                                              DashboardController dashboardController = Get.find();
+                                              dashboardController.tabIndex = 0;
+
+                                              Get.offAllNamed('/login');
+                                            },
+                                            style: TextButton.styleFrom(
+                                              backgroundColor: dangerColor,
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(100),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Keluar',
+                                                  style: whiteTextStyle.copyWith(
+                                                    fontSize: 16,
+                                                    fontWeight: semiBold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: defaultMargin,
+                                          ),
+                                          height: 54,
+                                          child: TextButton(
+                                            onPressed: () => Navigator.pop(context),
+                                            style: TextButton.styleFrom(
+                                              backgroundColor: secondaryColor,
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(100),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'Kembali',
+                                                  style: whiteTextStyle.copyWith(
+                                                    fontSize: 16,
+                                                    fontWeight: semiBold,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      const Icon(
-                        Icons.chevron_right,
-                        color: Colors.black, // Ganti dengan warna ikon yang diinginkan
-                      ),
-                    ],
+                      shadowColor: Colors.transparent,
+                      backgroundColor: Colors.transparent, // Atur warna background menjadi transparan
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/ic_logout.svg',
+                              width: 24,
+                            ),
+                            const SizedBox(width: 14),
+                            const Text(
+                              'Logout',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black, // Ganti dengan warna teks yang diinginkan
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Icon(
+                          Icons.chevron_right,
+                          color: Colors.black, // Ganti dengan warna ikon yang diinginkan
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
+            const SizedBox(
+              height: 16,
+            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     showModalBottomSheet<void>(
+            //       context: context,
+            //       backgroundColor: Colors.transparent,
+            //       builder: (BuildContext context) {
+            //         return Container(
+            //           height: 270,
+            //           decoration: const BoxDecoration(
+            //             color: whiteColor,
+            //             borderRadius: BorderRadius.only(
+            //               topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
+            //               topRight: Radius.circular(50), // Atur border radius sudut kanan atas
+            //             ),
+            //           ),
+            //           // color: whiteColor,
+            //           child: Center(
+            //             child: Column(
+            //               mainAxisAlignment: MainAxisAlignment.center,
+            //               mainAxisSize: MainAxisSize.min,
+            //               children: <Widget>[
+            //                 Text(
+            //                   'Keluar',
+            //                   style: blackTextStyle.copyWith(
+            //                     fontSize: 18,
+            //                     fontWeight: semiBold,
+            //                   ),
+            //                 ),
+            //                 const SizedBox(
+            //                   height: 24,
+            //                 ),
+            //                 const Text('Apakah anda yakin ingin keluar?'),
+            //                 const SizedBox(
+            //                   height: 24,
+            //                 ),
+            //                 SizedBox(
+            //                   child: Column(
+            //                     children: [
+            //                       Container(
+            //                         margin: const EdgeInsets.symmetric(
+            //                           horizontal: defaultMargin,
+            //                         ),
+            //                         height: 54,
+            //                         child: TextButton(
+            //                           onPressed: () async {
+            //                             await GlobalVariable.secureStorage.delete(key: 'user_token');
+            //                             DashboardController dashboardController = Get.find();
+            //                             dashboardController.tabIndex = 0;
+
+            //                             Get.offAllNamed('/login');
+            //                           },
+            //                           style: TextButton.styleFrom(
+            //                             backgroundColor: dangerColor,
+            //                             padding: const EdgeInsets.symmetric(
+            //                               horizontal: 20,
+            //                             ),
+            //                             shape: RoundedRectangleBorder(
+            //                               borderRadius: BorderRadius.circular(100),
+            //                             ),
+            //                           ),
+            //                           child: Row(
+            //                             mainAxisAlignment: MainAxisAlignment.center,
+            //                             children: [
+            //                               Text(
+            //                                 'Keluar',
+            //                                 style: whiteTextStyle.copyWith(
+            //                                   fontSize: 16,
+            //                                   fontWeight: semiBold,
+            //                                 ),
+            //                               ),
+            //                             ],
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                 ),
+            //                 const SizedBox(
+            //                   height: 8,
+            //                 ),
+            //                 SizedBox(
+            //                   child: Column(
+            //                     children: [
+            //                       Container(
+            //                         margin: const EdgeInsets.symmetric(
+            //                           horizontal: defaultMargin,
+            //                         ),
+            //                         height: 54,
+            //                         child: TextButton(
+            //                           onPressed: () => Navigator.pop(context),
+            //                           style: TextButton.styleFrom(
+            //                             backgroundColor: secondaryColor,
+            //                             padding: const EdgeInsets.symmetric(
+            //                               horizontal: 20,
+            //                             ),
+            //                             shape: RoundedRectangleBorder(
+            //                               borderRadius: BorderRadius.circular(100),
+            //                             ),
+            //                           ),
+            //                           child: Row(
+            //                             mainAxisAlignment: MainAxisAlignment.center,
+            //                             children: [
+            //                               Text(
+            //                                 'Kembali',
+            //                                 style: whiteTextStyle.copyWith(
+            //                                   fontSize: 16,
+            //                                   fontWeight: semiBold,
+            //                                 ),
+            //                               ),
+            //                             ],
+            //                           ),
+            //                         ),
+            //                       ),
+            //                     ],
+            //                   ),
+            //                 )
+            //               ],
+            //             ),
+            //           ),
+            //         );
+            //       },
+            //     );
+            //   },
+            //   style: ElevatedButton.styleFrom(
+            //     padding: EdgeInsets.zero,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(20),
+            //     ),
+            //     shadowColor: Colors.transparent,
+            //     backgroundColor: Colors.transparent, // Atur warna background menjadi transparan
+            //   ),
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(bottom: 16.0),
+            //     child: Container(
+            //       padding: const EdgeInsets.all(16), // Atur padding sesuai kebutuhan
+            //       decoration: BoxDecoration(
+            //         borderRadius: BorderRadius.circular(20), // Atur border radius sesuai kebutuhan
+            //         color: whiteColor, // Atur warna background sesuai kebutuhan
+            //       ),
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Row(
+            //             children: [
+            //               SvgPicture.asset(
+            //                 'assets/icons/ic_logout.svg',
+            //                 width: 24,
+            //               ),
+            //               const SizedBox(width: 14),
+            //               const Text(
+            //                 'Logout',
+            //                 style: TextStyle(
+            //                   fontSize: 14,
+            //                   fontWeight: FontWeight.w600,
+            //                   color: Colors.black, // Ganti dengan warna teks yang diinginkan
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //           const Icon(
+            //             Icons.chevron_right,
+            //             color: Colors.black, // Ganti dengan warna ikon yang diinginkan
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       );
