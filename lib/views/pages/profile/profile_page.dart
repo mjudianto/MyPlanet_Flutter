@@ -488,37 +488,38 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.white, // Ganti dengan warna background yang diinginkan
                 borderRadius: BorderRadius.circular(20),
               ),
-              padding: const EdgeInsets.all(16),
+              // padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.only(left: 16, right: 16),
               child: Column(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      print("Privacy and Policy");
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/icons/ic_history.svg',
-                              width: 24,
-                            ),
-                            const SizedBox(width: 14),
-                            Text(
-                              'Privacy Policy',
-                              style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
-                            ),
-                          ],
-                        ),
-                        const Icon(
-                          Icons.chevron_right,
-                          color: blackColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const Divider(),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     print("Privacy and Policy");
+                  //   },
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Row(
+                  //         children: [
+                  //           SvgPicture.asset(
+                  //             'assets/icons/ic_privacy.svg',
+                  //             width: 24,
+                  //           ),
+                  //           const SizedBox(width: 14),
+                  //           Text(
+                  //             'Privacy Policy',
+                  //             style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semiBold),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       const Icon(
+                  //         Icons.chevron_right,
+                  //         color: blackColor,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // const Divider(),
                   ElevatedButton(
                     onPressed: () {
                       showModalBottomSheet<void>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
+import 'package:myplanet/views/widgets/under_construction.dart';
 import 'package:popup_banner/popup_banner.dart';
 
 class NotificationPage extends StatefulWidget {
@@ -112,20 +113,20 @@ class _NotificationPageState extends State<NotificationPage> {
                 title: 'Notification',
               ),
               // content()
-              // const UnderConstruction(),
+              const UnderConstruction(),
               // const Popup()
-              ElevatedButton(
-                onPressed: () => showFromLocal(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                ),
-                child: const Text(
-                  "Show Default Popup",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // ElevatedButton(
+              //   onPressed: () => showFromLocal(context),
+              //   style: ElevatedButton.styleFrom(
+              //     backgroundColor: Colors.blue,
+              //   ),
+              //   child: const Text(
+              //     "Show Default Popup",
+              //     style: TextStyle(
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
