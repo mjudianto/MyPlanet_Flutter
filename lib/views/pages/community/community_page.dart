@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
-import 'package:myplanet/views/widgets/under_construction.dart';
-// import 'package:myplanet/views/widgets/card/card_vertical_widget.dart';
+import 'package:myplanet/views/widgets/community/create_status.dart';
+import 'package:myplanet/views/widgets/community/posting_content.dart';
 
 class CommunityPage extends StatefulWidget {
   const CommunityPage({super.key});
@@ -32,9 +32,9 @@ class _CommunityPageState extends State<CommunityPage> {
               PageAppBar(
                 type: 'logo',
               ),
-              // createStatus(),
-              // posting(),
-              const UnderConstruction()
+              const CreateStatus(),
+              const PostingContent()
+              // const UnderConstruction()
             ],
           ),
         ),

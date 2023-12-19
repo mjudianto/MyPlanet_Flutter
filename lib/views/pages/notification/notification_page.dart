@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:myplanet/theme.dart';
 import 'package:myplanet/views/widgets/appBar/appbar.dart';
-import 'package:myplanet/views/widgets/under_construction.dart';
-import 'package:popup_banner/popup_banner.dart';
+// import 'package:myplanet/views/widgets/under_construction.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -13,85 +12,6 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  List<String> images = [
-    "https://tinyurl.com/popup-banner-image",
-    "https://tinyurl.com/popup-banner-image2",
-    "https://tinyurl.com/popup-banner-image3",
-    "https://tinyurl.com/popup-banner-image4"
-  ];
-
-  List<String> imagesLocal = [
-    "assets/myplanet_ison.png",
-    "assets/thankyou.png",
-    "assets/myplanet_ison.png",
-  ];
-
-  void showDefaultPopup(BuildContext context) {
-    PopupBanner(
-      context: context,
-      images: images,
-      onClick: (index) {
-        debugPrint("CLICKED $index");
-      },
-    ).show();
-  }
-
-  void showHideDotsPopup(BuildContext context) {
-    PopupBanner(
-      context: context,
-      images: images,
-      useDots: false,
-      onClick: (index) {
-        debugPrint("CLICKED $index");
-      },
-    ).show();
-  }
-
-  void showCustomizeDots(BuildContext context) {
-    PopupBanner(
-      context: context,
-      images: images,
-      dotsAlignment: Alignment.bottomCenter,
-      dotsColorActive: Colors.blue,
-      dotsColorInactive: Colors.grey.withOpacity(0.5),
-      onClick: (index) {
-        debugPrint("CLICKED $index");
-      },
-    ).show();
-  }
-
-  void showNonactiveSlideCustomClose(BuildContext context) {
-    PopupBanner(
-      context: context,
-      images: images,
-      autoSlide: false,
-      customCloseButton: ElevatedButton(
-        onPressed: () => Navigator.pop(context),
-        style: ElevatedButton.styleFrom(
-          primary: Colors.blue,
-        ),
-        child: const Text(
-          "Close",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-      onClick: (index) {
-        debugPrint("CLICKED $index");
-      },
-    ).show();
-  }
-
-  void showFromLocal(BuildContext context) {
-    PopupBanner(
-      context: context,
-      images: imagesLocal,
-      fromNetwork: false,
-      onClick: (index) {},
-    ).show();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -101,7 +21,8 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     Widget content() {
       return Container(
-        margin: const EdgeInsets.only(left: defaultMargin, right: defaultMargin, top: 20),
+        margin: const EdgeInsets.only(
+            left: defaultMargin, right: defaultMargin, top: 20),
         child: Column(
           children: [
             InkWell(
@@ -109,7 +30,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 // print("Notif Check");
               },
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Atur posisi child ke start (kiri)
+                crossAxisAlignment: CrossAxisAlignment
+                    .start, // Atur posisi child ke start (kiri)
                 children: [
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,14 +95,17 @@ class _NotificationPageState extends State<NotificationPage> {
                                     decoration: const BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
-                                        topRight: Radius.circular(50), // Atur border radius sudut kanan atas
+                                        topLeft: Radius.circular(
+                                            50), // Atur border radius sudut kiri atas
+                                        topRight: Radius.circular(
+                                            50), // Atur border radius sudut kanan atas
                                       ),
                                     ),
                                     // color: whiteColor,
                                     child: Center(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           Text(
@@ -193,7 +118,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                           const SizedBox(
                                             height: 24,
                                           ),
-                                          const Text('Apakah anda yakin ingin menghapus notifikasi ini?'),
+                                          const Text(
+                                              'Apakah anda yakin ingin menghapus notifikasi ini?'),
                                           const SizedBox(
                                             height: 24,
                                           ),
@@ -201,7 +127,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets.symmetric(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
@@ -210,22 +137,31 @@ class _NotificationPageState extends State<NotificationPage> {
                                                       // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor: dangerColor,
-                                                      padding: const EdgeInsets.symmetric(
+                                                      backgroundColor:
+                                                          dangerColor,
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(100),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Text(
                                                           'Hapus',
-                                                          style: whiteTextStyle.copyWith(
+                                                          style: whiteTextStyle
+                                                              .copyWith(
                                                             fontSize: 16,
-                                                            fontWeight: semiBold,
+                                                            fontWeight:
+                                                                semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -242,29 +178,40 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets.symmetric(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
                                                   child: TextButton(
-                                                    onPressed: () => Navigator.pop(context),
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor: secondaryColor,
-                                                      padding: const EdgeInsets.symmetric(
+                                                      backgroundColor:
+                                                          secondaryColor,
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(100),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Text(
                                                           'Kembali',
-                                                          style: whiteTextStyle.copyWith(
+                                                          style: whiteTextStyle
+                                                              .copyWith(
                                                             fontSize: 16,
-                                                            fontWeight: semiBold,
+                                                            fontWeight:
+                                                                semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -309,7 +256,8 @@ class _NotificationPageState extends State<NotificationPage> {
                 // print('Klik pada elemen Column');
               },
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Atur posisi child ke start (kiri)
+                crossAxisAlignment: CrossAxisAlignment
+                    .start, // Atur posisi child ke start (kiri)
                 children: [
                   Row(
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -373,14 +321,17 @@ class _NotificationPageState extends State<NotificationPage> {
                                     decoration: const BoxDecoration(
                                       color: whiteColor,
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(50), // Atur border radius sudut kiri atas
-                                        topRight: Radius.circular(50), // Atur border radius sudut kanan atas
+                                        topLeft: Radius.circular(
+                                            50), // Atur border radius sudut kiri atas
+                                        topRight: Radius.circular(
+                                            50), // Atur border radius sudut kanan atas
                                       ),
                                     ),
                                     // color: whiteColor,
                                     child: Center(
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           Text(
@@ -393,7 +344,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                           const SizedBox(
                                             height: 24,
                                           ),
-                                          const Text('Apakah anda yakin ingin menghapus notifikasi ini?'),
+                                          const Text(
+                                              'Apakah anda yakin ingin menghapus notifikasi ini?'),
                                           const SizedBox(
                                             height: 24,
                                           ),
@@ -401,7 +353,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets.symmetric(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
@@ -410,22 +363,31 @@ class _NotificationPageState extends State<NotificationPage> {
                                                       // print('WKWK!');
                                                     },
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor: dangerColor,
-                                                      padding: const EdgeInsets.symmetric(
+                                                      backgroundColor:
+                                                          dangerColor,
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(100),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Text(
                                                           'Hapus',
-                                                          style: whiteTextStyle.copyWith(
+                                                          style: whiteTextStyle
+                                                              .copyWith(
                                                             fontSize: 16,
-                                                            fontWeight: semiBold,
+                                                            fontWeight:
+                                                                semiBold,
                                                           ),
                                                         ),
                                                       ],
@@ -442,29 +404,40 @@ class _NotificationPageState extends State<NotificationPage> {
                                             child: Column(
                                               children: [
                                                 Container(
-                                                  margin: const EdgeInsets.symmetric(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
                                                     horizontal: defaultMargin,
                                                   ),
                                                   height: 54,
                                                   child: TextButton(
-                                                    onPressed: () => Navigator.pop(context),
+                                                    onPressed: () =>
+                                                        Navigator.pop(context),
                                                     style: TextButton.styleFrom(
-                                                      backgroundColor: secondaryColor,
-                                                      padding: const EdgeInsets.symmetric(
+                                                      backgroundColor:
+                                                          secondaryColor,
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
                                                         horizontal: 20,
                                                       ),
-                                                      shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(100),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
                                                       ),
                                                     ),
                                                     child: Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Text(
                                                           'Kembali',
-                                                          style: whiteTextStyle.copyWith(
+                                                          style: whiteTextStyle
+                                                              .copyWith(
                                                             fontSize: 16,
-                                                            fontWeight: semiBold,
+                                                            fontWeight:
+                                                                semiBold,
                                                           ),
                                                         ),
                                                       ],

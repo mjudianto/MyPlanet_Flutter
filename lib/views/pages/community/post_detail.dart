@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myplanet/theme.dart';
-import 'package:myplanet/views/pages/community/reactions.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:myplanet/views/widgets/community/comment_primary.dart';
 import 'package:myplanet/views/widgets/community/head_post.dart';
+import 'package:myplanet/views/widgets/community/reactions.dart';
 
 class PostDetail extends StatefulWidget {
   const PostDetail({super.key});
@@ -21,296 +22,23 @@ class _PostDetailState extends State<PostDetail> {
   Widget build(BuildContext context) {
     Widget header() {
       return AppBar(
-      leading: Align(
-      alignment: Alignment.centerLeft,
-      child: IconButton(
-        icon: SvgPicture.asset(
-          'assets/icons/ic_back.svg',
-          width: 14,
-          height: 14,
-        ),
-        onPressed: () {
-          Navigator.pop(
-              context); // Fungsi untuk kembali ke halaman sebelumnya
-        },
-      ),
-      ),
-      elevation: 1,
-      centerTitle: true,
-      backgroundColor: whiteColor,
-      );
-    }
-
-    Widget btnMore() {
-      return InkWell(
-        onTap: () {
-          showModalBottomSheet<void>(
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (BuildContext context) {
-              return Container(
-                height: 86,
-                decoration: const BoxDecoration(
-                  color: whiteColor,
-                ),
-                // color: whiteColor,
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      SizedBox(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {
-                                  // print('Terlapor!');
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: whiteColor,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                  ),
-                                ),
-                                child: Row(
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/icons/community/ic_flag.svg',
-                                      width: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      'Laporkan post',
-                                      style: blackTextStyle.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: semiBold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            SizedBox(
-                              height: 30,
-                              child: TextButton(
-                                onPressed: () {
-                                  // print('Terlapor!');
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: whiteColor,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 20,
-                                  ),
-                                ),
-                                child: Row(
-                                  // mainAxisAlignment:
-                                  //     MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      'assets/icons/ic_trash.svg',
-                                      width: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      'Hapus',
-                                      style: blackTextStyle.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: semiBold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                    ],
-                  ),
-                ),
-              );
+        leading: Align(
+          alignment: Alignment.centerLeft,
+          child: IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/ic_back.svg',
+              width: 14,
+              height: 14,
+            ),
+            onPressed: () {
+              Navigator.pop(
+                  context); // Fungsi untuk kembali ke halaman sebelumnya
             },
-          );
-        },
-        child: SvgPicture.asset(
-          'assets/icons/ic_more.svg',
-          width: 18,
+          ),
         ),
-      );
-    }
-
-    Widget commentReply() {
-      return Container(
-        margin: const EdgeInsets.only(
-            left: 40, bottom: 8), // Tambahkan margin kiri di sini
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipOval(
-              child: Image.asset(
-                'assets/nanda.jpg', // Ganti dengan path avatar yang sesuai
-                width: 32,
-              ),
-            ),
-            const SizedBox(
-              width: 4,
-            ),
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: pastelSecondaryColor,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nanda Raditya',
-                              style: blackTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: semiBold,
-                              ),
-                            ),
-                            Text(
-                              'EPM - IT',
-                              style: secondaryTextStyle.copyWith(
-                                fontSize: 10,
-                                fontWeight: regular,
-                              ),
-                            ),
-                          ],
-                        ),
-                        btnMore(),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "Reply comment above!",
-                      style: blackTextStyle.copyWith(
-                        fontSize: 12,
-                        fontWeight: regular,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    Widget commentPrimary() {
-      return Container(
-        margin: const EdgeInsets.only(bottom: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipOval(
-                  child: Image.asset(
-                    'assets/nanda.jpg',
-                    width: 42,
-                  ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: pastelSecondaryColor,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Nanda Raditya',
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: semiBold,
-                                  ),
-                                ),
-                                Text(
-                                  'EPM - IT',
-                                  style: secondaryTextStyle.copyWith(
-                                    fontSize: 10,
-                                    fontWeight: regular,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            btnMore()
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          "Good tips for designer!",
-                          style: blackTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: regular,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 48, top: 8, bottom: 8),
-              child: InkWell(
-                onTap: () {
-                  // print("Balas!");
-                },
-                child: Text(
-                  "Balas",
-                  style: secondaryTextStyle.copyWith(
-                    fontSize: 12,
-                    fontWeight: semiBold,
-                  ),
-                ),
-              ),
-            ),
-            commentReply(),
-            commentReply(),
-          ],
-        ),
+        elevation: 1,
+        centerTitle: true,
+        backgroundColor: whiteColor,
       );
     }
 
@@ -395,7 +123,7 @@ class _PostDetailState extends State<PostDetail> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            const PostDetail(), // Ganti dengan nama yang sesuai
+                            PostDetail(), // Ganti dengan nama yang sesuai
                       ),
                     );
                   },
@@ -444,9 +172,9 @@ class _PostDetailState extends State<PostDetail> {
             const SizedBox(
               height: 12,
             ),
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [commentPrimary(), commentPrimary()],
+              children: [CommentPrimary(), CommentPrimary()],
             )
           ],
         ),
@@ -456,7 +184,9 @@ class _PostDetailState extends State<PostDetail> {
     Widget content() {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [posting()],
+        children: [
+          posting(),
+        ],
       );
     }
 
